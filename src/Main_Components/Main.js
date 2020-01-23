@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SearchSidebar from "./SearchSidebar.js";
 import InfoSidebar from './InfoSidebar.js';
-import GMap from './GMap.js';
+import GoogleMap from './GoogleMap.js';
 
 
 function Main() {
@@ -11,12 +11,12 @@ function Main() {
 			<div>
 			
 				{ /*left side bar of the map*/ }
-				<SearchSidebar/> 
+					{/*<SearchSidebar/> */}
 			
-				<GMap selectedMarker={selectedMarker} setSelectedMarker={setSelectedMarker}/>
+				<GoogleMap/>
 				
 				{/*right side bar of the map*/}
-				<InfoSidebar selectedMarker={selectedMarker}/> 
+					{/*<InfoSidebar selectedMarker={selectedMarker/> }*/}
 			
 			</div>
 		);

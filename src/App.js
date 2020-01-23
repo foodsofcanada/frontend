@@ -17,7 +17,6 @@ export default function App() {
 				3. In the profileSideBar component, if user clicks on the profile icon display ProfileSetting component
 				3.1. If the admin clicks on the profile icon in the Dashboard component display ProfileSetting component
 				4. 
-			
 			*/
 		}
 	</div>
