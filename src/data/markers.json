@@ -1,0 +1,8 @@
+{
+	"markers": [
+		{ "id": 1, "position": {"lat": 56.13, "lng":106.34}, "product": {"name": "Barley", "description": "This is a Barley"} },
+		{ "id": 2, "position": {"lat": 56.13, "lng":105.34}, "product": {"name": "Wild Leek", "description": "This is a Wild Leek"} },
+		{ "id": 3, "position": {"lat": 54.13, "lng":106.34}, "product": {"name": "Sockeye Salmon", "description": "This is a Sockeye Salmon"} },
+		{ "id": 4, "position": {"lat": 54.13, "lng":105.34}, "product": {"name": "Product", "description": "This is a Product description"} }
+	]
+}
