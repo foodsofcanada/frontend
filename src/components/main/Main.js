@@ -8,6 +8,8 @@ class Main extends React.Component {
     super();
 
     this.state = {
+      selectedMarker: null,
+			currentMarkers: [],
       showState: {
         showTop10: true,
         showPantries: false,
@@ -17,6 +19,17 @@ class Main extends React.Component {
       }
     };
   }
+
+  setSelectedMarker = (marker) => {
+		this.setState( {selectedMarker: marker} );
+		console.log("selected markers: " + marker.label);
+	}
+	
+	setCurrentMarkers = (markers) => {
+		console.log("update markers: " + markers);
+		this.setState( {currentMarkers: markers} );
+	}
+
 
   render() {
     // const p = "hello";
@@ -32,7 +45,12 @@ class Main extends React.Component {
             position: "relative"
           }}
         >
-         <GoogleMap/>
+         <GoogleMap
+					language={this.props.language}
+					setSelectedMarker={this.setSelectedMarker} 
+					currentMarkers={this.state.currentMarkers} 
+					setCurrentMarkers={this.setCurrentMarkers}
+				/>
         </div>
       </div>
     );
