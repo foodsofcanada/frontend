@@ -1,6 +1,7 @@
 import React from "react";
 //import { Link } from "react-router-dom";
 import InfoBar from "./InfoBar";
+import GoogleMap from "./GoogleMap"
 
 class Main extends React.Component {
   constructor() {
@@ -31,10 +32,7 @@ class Main extends React.Component {
             position: "relative"
           }}
         >
-          Use justify-content utilities on flexbox containers to change the
-          alignment of flex items on the main axis (the x-axis to start, y-axis
-          if flex-direction: column). Choose from start (browser default), end,
-          center, between, or around.
+         <GoogleMap/>
         </div>
       </div>
     );

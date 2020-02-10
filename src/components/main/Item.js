@@ -49,7 +49,7 @@ class Item extends React.Component {
             style={{
               display: "inline-flex",
               color: "#8898AA",
-              marginLeft: "20px",
+              marginLeft: "5%",
               fontSize: "10px",
               position: "relative",
               top: "-4.5px"
