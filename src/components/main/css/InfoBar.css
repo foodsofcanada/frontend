@@ -4,6 +4,7 @@
   width: 25%;
   height: 100vh;
   display: inline-block;
+  z-index: 2;
 }
 
 .head {

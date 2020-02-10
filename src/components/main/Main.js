@@ -26,7 +26,7 @@ class Main extends React.Component {
         <InfoBar />
         <div
           style={{
-            backgroundColor: "red",
+           
             display: "inline-flex",
             width: "75%",
             position: "relative"

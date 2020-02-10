@@ -4,9 +4,8 @@ import top10Products from '../../data/topTenProducts.json';
 import Regions from '../../data/Regions.json';
 
 const mapStyles = {
-	width: "100vw",
+	width: "74vw",
 	height: "100vh",
-	// zIndex: -1,
 };
 
 var markers = [];
