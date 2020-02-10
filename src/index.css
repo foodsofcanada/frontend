@@ -1,29 +1,14 @@
 body {
   margin: 0;
-  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #f6f9fc !important;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-
-
-.App {
-	z-index: 1;
-}
-
-.SearchSidebar, .InformationSidebar {
-	z-index: 2;
-}
-
-.SearchSidebar #test {
-	width: 300px;
-	background-color: black;
 }

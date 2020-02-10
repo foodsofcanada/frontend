@@ -1,0 +1,53 @@
+.NavBar {
+  top: 0px;
+  left: 0px;
+  width: 268px;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+
+  background: #ffffff 0% 0% no-repeat padding-box;
+  opacity: 1;
+
+  margin: 0;
+}
+.backStuff {
+  width: 25px;
+  display: inline-block;
+}
+
+.backLink {
+  text-align: left;
+  font: 16px;
+  letter-spacing: 0;
+  color: #7764e4;
+  width: max-content;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.backLink:hover {
+  text-decoration: underline #7764e4;
+}
+
+.head {
+  /*float: right;*/
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 25px;
+  letter-spacing: 0;
+  color: #172b4d;
+  font-weight: bold;
+}
+
+.buttonLinks {
+  display: flex;
+  justify-content: center;
+  margin-top: 1px;
+  height: fit-content;
+}
+
+.header {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}

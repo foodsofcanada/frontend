@@ -1,0 +1,29 @@
+.sidebar {
+  float: right;
+  background-color: #ffffff;
+  width: 25%;
+  height: 100vh;
+  display: inline-block;
+}
+
+.head {
+  /*float: right;*/
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 25px;
+  letter-spacing: 0;
+  color: #172b4d;
+  font-weight: bold;
+  /* width: 80%; */
+}
+
+.profilePic {
+  display: inline;
+  float: right;
+  margin-right: 10px;
+  width: 35px;
+  height: 35px;
+  background-color: red;
+  border-radius: 50%;
+  margin-top: 5px;
+}

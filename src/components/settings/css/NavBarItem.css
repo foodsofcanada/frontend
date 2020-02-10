@@ -1,0 +1,19 @@
+.navbutton {
+  width: 247px;
+  height: 55px;
+  border-radius: 5px;
+
+  outline: none !important;
+  font-size: 13px;
+  background-color: #ffffff;
+  border: 0;
+}
+
+.navbutton:hover {
+  background-color: #f6f9fc;
+}
+
+.test {
+  margin-left: 10px;
+  float: left;
+}

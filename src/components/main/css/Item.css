@@ -1,0 +1,12 @@
+.item {
+  width: 95%;
+  border-radius: 5px;
+  height: 55px;
+  padding-top: 5px;
+  margin-top: 1px;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: #f6f9fc;
+}
