@@ -1,6 +1,6 @@
 import React, { Component, createRef } from "react";
 import top10Products from '../../data/topTenProducts.json';
-
+// import myIcon from './myMarker.png';
 import Regions from '../../data/Regions.json';
 
 const mapStyles = {
@@ -43,7 +43,7 @@ class GoogleMap extends Component {
 	componentDidUpdate() {
 		console.log("Google Map Component updated!")
 		this.showMarkers(this.props.currentMarkers);
-		console.log(this.markers);
+		// console.log(this.markers);
 	}
 
 	createGoogleMap = () => {
@@ -63,6 +63,7 @@ class GoogleMap extends Component {
 	}
 
 	showTop10Products = () => {
+		this.props.setCurrentMarkers(top10Products);
 		this.showMarkers(top10Products);
 	}
 
@@ -75,10 +76,18 @@ class GoogleMap extends Component {
 					lat: position.lat,
 					lng: position.lng
 				},
-				label: id.toString(),
+				// label: id.toString(),
 				map: this.googleMap
 			});
+			let myLabel = {
+				text: id.toString(),
+				color: "white"
+			}
+			gMapMarker.setLabel(myLabel);
 
+			let myIcon = {
+
+			}
 			gMapMarker.addListener("click", () => {
 				this.props.setSelectedMarker(gMapMarker);
 			});
@@ -164,11 +173,20 @@ class GoogleMap extends Component {
 				map: this.googleMap,
 			});
 		polygon.addListener("click", () => {
-			//fetch
+			const requestAnimeAwait = async(id=100) => {
+				const response = await fetch('url/')
+				const products = await response.json();
+				this.showProductsInRegion(products);
+			}
 			console.log(regionInfo.regionName)
 		});
 	  	polygons.push(polygon);
 	}	  
+
+	showProductsInRegion = (products) => {
+		this.showMarkers(products);
+	}
+
 
 	render() {
 		return (

@@ -1,7 +1,7 @@
 [
 
   
-  {"regionName":"Arctic Archipelago",
+  {"regionName":"Arctic Archipelago", "regionID":"1",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",

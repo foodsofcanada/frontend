@@ -9,7 +9,8 @@ class Main extends React.Component {
 
     this.state = {
       selectedMarker: null,
-			currentMarkers: [],
+      currentMarkers: [],
+      selectedRegion: null,
       showState: {
         showTop10: true,
         showPantries: false,
@@ -20,14 +21,23 @@ class Main extends React.Component {
     };
   }
 
+  componentDidUpdate() {
+    console.log("Main component update!");
+  }
+
   setSelectedMarker = (marker) => {
-		this.setState( {selectedMarker: marker} );
-		console.log("selected markers: " + marker.label);
+		// this.setState( {selectedMarker: marker} );
+		console.log("selected markers: " + marker.label.text);
 	}
 	
 	setCurrentMarkers = (markers) => {
-		console.log("update markers: " + markers);
+		// console.log("update markers: " + markers);
 		this.setState( {currentMarkers: markers} );
+  }
+  
+  setSelectedRegion = (region) => {
+		this.setState( {selectedRegion: region} );
+		console.log("selected Region: " + region.regionName);
 	}
 
 
