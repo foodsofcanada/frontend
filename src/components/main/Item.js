@@ -31,7 +31,7 @@ class Item extends React.Component {
               display: "inline-block",
               color: "#7764E4",
               marginBottom: "7px",
-              marginLeft: "25px",
+              marginLeft: "15px",
               fontSize: "14px",
               width: "120px"
             }}
@@ -40,16 +40,18 @@ class Item extends React.Component {
           </div>
           <div
             style={{
-              display: "inline",
+              display: "inline-block",
               color: "#8898AA",
               marginTop: "7px",
               marginBottom: "7px",
-              marginLeft: "10px",
+              marginLeft: "5px",
+              marginRight: "10px",
               fontSize: "10px",
-              textTransform: "uppercase"
+              textTransform: "uppercase",
+              width: "30px"
             }}
           >
-            Priaries
+            {this.props.region}
           </div>
           <div
             style={{

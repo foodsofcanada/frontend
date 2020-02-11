@@ -9,6 +9,11 @@ class InfoBar extends React.Component {
   constructor(props) {
     super();
     this.state = {};
+    this.handleBackClick = this.handleBackClick.bind(this);
+  }
+
+  handleBackClick() {
+    window.location.reload();
   }
 
   render() {
@@ -36,6 +41,7 @@ class InfoBar extends React.Component {
             number={number}
             key={product.id}
             name={product.information.name}
+            region={product.information.region}
           />
         );
       });
@@ -51,6 +57,7 @@ class InfoBar extends React.Component {
             <div
               className="backLink"
               style={{ display: "inline", marginTop: "90px" }}
+              onClick={this.handleBackClick}
             >
               <div className="backStuff ">
                 <ReactSVG
