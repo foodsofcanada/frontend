@@ -173,17 +173,19 @@ class GoogleMap extends Component {
 				map: this.googleMap,
 			});
 		polygon.addListener("click", () => {
+			this.props.setSelectedRegion(regionInfo.regionName);
 			const requestAnimeAwait = async(id=100) => {
 				const response = await fetch('url/')
 				const products = await response.json();
 				this.showProductsInRegion(products);
 			}
-			console.log(regionInfo.regionName)
+			// console.log(regionInfo.regionName)
 		});
 	  	polygons.push(polygon);
 	}	  
 
 	showProductsInRegion = (products) => {
+		this.props.setCurrentMarkers(products);
 		this.showMarkers(products);
 	}
 

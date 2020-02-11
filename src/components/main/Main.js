@@ -37,7 +37,7 @@ class Main extends React.Component {
   
   setSelectedRegion = (region) => {
 		this.setState( {selectedRegion: region} );
-		console.log("selected Region: " + region.regionName);
+		console.log("selected Region: " + region);
 	}
 
 
@@ -59,7 +59,8 @@ class Main extends React.Component {
 					language={this.props.language}
 					setSelectedMarker={this.setSelectedMarker} 
 					currentMarkers={this.state.currentMarkers} 
-					setCurrentMarkers={this.setCurrentMarkers}
+          setCurrentMarkers={this.setCurrentMarkers}
+          setSelectedRegion={this.setSelectedRegion}
 				/>
         </div>
       </div>
