@@ -39,7 +39,7 @@ class InfoBar extends React.Component {
         return (
           <Item
             number={number}
-            key={product.id}
+            key={number}
             name={product.information.name}
             region={product.information.region}
           />
