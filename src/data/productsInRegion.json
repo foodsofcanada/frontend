@@ -2,6 +2,6 @@
     { "id": 2, "regionID":3, "position": {"lat": 82.82188247903477, "lng":-91.37204940096997}, "information": {"name": "Barley", "description": "This is a Barley"} },
     { "id": 1, "regionID":3, "position": {"lat": 66.6658795787151, "lng":-63.89001720999066}, "information": {"name": "Wild Leek", "description": "This is a Wild Leek"} },
     { "id": 3, "regionID":1,"position": {"lat": 80.40205361653143, "lng":-86.19945539732187}, "information": {"name": "Sockeye Salmon", "description": "This is a Sockeye Salmon"} },
-    { "id": 3, "regionID":2,"position": {"lat": 77.24554605298225, "lng": -98.74820217855137}, "information": {"name": "Sockeye Salmon", "description": "This is a Sockeye Salmon"} }
+    { "id": 4, "regionID":2,"position": {"lat": 77.24554605298225, "lng": -98.74820217855137}, "information": {"name": "Sockeye Salmon", "description": "This is a Sockeye Salmon"} }
    
 ]
