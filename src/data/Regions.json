@@ -31,7 +31,7 @@
   ]},
 
 
-  {"regionName":"Arctic Basin", 
+  {"regionName":"Arctic Basin", "regionID":"2",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -44,7 +44,7 @@
     ]},
 
 
-  {"regionName":"Arctic Cordillera", 
+  {"regionName":"Arctic Cordillera", "regionID":"3",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -93,7 +93,7 @@
   ]},
 
 
-  {"regionName":"Atlantic Highlands", 
+  {"regionName":"Atlantic Highlands", "regionID":"4",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -107,7 +107,7 @@
   ]},
 
 
-  {"regionName":"Atlantic Maritime", 
+  {"regionName":"Atlantic Maritime", "regionID":"5",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -149,7 +149,7 @@
   ]},
 
 
-  {"regionName":"Boreal Cordillera", 
+  {"regionName":"Boreal Cordillera", "regionID":"6",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -163,7 +163,7 @@
   ]},
 
 
-  {"regionName":"Boreal Plains", 
+  {"regionName":"Boreal Plains", "regionID":"7",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -177,7 +177,7 @@
   ]},
 
 
-  {"regionName":"Boreal Shield", 
+  {"regionName":"Boreal Shield", "regionID":"8",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -255,7 +255,7 @@
   ]},
 
 
-  {"regionName":"Eastern Arctic", 
+  {"regionName":"Eastern Arctic", "regionID":"9",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -277,7 +277,7 @@
   ]},
 
 
-  {"regionName":"Great Lakes", 
+  {"regionName":"Great Lakes", "regionID":"10",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -310,7 +310,7 @@
   ]},
 
 
-  {"regionName":"Gulf of Saint Lawrence", 
+  {"regionName":"Gulf of Saint Lawrence", "regionID":"11",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -327,7 +327,7 @@
   ]},
 
 
-  {"regionName":"Hudson Bay Complex", 
+  {"regionName":"Hudson Bay Complex", "regionID":"12",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -363,7 +363,7 @@
   ]},
 
 
-  {"regionName":"Hudson Plains", 
+  {"regionName":"Hudson Plains", "regionID":"13",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -385,7 +385,7 @@
   ]},
 
 
-  {"regionName":"Mixedwood Plains", 
+  {"regionName":"Mixedwood Plains", "regionID":"14",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -423,7 +423,7 @@
   ]},
 
 
-  {"regionName":"Montane Cordillera", 
+  {"regionName":"Montane Cordillera", "regionID":"15",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -437,7 +437,7 @@
   ]},
 
 
-  {"regionName":"Newfoundland-Labrador Shelves", 
+  {"regionName":"Newfoundland-Labrador Shelves", "regionID":"16",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -459,7 +459,7 @@
   ]},
 
 
-  {"regionName":"Northern Shelf", 
+  {"regionName":"Northern Shelf", "regionID":"17",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -480,7 +480,7 @@
   ]},
 
 
-  {"regionName":"Northern Arctic", 
+  {"regionName":"Northern Arctic", "regionID":"18",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -754,7 +754,7 @@
   ]},
 
 
-  {"regionName":"Offshore Pacific", 
+  {"regionName":"Offshore Pacific", "regionID":"19",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -768,7 +768,7 @@
   ]},
 
 
-  {"regionName":"Pacific Maritime", 
+  {"regionName":"Pacific Maritime", "regionID":"20",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -830,7 +830,7 @@
   ]},
 
 
-  {"regionName":"Prairies", 
+  {"regionName":"Prairies", "regionID":"21",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -844,7 +844,7 @@
   ]},
 
 
-  {"regionName":"Scotian Shelf", 
+  {"regionName":"Scotian Shelf", "regionID":"22",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -859,7 +859,7 @@
   ]},
 
 
-  {"regionName":"Semi-Arid Plateaux", 
+  {"regionName":"Semi-Arid Plateaux", "regionID":"23",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -873,7 +873,7 @@
   ]},
 
 
-  {"regionName":"Southern Arctic", 
+  {"regionName":"Southern Arctic", "regionID":"24",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -959,7 +959,7 @@
   ]},
 
 
-  {"regionName":"Southern Shelf", 
+  {"regionName":"Southern Shelf", "regionID":"25",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -973,7 +973,7 @@
   ]},
 
 
-  {"regionName":"Strait of Georgia", 
+  {"regionName":"Strait of Georgia", "regionID":"26",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -1007,7 +1007,7 @@
   ]},
 
 
-  {"regionName":"Taiga Cordillera", 
+  {"regionName":"Taiga Cordillera", "regionID":"27",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -1021,7 +1021,7 @@
   ]},
 
 
-  {"regionName":"Taiga Plains", 
+  {"regionName":"Taiga Plains", "regionID":"28",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -1035,7 +1035,7 @@
   ]},
 
 
-  {"regionName":"Taiga Shield", 
+  {"regionName":"Taiga Shield", "regionID":"29",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -1089,7 +1089,7 @@
   ]},
 
 
-  {"regionName":"Tundra Cordillera", 
+  {"regionName":"Tundra Cordillera", "regionID":"30",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
@@ -1103,7 +1103,7 @@
   ]},
 
 
-  {"regionName":"Western Arctic", 
+  {"regionName":"Western Arctic", "regionID":"31",
     "polygonStyle":{
       "strokeColor":"#e6e600",
       "strokeWeight":"0.2",
