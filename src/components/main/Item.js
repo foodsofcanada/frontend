@@ -45,7 +45,7 @@ class Item extends React.Component {
               marginTop: "7px",
               marginBottom: "7px",
               marginLeft: "5px",
-              marginRight: "10px",
+              marginRight: "20px",
               fontSize: "10px",
               textTransform: "uppercase",
               width: "30px"
