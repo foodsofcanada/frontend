@@ -181,10 +181,11 @@ class GoogleMap extends Component {
       map: this.googleMap
     });
     polygon.addListener("click", event => {
+      let myProductsInRegion = [];
       this.googleMap.panTo(event.latLng);
       this.googleMap.setZoom(6);
       this.props.setSelectedRegion(regionInfo.regionName);
-      let products = fetch("http://localhost:8180/products");
+      let products = fetch("http://localhost:8180/products")
         .then(response => response.json())
         .then(data => {
         myProductsInRegion = ProductsInRegion;
@@ -198,8 +199,9 @@ class GoogleMap extends Component {
         myProductsInRegion.forEach(element => {
           console.log(element);
         });
-          this.showProductsInRegion(data);
+          
         });
+        this.showProductsInRegion(myProductsInRegion);
       // this.showProductsInRegion([]);
       // console.log(regionInfo.regionName)
     });
