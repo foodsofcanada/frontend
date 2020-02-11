@@ -185,6 +185,7 @@ class GoogleMap extends Component {
 	}	  
 
 	showProductsInRegion = (products) => {
+		this.clearCurrentMarkers();
 		this.props.setCurrentMarkers(products);
 		this.showMarkers(products);
 	}
