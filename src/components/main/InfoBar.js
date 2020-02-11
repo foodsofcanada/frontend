@@ -45,22 +45,27 @@ class InfoBar extends React.Component {
     return (
       <div className="sidebar">
         <div>
-          <div
-            className="backLink"
-            style={{ display: "inline", marginTop: "90px" }}
-          >
-            <div className="backStuff ">
-              <ReactSVG
-                src={icon}
-                style={{
-                  height: "30px",
-                  transform: "rotate(90deg)",
-                  marginTop: "10px"
-                }}
-              />
+          {this.props.header === null ? (
+            ""
+          ) : (
+            <div
+              className="backLink"
+              style={{ display: "inline", marginTop: "90px" }}
+            >
+              <div className="backStuff ">
+                <ReactSVG
+                  src={icon}
+                  style={{
+                    height: "30px",
+                    transform: "rotate(90deg)",
+                    marginTop: "10px"
+                  }}
+                />
+              </div>
+              Back
             </div>
-            Back
-          </div>
+          )}
+
           <div className="profilePic"></div>
         </div>
         <div>
