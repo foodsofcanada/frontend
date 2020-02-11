@@ -35,9 +35,9 @@ class Main extends React.Component {
     this.setState({ currentMarkers: markers });
   };
 
-  setSelectedRegion = region => {
-    this.setState({ selectedRegion: region });
-    console.log("selected Region: " + region);
+  setSelectedRegion = (regionName, regionID) => {
+    this.setState({ selectedRegion: regionName });
+    console.log("selected Region: " + regionID);
   };
 
   render() {

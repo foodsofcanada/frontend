@@ -56,8 +56,8 @@ class GoogleMap extends Component {
       streetViewControl: false,
       rotateControl: false,
       fullscreenControl: true
-	});
-	this.googleMap.setOptions({ minZoom: 3, maxZoom: 6 });
+    });
+    this.googleMap.setOptions({ minZoom: 3, maxZoom: 6 });
   };
 
   showTop10Products = () => {
@@ -131,6 +131,7 @@ class GoogleMap extends Component {
         }
         let regionInfo = {
           regionName: regions[regionsIndex].regionName,
+          regionId: regions[regionsIndex].regionID,
           polygonStyle: regions[regionsIndex].polygonStyle,
           polygonPaths: polygonPaths
         };
@@ -184,24 +185,27 @@ class GoogleMap extends Component {
       let myProductsInRegion = [];
       this.googleMap.panTo(event.latLng);
       this.googleMap.setZoom(6);
-      this.props.setSelectedRegion(regionInfo.regionName);
+      this.props.setSelectedRegion(regionInfo.regionName, regionInfo.regionId);
       // let products = fetch("http://localhost:8180/products")
       //   .then(response => response.json())
       //   .then(data => {
-        myProductsInRegion = ProductsInRegion;
-        Temp.forEach(element => {
-          myProductsInRegion.forEach(product => {
-            if (element.prod_id === product.id) {
-              product.information = element;
-            }
-          });
+      myProductsInRegion = ProductsInRegion;
+      let prodRegion = [];
+      Temp.forEach(element => {
+        myProductsInRegion.forEach(product => {
+          if (
+            element.prod_id === product.id &&
+            product.regionID === regionInfo.regionId
+          ) {
+            prodRegion.push(product);
+          }
+        });
         // });
         myProductsInRegion.forEach(element => {
-          console.log(element);
+          //console.log(element);
         });
-          
-        });
-        this.showProductsInRegion(myProductsInRegion);
+      });
+      this.showProductsInRegion(prodRegion);
       // this.showProductsInRegion([]);
       // console.log(regionInfo.regionName)
     });
