@@ -2,6 +2,7 @@ import React, { Component, createRef } from "react";
 import top10Products from "../../data/topTenProducts.json";
 // import myIcon from './myMarker.png';
 import Regions from "../../data/Regions.json";
+import ProductsInRegion from "../../data/productsInRegion.json";
 
 const mapStyles = {
   width: "75vw",
@@ -183,12 +184,23 @@ class GoogleMap extends Component {
       this.googleMap.panTo(event.latLng);
       this.googleMap.setZoom(6);
       this.props.setSelectedRegion(regionInfo.regionName);
-      let products = fetch("")
+      let products = fetch("http://localhost:8180/products");
         .then(response => response.json())
         .then(data => {
+        myProductsInRegion = ProductsInRegion;
+        data.forEach(element => {
+          myProductsInRegion.forEach(product => {
+            if (element.prod_id === product.id) {
+              product.information = element;
+            }
+          });
+        });
+        myProductsInRegion.forEach(element => {
+          console.log(element);
+        });
           this.showProductsInRegion(data);
         });
-      this.showProductsInRegion([]);
+      // this.showProductsInRegion([]);
       // console.log(regionInfo.regionName)
     });
     polygons.push(polygon);

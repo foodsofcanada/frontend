@@ -1,0 +1,44 @@
+[
+    {
+        "prod_id": 1,
+        "name": "Wild Leek",
+        "description": "Wild leeks grown in patches on hillsides with a lot of shade. Their elongated green leaves grow vertically and outward. The underside of the leaves sometimes have a purple hue. The stems (30-45cm) are smooth with little white flowerspopping up in the early summer, after the leaves have gone. Wild leeks have a strong onion smell, although the taste is closer to that of garlic.",
+        "imgPath": null,
+        "shelfLife": "Wild leeks should be loosely wrapped an stored from 0-4⁰C. They should last one week in the cooler. ",
+        "danger": "Both leaves and bulbs are edible, cooked or raw.",
+        "scientificName": "Ramps, wild garlic, wood leeks, ramsom, Allium triccocum ",
+        "history": "Wild leeks were considered an important part of spring diets among indigenous groups because they were often the first edible plant to emerge.",
+        "cookingUse": "Both leaves and bulbs are edible, cooked or raw. Many chefs use them in place of leek, onion or scallion. Can be used to make soups, purées, preserves, sauces, salads, marinades, pesto, vinaigrette…",
+        "preservation": null,
+        "funFact": "Wild leek festivals are held in various parts of the Appalachian region.",
+        "countryOfOrigin": "Canada"
+    },
+    {
+        "prod_id": 2,
+        "name": "Barley",
+        "description": "Barley is a cereal grass that grows in flat and mainly dry regions. The stems are cylindrical and hollow except for where the leaves arise.The head can have either rows of 2 or rows of 6 kernels. It starts out greet and dries and turns yellow/golden-brown when it is ready for harvesting. Pearl barley is polished pot barley. (The outer husk has been removed and is therefore less nutritious.)",
+        "imgPath": null,
+        "shelfLife": "Dried pearl and pot barley can be stored at room temperature for up to one year.",
+        "danger": null,
+        "scientificName": "Hordeum vulgare",
+        "history": "Barley is one of the founder crops of world agriculture.",
+        "cookingUse": "Barley is the most common grain that is malted and brewed into beer. It is also exptremely versatile in cooking. It can be milled into flour for baking or boiled to be used in soups, salads, risottos, hot cereals, pilafs and stews. It is also used for animal feed.",
+        "preservation": null,
+        "funFact": "Barley is packed with fibre, is naturally low in fat, and contains important vitamins, minerals, and antioxidants. In Canada, we have around 3.9 million hectares of land devoted for growing barley.",
+        "countryOfOrigin": "Canada"
+    },
+    {
+        "prod_id": 3,
+        "name": "Sockeye Salmon",
+        "description": "Barley is a cereal grass that grows in flat and mainly dry regions. The stems are cylindrical and hollow except for where the leaves arise.The head can have either rows of 2 or rows of 6 kernels. It starts out greet and dries and turns yellow/golden-brown when it is ready for harvesting. Pearl barley is polished pot barley. (The outer husk has been removed and is therefore less nutritious.)",
+        "imgPath": null,
+        "shelfLife": "Salmon is best when fresh. When stored properly (0-4⁰C) it can be kept for up to 5 days. If frozen and stored in -18⁰C, it can be kept for up to 6 months. ",
+        "danger": "If improperly stored, fresh salmon is not fully cooked (to70°C or 158°F) it can result in foodborne illnesses.",
+        "scientificName": "Red salfoc_productsmon, kokanee salmon  Oncorhynchus nerka",
+        "history": "All types of salmon are important to native communities. They are eaten as substenance and used during ceremonies. ",
+        "cookingUse": "Pacific salmon have a slightly lower fat/oil content compared to Atlantic varieties with a smaller flake to them. They can be poached, pan fried, grilled, baked, cured,  canned, hot smoked, cold-smoked or roasted. The culinary uses are seemingly endless and can be made into hot or cold preparations from sushi to salads, to mousses and pâtés as well as candied. ",
+        "preservation": null,
+        "funFact": "Salmon are well-known for their jumping and fighting when being fished. Wild salmon is declining because farming is becoming much more prevalent. ",
+        "countryOfOrigin": "Canada"
+    }
+]
