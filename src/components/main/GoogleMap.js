@@ -69,30 +69,28 @@ class GoogleMap extends Component {
 
 
 	showMarkers = (newMarkers) => {
-		newMarkers.map(marker => {
-			const { position, id } = marker;
+		for (let index = 0; index < newMarkers.length; index++) {
+			const { position } = newMarkers[index];
 			var gMapMarker = new window.google.maps.Marker({
 				position: {
 					lat: position.lat,
 					lng: position.lng
 				},
-				// label: id.toString(),
 				map: this.googleMap
 			});
+
 			let myLabel = {
-				text: id.toString(),
+				// text: id.toString(),
+				text: (index+1).toString(),
 				color: "white"
 			}
 			gMapMarker.setLabel(myLabel);
-
-			let myIcon = {
-
-			}
 			gMapMarker.addListener("click", () => {
 				this.props.setSelectedMarker(gMapMarker);
 			});
 			this.markers.push(gMapMarker);
-		});
+			
+		}
 	}
 
 	clearCurrentMarkers = () => {
@@ -172,13 +170,16 @@ class GoogleMap extends Component {
 				fillColor: fillColor,
 				map: this.googleMap,
 			});
-		polygon.addListener("click", () => {
+		polygon.addListener("click", (event) => {
+			this.googleMap.panTo(event.latLng);
+			this.googleMap.setZoom(6);
 			this.props.setSelectedRegion(regionInfo.regionName);
-			const requestAnimeAwait = async(id=100) => {
-				const response = await fetch('url/')
-				const products = await response.json();
-				this.showProductsInRegion(products);
-			}
+			let products = fetch("")
+        		.then(response => response.json())
+        		.then(data => {
+          			this.showProductsInRegion(data);
+        		});
+			this.showProductsInRegion([]);
 			// console.log(regionInfo.regionName)
 		});
 	  	polygons.push(polygon);
