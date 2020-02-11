@@ -5,12 +5,24 @@ import { ReactSVG } from "react-svg";
 import Item from "./Item";
 
 class InfoBar extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
     this.state = {};
   }
 
   render() {
+    let productItems = null;
+    let number = 0;
+    if (this.props.currentMarkers.length === 0) {
+      productItems = "Loading";
+    } else {
+      productItems = this.props.currentMarkers.map(function(product) {
+        number = number + 1;
+        return <Item number={number} name={product.information.name} />;
+      });
+    }
+
+    // let productItems = this.props.currentMarkers.map(product => <Item key={product.id} name={product.item}/>)
     return (
       <div className="sidebar">
         <div>
@@ -34,12 +46,13 @@ class InfoBar extends React.Component {
         </div>
         <div>
           <div className="head" style={{ marginBottom: "10px" }}>
-            Top 10 searched products
+            {this.props.header === null
+              ? "Top 10 searched products"
+              : "Products in " + this.props.header + " Region"}
           </div>
         </div>
 
-        <Item />
-        <Item />
+        {productItems}
       </div>
     );
   }

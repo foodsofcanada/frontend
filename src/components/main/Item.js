@@ -5,6 +5,10 @@ import heart from "../../icons/heart.svg";
 import more from "../../icons/more-vertical.svg";
 
 class Item extends React.Component {
+  constructor(props) {
+    super();
+  }
+
   render() {
     return (
       <div className=" d-flex justify-content-center">
@@ -12,25 +16,27 @@ class Item extends React.Component {
           <div
             className="head"
             style={{
-              display: "inline",
+              display: "inline-block",
               color: "#7764E4",
               marginTop: "7px",
               marginBottom: "7px",
-              fontSize: "30px"
+              fontSize: "25px",
+              width: "30px"
             }}
           >
-            1.
+            {this.props.number}.
           </div>
           <div
             style={{
-              display: "inline-flex",
+              display: "inline-block",
               color: "#7764E4",
               marginBottom: "7px",
-              marginLeft: "45px",
-              fontSize: "15px"
+              marginLeft: "25px",
+              fontSize: "14px",
+              width: "120px"
             }}
           >
-            Lettuce
+            {this.props.name}
           </div>
           <div
             style={{
@@ -38,7 +44,7 @@ class Item extends React.Component {
               color: "#8898AA",
               marginTop: "7px",
               marginBottom: "7px",
-              marginLeft: "65px",
+              marginLeft: "10px",
               fontSize: "10px",
               textTransform: "uppercase"
             }}
@@ -49,7 +55,7 @@ class Item extends React.Component {
             style={{
               display: "inline-flex",
               color: "#8898AA",
-              marginLeft: "5%",
+              marginLeft: "10px",
               fontSize: "10px",
               position: "relative",
               top: "-4.5px"
