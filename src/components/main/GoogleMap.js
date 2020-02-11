@@ -186,26 +186,45 @@ class GoogleMap extends Component {
       this.googleMap.panTo(event.latLng);
       this.googleMap.setZoom(6);
       this.props.setSelectedRegion(regionInfo.regionName, regionInfo.regionId);
-      // let products = fetch("http://localhost:8180/products")
-      //   .then(response => response.json())
-      //   .then(data => {
+
       myProductsInRegion = ProductsInRegion;
       let prodRegion = [];
-      Temp.forEach(element => {
-        myProductsInRegion.forEach(product => {
-          if (
-            element.prod_id === product.id &&
-            product.regionID === regionInfo.regionId
-          ) {
-            prodRegion.push(product);
-          }
+      let stuff = [];
+
+      fetch("http://localhost:8180/products")
+        .then(response => response.json())
+        .then(response => {
+          response.forEach(element => {
+            myProductsInRegion.forEach(product => {
+              if (
+                element.prod_id === product.id &&
+                product.regionID === regionInfo.regionId
+              ) {
+                prodRegion.push(product);
+              }
+            });
+            myProductsInRegion.forEach(element => {});
+          });
+          this.showProductsInRegion(prodRegion);
         });
-        // });
-        myProductsInRegion.forEach(element => {
-          //console.log(element);
-        });
-      });
-      this.showProductsInRegion(prodRegion);
+
+      // Temp.forEach(element => {
+      //   console.log("Stuff element "+element.name)
+      //   myProductsInRegion.forEach(product => {
+      //     if (
+      //       element.prod_id === product.id &&
+      //       product.regionID === regionInfo.regionId
+      //     ) {
+      //       prodRegion.push(product);
+      //     }
+      //   });
+      //   // });
+      //   myProductsInRegion.forEach(element => {
+      //     //console.log(element);
+      //   });
+      // });
+      // console.log(prodRegion)
+      // this.showProductsInRegion(prodRegion);
       // this.showProductsInRegion([]);
       // console.log(regionInfo.regionName)
     });
