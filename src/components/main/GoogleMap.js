@@ -55,7 +55,8 @@ class GoogleMap extends Component {
       streetViewControl: false,
       rotateControl: false,
       fullscreenControl: true
-    });
+	});
+	this.googleMap.setOptions({ minZoom: 3, maxZoom: 6 });
   };
 
   showTop10Products = () => {
