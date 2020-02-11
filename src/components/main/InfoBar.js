@@ -3,6 +3,7 @@ import "./css/InfoBar.css";
 import icon from "../../icons/chevron-down.svg";
 import { ReactSVG } from "react-svg";
 import Item from "./Item";
+import { Spinner } from "react-bootstrap";
 
 class InfoBar extends React.Component {
   constructor(props) {
@@ -14,11 +15,29 @@ class InfoBar extends React.Component {
     let productItems = null;
     let number = 0;
     if (this.props.currentMarkers.length === 0) {
-      productItems = "Loading";
+      productItems = (
+        <div
+          style={{
+            marginLeft: "40%",
+            marginTop: "50%"
+          }}
+        >
+          &nbsp;&nbsp;&nbsp;
+          <Spinner animation="grow" variant="primary" />
+          <br />
+          Loading...
+        </div>
+      );
     } else {
       productItems = this.props.currentMarkers.map(function(product) {
         number = number + 1;
-        return <Item number={number} name={product.information.name} />;
+        return (
+          <Item
+            number={number}
+            key={product.id}
+            name={product.information.name}
+          />
+        );
       });
     }
 

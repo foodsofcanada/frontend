@@ -1,5 +1,6 @@
 .sidebar {
   float: right;
+  position: sticky;
   background-color: #ffffff;
   width: 25%;
   height: 100vh;
