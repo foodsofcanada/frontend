@@ -52,7 +52,13 @@ class InfoBar extends React.Component {
       <div className="sidebar">
         <div>
           {this.props.header === null ? (
-            ""
+            <div
+              className="backLink"
+              style={{ display: "inline", marginTop: "90px" }}
+              onClick={this.handleBackClick}
+            >
+              &nbsp;
+            </div>
           ) : (
             <div
               className="backLink"

@@ -47,8 +47,9 @@ class Main extends React.Component {
         <div
           style={{
             display: "inline-flex",
-            width: "75%",
-            position: "fixed"
+            width: "100%",
+            position: "fixed",
+            zIndex: "0"
           }}
         >
           <GoogleMap
