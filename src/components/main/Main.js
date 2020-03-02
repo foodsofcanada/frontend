@@ -2,6 +2,13 @@ import React from "react";
 //import { Link } from "react-router-dom";
 import InfoBar from "./InfoBar";
 import GoogleMap from "./GoogleMap";
+import ProductInfoSidebar from "./ProductInfoSidebar";
+import ProfileSidebar from "./ProfileSidebar";
+import FavoritesBar from "./FavoritesBar";
+import PantriesBar from "./PantriesBar";
+import icon from "../../icons/chevron-down.svg";
+import { ReactSVG } from "react-svg";
+import "./css/Main.css";
 
 class Main extends React.Component {
   constructor() {
@@ -10,6 +17,7 @@ class Main extends React.Component {
     this.state = {
       selectedMarker: null,
       currentMarkers: [],
+      tabOpen: true,
       selectedRegion: null,
       showState: {
         showTop10: true,
@@ -19,10 +27,18 @@ class Main extends React.Component {
         showProductInformation: false
       }
     };
+
+    this.openCloseBar = this.openCloseBar.bind(this);
   }
 
   componentDidUpdate() {
     console.log("Main component update!");
+
+    if (this.state.tabOpen === true) {
+      document.getElementById("bar").style.width = "360px";
+    } else {
+      document.getElementById("bar").style.width = "0";
+    }
   }
 
   setSelectedMarker = marker => {
@@ -39,8 +55,15 @@ class Main extends React.Component {
     console.log("selected Region: " + regionID);
   };
 
+  openCloseBar() {
+    this.setState(prevState => ({
+      tabOpen: !prevState.tabOpen
+    }));
+  }
+
   render() {
     // const p = "hello";
+
     return (
       //   <Link to="/settings">{p === "Hell" ? <h1>Hello</h1> : <h1>Ho</h1>}</Link>
       <div>
@@ -64,6 +87,52 @@ class Main extends React.Component {
           header={this.state.selectedRegion}
           currentMarkers={this.state.currentMarkers}
         />
+
+        {/* <ProductInfoSidebar
+          header={this.state.selectedRegion}
+          currentMarkers={this.state.currentMarkers}
+        /> */}
+
+        {/* <ProfileSidebar
+          header={this.state.selectedRegion}
+          currentMarkers={this.state.currentMarkers}
+        /> */}
+
+        {/* <FavoritesBar
+          header={this.state.selectedRegion}
+          currentMarkers={this.state.currentMarkers}
+        /> */}
+        {/* 
+        <PantriesBar
+          header={this.state.selectedRegion}
+          currentMarkers={this.state.currentMarkers}
+        /> */}
+        <div
+          className="d-flex justify-content-center pullTab"
+          onClick={this.openCloseBar}
+        >
+          {this.state.tabOpen ? (
+            <ReactSVG
+              src={icon}
+              style={{
+                height: "15px",
+                marginTop: "11px",
+                marginRight: "9px",
+                transform: "rotate(270deg)"
+              }}
+            />
+          ) : (
+            <ReactSVG
+              src={icon}
+              style={{
+                height: "15px",
+                marginTop: "11.5px",
+                marginLeft: "10.5px",
+                transform: "rotate(90deg)"
+              }}
+            />
+          )}
+        </div>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 .navbutton {
-  width: 247px;
+  width: 95%;
   height: 55px;
   border-radius: 5px;
 
@@ -7,6 +7,8 @@
   font-size: 13px;
   background-color: #ffffff;
   border: 0;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
 }
 
 .navbutton:hover {

@@ -46,7 +46,7 @@ class NavBar extends React.Component {
           <br />
           <span className="head">Settings</span>
         </div>
-        <div className="buttonLinks">
+        <div className=" buttonLinks">
           <Link to="/settings">
             <NavBarItem
               onClick={this.handleButtonClick}

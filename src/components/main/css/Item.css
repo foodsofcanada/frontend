@@ -10,3 +10,11 @@
 .item:hover {
   background-color: #f6f9fc;
 }
+
+.heart {
+  fill: none;
+}
+
+.heart:hover {
+  fill: #7764e4;
+}

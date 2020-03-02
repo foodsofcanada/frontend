@@ -1,0 +1,23 @@
+.pullTab {
+  float: right;
+  position: sticky;
+  background-color: #ffffff;
+  cursor: pointer;
+  height: 40px;
+  width: 40px;
+  position: sticky;
+  display: inline-flex;
+  z-index: 2;
+  border-style: solid;
+  border-color: #33353abc;
+  border-width: 1px;
+  margin-top: 40vh;
+  top: -10px;
+
+  margin-right: 5px;
+  border-radius: 50%;
+}
+
+.pullTab:hover {
+  background-color: #e6f1ff;
+}

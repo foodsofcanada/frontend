@@ -3,6 +3,7 @@ import "./css/Item.css";
 import { ReactSVG } from "react-svg";
 import heart from "../../icons/heart.svg";
 import more from "../../icons/more-vertical.svg";
+import { Dropdown, DropdownButton } from "react-bootstrap";
 
 class Item extends React.Component {
   constructor(props) {
@@ -10,6 +11,18 @@ class Item extends React.Component {
   }
 
   render() {
+    let moreButton = (
+      <ReactSVG
+        src={more}
+        style={{
+          height: "25px",
+          stroke: "#7764E4",
+          fill: "none",
+          marginLeft: "25px"
+        }}
+      />
+    );
+
     return (
       <div className=" d-flex justify-content-center">
         <div className="item">
@@ -64,24 +77,27 @@ class Item extends React.Component {
             }}
           >
             <ReactSVG
+              className="heart"
               src={heart}
               style={{
                 height: "30px",
-                stroke: "#7764E4",
-                fill: "none"
+                stroke: "#7764E4"
               }}
             />
-            <ReactSVG
-              src={more}
+            <DropdownButton
+              title={moreButton}
               style={{
-                height: "30px",
-                stroke: "#7764E4",
-                fill: "none",
-                marginLeft: "25px",
-                stroke: "#7764E4",
-                fill: "none"
+                top: "-10px",
+                height: "10px",
+                width: "30px",
+                backgroundColor: "rgba(0,0,0,0) !important",
+                marginRight: "20px",
+                marginLeft: "10px"
               }}
-            />
+              id="dropdownB"
+            >
+              <Dropdown.Item as="button">Add to Pantry</Dropdown.Item>
+            </DropdownButton>
           </div>
         </div>
       </div>

@@ -3,10 +3,11 @@ import "./css/InfoBar.css";
 import icon from "../../icons/chevron-down.svg";
 import { ReactSVG } from "react-svg";
 import Item from "./Item";
+import Pantry from "./Pantry";
 
-import { Spinner } from "react-bootstrap";
+import { Spinner, Dropdown, DropdownButton } from "react-bootstrap";
 
-class InfoBar extends React.Component {
+class PantriesBar extends React.Component {
   constructor(props) {
     super();
     this.state = {};
@@ -17,8 +18,28 @@ class InfoBar extends React.Component {
     window.location.reload();
   }
 
+  newPantryButton() {
+    return (
+      <div className="profileOptions">
+        <div
+          style={{
+            position: "relative",
+            top: "15px",
+            display: "inline-flex"
+          }}
+        >
+          <div style={{ color: "#0CC8AC" }} className="plus">
+            +
+          </div>
+          Add a Pantry
+        </div>
+      </div>
+    );
+  }
+
   render() {
     let productItems = null;
+    let newPantryButton = this.newPantryButton();
     let number = 0;
     if (this.props.currentMarkers.length === 0) {
       productItems = (
@@ -52,48 +73,35 @@ class InfoBar extends React.Component {
     return (
       <div className="sidebar" id="bar">
         <div>
-          {this.props.header === null ? (
-            <div
-              className="backLink"
-              style={{ display: "inline", marginTop: "90px" }}
-              onClick={this.handleBackClick}
-            >
-              &nbsp;
+          <div
+            className="backLink"
+            style={{ display: "inline", marginTop: "90px" }}
+            onClick={this.handleBackClick}
+          >
+            <div className="backStuff ">
+              <ReactSVG
+                src={icon}
+                style={{
+                  height: "30px",
+                  transform: "rotate(90deg)",
+                  marginTop: "10px"
+                }}
+              />
             </div>
-          ) : (
-            <div
-              className="backLink"
-              style={{ display: "inline", marginTop: "90px" }}
-              onClick={this.handleBackClick}
-            >
-              <div className="backStuff ">
-                <ReactSVG
-                  src={icon}
-                  style={{
-                    height: "30px",
-                    transform: "rotate(90deg)",
-                    marginTop: "10px"
-                  }}
-                />
-              </div>
-              Back
-            </div>
-          )}
-
-          <div className="profilePic"></div>
+            Back
+          </div>
         </div>
         <div>
           <div className="head" style={{ marginBottom: "10px" }}>
-            {this.props.header === null
-              ? "Top 10 searched products"
-              : "Products in " + this.props.header + " Region"}
+            Pantries
           </div>
         </div>
 
-        {productItems}
+        {newPantryButton}
+        <Pantry name="Poutine" />
       </div>
     );
   }
 }
 
-export default InfoBar;
+export default PantriesBar;

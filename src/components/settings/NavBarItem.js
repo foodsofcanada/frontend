@@ -19,7 +19,7 @@ function NavBarItem(props) {
               style={{ height: "30px", fill: "none", stroke: props.color }}
             />
           </div>
-          {props.text}
+          <div style={{ display: "inline-block" }}>{props.text}</div>
         </div>
       </button>
     );

@@ -6,7 +6,7 @@ import Item from "./Item";
 
 import { Spinner } from "react-bootstrap";
 
-class InfoBar extends React.Component {
+class FavoritesBar extends React.Component {
   constructor(props) {
     super();
     this.state = {};
@@ -52,41 +52,27 @@ class InfoBar extends React.Component {
     return (
       <div className="sidebar" id="bar">
         <div>
-          {this.props.header === null ? (
-            <div
-              className="backLink"
-              style={{ display: "inline", marginTop: "90px" }}
-              onClick={this.handleBackClick}
-            >
-              &nbsp;
+          <div
+            className="backLink"
+            style={{ display: "inline", marginTop: "90px" }}
+            onClick={this.handleBackClick}
+          >
+            <div className="backStuff ">
+              <ReactSVG
+                src={icon}
+                style={{
+                  height: "30px",
+                  transform: "rotate(90deg)",
+                  marginTop: "10px"
+                }}
+              />
             </div>
-          ) : (
-            <div
-              className="backLink"
-              style={{ display: "inline", marginTop: "90px" }}
-              onClick={this.handleBackClick}
-            >
-              <div className="backStuff ">
-                <ReactSVG
-                  src={icon}
-                  style={{
-                    height: "30px",
-                    transform: "rotate(90deg)",
-                    marginTop: "10px"
-                  }}
-                />
-              </div>
-              Back
-            </div>
-          )}
-
-          <div className="profilePic"></div>
+            Back
+          </div>
         </div>
         <div>
           <div className="head" style={{ marginBottom: "10px" }}>
-            {this.props.header === null
-              ? "Top 10 searched products"
-              : "Products in " + this.props.header + " Region"}
+            Favorite Products
           </div>
         </div>
 
@@ -96,4 +82,4 @@ class InfoBar extends React.Component {
   }
 }
 
-export default InfoBar;
+export default FavoritesBar;

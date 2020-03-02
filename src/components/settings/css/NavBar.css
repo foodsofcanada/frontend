@@ -41,7 +41,8 @@
 }
 
 .buttonLinks {
-  display: flex;
+  display: block;
+  width: 268px;
   justify-content: center;
   margin-top: 1px;
   height: fit-content;
