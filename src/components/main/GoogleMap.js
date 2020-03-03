@@ -48,8 +48,8 @@ class GoogleMap extends Component {
     var CANADA_BOUNDS = {
       north: 85.06,
       south: 40,
-      west: -165.60,
-      east: 0,
+      west: -165.6,
+      east: 0
     };
 
     this.googleMap = new window.google.maps.Map(this.googleMapRef.current, {
@@ -114,7 +114,11 @@ class GoogleMap extends Component {
       //every region
       // console.log("region: " + regions)
       let polygons = regions[regionsIndex].polygons;
-      for (let polygonsIndex = 0; polygonsIndex < polygons.length; polygonsIndex++) {
+      for (
+        let polygonsIndex = 0;
+        polygonsIndex < polygons.length;
+        polygonsIndex++
+      ) {
         //loop every polygons in a region
         //every polygons
         // console.log("polygons: " + polygons[polygonsIndex])
@@ -123,7 +127,11 @@ class GoogleMap extends Component {
         let polygonPaths = [];
         let outerPath = this.convertStringToArrayCoords(polygon.outerPath);
         polygonPaths.push(outerPath);
-        for (let innerIndex = 0; innerIndex < polygon.innerPaths.length; innerIndex++) {
+        for (
+          let innerIndex = 0;
+          innerIndex < polygon.innerPaths.length;
+          innerIndex++
+        ) {
           //loop every inner polygon
           // console.log("inner: " + polygon.innerPaths[innerIndex].innerPath)
           let innerPath = this.convertStringToArrayCoordsBackwards(
@@ -131,7 +139,9 @@ class GoogleMap extends Component {
           );
           polygonPaths.push(innerPath);
         }
-        let pushpinsCoords = this.convertStringToArrayCoords(regions[regionsIndex].pushpins);
+        let pushpinsCoords = this.convertStringToArrayCoords(
+          regions[regionsIndex].pushpins
+        );
         let regionInfo = {
           regionName: regions[regionsIndex].regionName,
           regionID: regions[regionsIndex].regionID,
@@ -147,7 +157,7 @@ class GoogleMap extends Component {
   convertStringToArrayCoords = MultiGeometryCoordinates => {
     let finalData = [];
     var grouped = MultiGeometryCoordinates.split("\n");
-    grouped.forEach(function (item, i) {
+    grouped.forEach(function(item, i) {
       let a = item.trim().split(",");
 
       finalData.push({
@@ -196,36 +206,34 @@ class GoogleMap extends Component {
       this.googleMap.panTo(event.latLng);
       this.googleMap.setZoom(5);
       this.props.setSelectedRegion(regionInfo.regionName, regionInfo.regionID);
-      // let products = fetch("http://localhost:8180/products")
-        // .then(response => response.json())
-        // .then(data => {
+      fetch("http://localhost:8080/productRegion/" + regionInfo.regionID)
+        .then(response => response.json())
+        .then(data => {
           myProductsInRegion = ProductsInRegion;
           let prodRegion = [];
 
-          Temp.forEach(element => {
-            myProductsInRegion.forEach(product => {
-              if (element.prod_id === product.id && product.regionID === regionInfo.regionID) {
-                prodRegion.push(product);
-              }
-            });
+          data.forEach(element => {
+            prodRegion.push(element);
           });
-          this.showProductsInRegion(prodRegion, regionInfo.regionID);
-      // }); //Fetch closing brackets
-      
+          this.showProductsInRegion(prodRegion);
+        }); //Fetch closing brackets
+
       unhightlightAllRegions();
       toggleHighlightRegion();
-          
     });
 
     polygon.addListener("mouseover", event => {
       if (regionPushpins.length === 0) {
-        regionPushpins = this.createPushpinsInRegion(regionInfo.pushpins, regionInfo.regionName);
+        regionPushpins = this.createPushpinsInRegion(
+          regionInfo.pushpins,
+          regionInfo.regionName
+        );
       } else {
         regionPushpins.forEach(pushpin => {
           pushpin.setMap(this.googleMap);
         });
       }
-      
+
       let isHighlighted = this.isHighlighted(regionInfo.regionID);
 
       if (!isHighlighted) {
@@ -253,73 +261,65 @@ class GoogleMap extends Component {
       }
     });
 
-
     let unhightlightAllRegions = () => {
       regionsPolygons.forEach(region => {
         for (let index = 0; index < currentHighlightedRegions.length; index++) {
           const regionID = currentHighlightedRegions[index];
-          if (regionID === region.regionID && region.regionID !== regionInfo.regionID) {
+          if (
+            regionID === region.regionID &&
+            region.regionID !== regionInfo.regionID
+          ) {
             region.toggleHighlightRegion();
             currentHighlightedRegions = [];
           }
         }
       });
-      
-    }
+    };
 
-    let toggleHighlightRegion = () => { 
-
+    let toggleHighlightRegion = () => {
       let isHighlighted = this.isHighlighted(regionInfo.regionID);
-      console.log(isHighlighted)
-        if (isHighlighted) {
-          regionsPolygons.forEach(regionPolygons => {
-            if (regionInfo.regionID === regionPolygons.regionID) {
-              regionPolygons.polygon.setOptions({ strokeWeight: "0.2" });
-            }
-          });
-          
-          for (let index = 0; index < currentHighlightedRegions.length; index++) {
-            const element = currentHighlightedRegions[index];
-            if (element === regionInfo.regionID) {
-              currentHighlightedRegions.splice(index, 1);
-            }
+      console.log(isHighlighted);
+      if (isHighlighted) {
+        regionsPolygons.forEach(regionPolygons => {
+          if (regionInfo.regionID === regionPolygons.regionID) {
+            regionPolygons.polygon.setOptions({ strokeWeight: "0.2" });
           }
+        });
 
-        } else {
-          regionsPolygons.forEach(regionPolygons => {
-            if (regionInfo.regionID === regionPolygons.regionID) {
-              regionPolygons.polygon.setOptions({ strokeWeight: "2" });
-            }
-          });
-          currentHighlightedRegions.push(regionInfo.regionID);
-          
+        for (let index = 0; index < currentHighlightedRegions.length; index++) {
+          const element = currentHighlightedRegions[index];
+          if (element === regionInfo.regionID) {
+            currentHighlightedRegions.splice(index, 1);
+          }
         }
-  
-    }
+      } else {
+        regionsPolygons.forEach(regionPolygons => {
+          if (regionInfo.regionID === regionPolygons.regionID) {
+            regionPolygons.polygon.setOptions({ strokeWeight: "2" });
+          }
+        });
+        currentHighlightedRegions.push(regionInfo.regionID);
+      }
+    };
 
-    regionsPolygons.push({ 
-      "regionID": regionInfo.regionID, 
-      "polygon": polygon,
-      "toggleHighlightRegion": toggleHighlightRegion,
+    regionsPolygons.push({
+      regionID: regionInfo.regionID,
+      polygon: polygon,
+      toggleHighlightRegion: toggleHighlightRegion
     });
-
-    
-
   };
 
-  showProductsInRegion = (products, regionID) => {
+  showProductsInRegion = products => {
     this.clearCurrentMarkers();
     this.props.setCurrentMarkers(products);
     // this.showMarkers(products);
     // this.highlightRegion(regionID);
   };
 
-
   /********************************
-  * Region Pushpins
-  ********************************/
+   * Region Pushpins
+   ********************************/
   createPushpinsInRegion = (pushpins, regionName) => {
-
     return pushpins.map(element => {
       let marker = new window.google.maps.Marker({
         position: {
@@ -342,18 +342,17 @@ class GoogleMap extends Component {
       marker.setOpacity(1);
       return marker;
     });
-  }
+  };
 
-
-  isHighlighted = (regionID) => {
+  isHighlighted = regionID => {
     let isHighlighted = false;
     currentHighlightedRegions.forEach(ID => {
       if (ID === regionID) {
-         isHighlighted = true;
+        isHighlighted = true;
       }
     });
     return isHighlighted;
-  }
+  };
 
   render() {
     return (
