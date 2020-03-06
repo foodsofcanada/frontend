@@ -11,9 +11,7 @@ class SearchSidebar extends Component {
 			regionsLoading: true,
 			regionsError: false,
 			seasonsLoading: true,
-			seasonsError: false,
 			productTypesLoading: true,
-			productTypesError: false,
 			searchText: "",//Search Input text box
 			products: [],
 			regions: [],
