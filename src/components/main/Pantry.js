@@ -1,7 +1,7 @@
 import React from "react";
 import "./css/Item.css";
 import { ReactSVG } from "react-svg";
-import heart from "../../icons/heart.svg";
+// import heart from "../../icons/heart.svg";
 import more from "../../icons/more-vertical.svg";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 

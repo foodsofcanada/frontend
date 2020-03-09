@@ -2,10 +2,11 @@ import React from "react";
 //import { Link } from "react-router-dom";
 import InfoBar from "./InfoBar";
 import GoogleMap from "./GoogleMap";
-import ProductInfoSidebar from "./ProductInfoSidebar";
-import ProfileSidebar from "./ProfileSidebar";
-import FavoritesBar from "./FavoritesBar";
-import PantriesBar from "./PantriesBar";
+import SearchSideBar from "./SearchSidebar";
+// import ProductInfoSidebar from "./ProductInfoSidebar";
+// import ProfileSidebar from "./ProfileSidebar";
+// import FavoritesBar from "./FavoritesBar";
+// import PantriesBar from "./PantriesBar";
 import icon from "../../icons/chevron-down.svg";
 import { ReactSVG } from "react-svg";
 import "./css/Main.css";
@@ -39,6 +40,21 @@ class Main extends React.Component {
     } else {
       document.getElementById("bar").style.width = "0";
     }
+
+    fetch("http://localhost:8080/save-member", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        "email": "password",
+        "password": "yellow",
+        })
+    })
+      .then(response => response.text())
+      .then(data => {
+        console.log(data);
+      });
   }
 
   setSelectedMarker = marker => {
@@ -87,6 +103,7 @@ class Main extends React.Component {
           header={this.state.selectedRegion}
           currentMarkers={this.state.currentMarkers}
         />
+        <SearchSideBar/>
 
         {/* <ProductInfoSidebar
           header={this.state.selectedRegion}

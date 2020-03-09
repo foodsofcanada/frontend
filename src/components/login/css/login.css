@@ -1,0 +1,13 @@
+.loginBox{
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px #2c28281c;
+  background: #ffffff;
+  margin-top: 60px;
+  margin-bottom: 70px;
+  width: 75%;
+
+  padding-top: 100px;
+  padding-left: 40px;
+  padding-right: 40px;
+ 
+}
