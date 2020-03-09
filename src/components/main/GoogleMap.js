@@ -5,7 +5,6 @@ import Regions from "../../data/Regions.json";
 // import Regions from "../../data/TempRegion.json";
 // import Regions from "../../data/TempRegion_pushpin.json";
 import ProductsInRegion from "../../data/productsInRegion.json";
-import Temp from "../../data/Temp.json";
 const mapStyles = {
   width: "100vw",
   height: "100vh"
@@ -35,22 +34,23 @@ class GoogleMap extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.currentMarkers !== this.props.currentMarkers;
+    // return nextProps.currentMarkers !== this.props.currentMarkers;
+    return false;
   }
 
   componentDidUpdate() {
-    // console.log("Google Map Component updated!");
+    console.log("Google Map Component updated!");
     // this.showMarkers(this.props.currentMarkers);
     // console.log(this.markers);
   }
 
   createGoogleMap = () => {
-    var CANADA_BOUNDS = {
-      north: 85.06,
-      south: 40,
-      west: -165.6,
-      east: 0
-    };
+    // var CANADA_BOUNDS = {
+    //   north: 85.06,
+    //   south: 40,
+    //   west: -165.6,
+    //   east: 0
+    // };
 
     this.googleMap = new window.google.maps.Map(this.googleMapRef.current, {
       center: {
@@ -73,14 +73,33 @@ class GoogleMap extends Component {
   };
 
   showTop10Products = () => {
-    this.props.setCurrentMarkers(top10Products);
-    // this.showMarkers(top10Products);
+    fetch("http://localhost:8080/products")
+      .then (response => response.json())
+      .then (data => {
+        /*********************************************************************
+         * TO BE CHANGED ONCE BACKEND HAS IMPLEMENTED TO FETCH /TOP10PRODUCTS
+         *********************************************************************/
+        let temp = top10Products;
+          temp.forEach(product => {
+            for (let index = 0; index < data.length; index++) {
+              const element = data[index];
+              if (product.id === element.prod_id) {
+                product.name = element.name;
+              }
+            }
+          });
+          this.props.setCurrentMarkers(temp);
+      })
+      .catch(() => {
+        console.log("Failed to fetch top 10 products");
+      });
+    // this.showMarkers(top10Products); //uncomment to enable top10products markers. Note must uncomment all showMarkers()
   };
 
   showMarkers = newMarkers => {
     for (let index = 0; index < newMarkers.length; index++) {
       const { position } = newMarkers[index];
-      var gMapMarker = new window.google.maps.Marker({
+      let gMapMarker = new window.google.maps.Marker({
         position: {
           lat: position.lat,
           lng: position.lng
@@ -187,7 +206,8 @@ class GoogleMap extends Component {
    * Regions/Polygons
    ************************************************************/
   createRegion = regionInfo => {
-    const { strokeColor, strokeWeight, fillColor } = regionInfo.polygonStyle;
+    // const { strokeColor, strokeWeight, fillColor } = regionInfo.polygonStyle;
+    const { strokeWeight, fillColor } = regionInfo.polygonStyle;
     let regionPushpins = [];
     var polygon = new window.google.maps.Polygon({
       paths: regionInfo.polygonPaths,
@@ -202,20 +222,16 @@ class GoogleMap extends Component {
       /**
        * Show products in region
        **/
-      let myProductsInRegion = [];
       this.googleMap.panTo(event.latLng);
       this.googleMap.setZoom(5);
       this.props.setSelectedRegion(regionInfo.regionName, regionInfo.regionID);
       fetch("http://localhost:8080/productRegion/" + regionInfo.regionID)
         .then(response => response.json())
-        .then(data => {
-          myProductsInRegion = ProductsInRegion;
-          let prodRegion = [];
-
-          data.forEach(element => {
-            prodRegion.push(element);
-          });
-          this.showProductsInRegion(prodRegion);
+        .then(productsInRegion => {
+          this.showProductsInRegion(productsInRegion);
+        })
+        .catch(() => {
+          console.log("Failed to retrieve products in region");
         }); //Fetch closing brackets
 
       unhightlightAllRegions();
@@ -265,10 +281,7 @@ class GoogleMap extends Component {
       regionsPolygons.forEach(region => {
         for (let index = 0; index < currentHighlightedRegions.length; index++) {
           const regionID = currentHighlightedRegions[index];
-          if (
-            regionID === region.regionID &&
-            region.regionID !== regionInfo.regionID
-          ) {
+          if (regionID === region.regionID && region.regionID !== regionInfo.regionID) {
             region.toggleHighlightRegion();
             currentHighlightedRegions = [];
           }
@@ -278,7 +291,6 @@ class GoogleMap extends Component {
 
     let toggleHighlightRegion = () => {
       let isHighlighted = this.isHighlighted(regionInfo.regionID);
-      console.log(isHighlighted);
       if (isHighlighted) {
         regionsPolygons.forEach(regionPolygons => {
           if (regionInfo.regionID === regionPolygons.regionID) {
@@ -287,8 +299,8 @@ class GoogleMap extends Component {
         });
 
         for (let index = 0; index < currentHighlightedRegions.length; index++) {
-          const element = currentHighlightedRegions[index];
-          if (element === regionInfo.regionID) {
+          const hightlightedRegion = currentHighlightedRegions[index];
+          if (hightlightedRegion === regionInfo.regionID) {
             currentHighlightedRegions.splice(index, 1);
           }
         }
@@ -317,7 +329,7 @@ class GoogleMap extends Component {
   };
 
   /********************************
-   * Region Pushpins
+   * Create Region Pushpins
    ********************************/
   createPushpinsInRegion = (pushpins, regionName) => {
     return pushpins.map(element => {

@@ -10,6 +10,7 @@ import SearchSideBar from "./SearchSidebar";
 import icon from "../../icons/chevron-down.svg";
 import { ReactSVG } from "react-svg";
 import "./css/Main.css";
+import SearchSidebar from "./SearchSidebar";
 
 class Main extends React.Component {
   constructor() {
@@ -91,6 +92,8 @@ class Main extends React.Component {
             zIndex: "0"
           }}
         >
+          <SearchSidebar/>
+
           <GoogleMap
             language={this.props.language}
             setSelectedMarker={this.setSelectedMarker}
