@@ -1,4 +1,4 @@
-.loginBox{
+.loginBox {
   border-radius: 10px;
   box-shadow: 0px 3px 6px #2c28281c;
   background: #ffffff;
@@ -9,5 +9,32 @@
   padding-top: 100px;
   padding-left: 40px;
   padding-right: 40px;
- 
+}
+.textbox {
+  width: 500px !important;
+}
+
+.textboxLabels {
+  font-weight: bold;
+  font-size: large;
+}
+
+.label {
+  height: 80px;
+}
+
+.loginButton {
+  width: 50%;
+  height: 40px;
+  background: #7764e4;
+  outline: none;
+  border-radius: 25px;
+  margin-top: 20px;
+  border: none;
+  opacity: 1;
+  color: #ffffff;
+}
+
+.loginButton:hover {
+  background: #6454c0;
 }

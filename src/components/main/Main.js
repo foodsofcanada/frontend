@@ -42,20 +42,7 @@ class Main extends React.Component {
       document.getElementById("bar").style.width = "0";
     }
 
-    fetch("http://localhost:8080/save-member", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        "email": "password",
-        "password": "yellow",
-        })
-    })
-      .then(response => response.text())
-      .then(data => {
-        console.log(data);
-      });
+    
   }
 
   setSelectedMarker = marker => {
