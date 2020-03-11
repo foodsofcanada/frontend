@@ -2,91 +2,61 @@
   {
     "id": 1,
     "position": { "lat": 65.95, "lng": -103.89 },
-    "information": {
-      "name": "Barley",
-      "description": "This is a Barley",
+      "name": "",
       "region": "Southern Arctic"
-    }
   },
   {
     "id": 2,
     "position": { "lat": 63.06, "lng": -105.89 },
-    "information": {
-      "name": "Wild Leek",
-      "description": "This is a Wild Leek",
+      "name": " Leek",
       "region": "Southern Arctic"
-    }
   },
   {
     "id": 3,
     "position": { "lat": 62.17, "lng": -107.89 },
-    "information": {
-      "name": "Sockeye Salmon",
-      "description": "This is a Sockeye Salmon",
+      "name": "",
       "region": "Taiga Shield"
-    }
   },
   {
-    "id": 4,
+    "id": 3,
     "position": { "lat": 60.28, "lng": -111.89 },
-    "information": {
-      "name": "Salmon",
-      "description": "This is a Product description",
+      "name": "",
       "region": "Taiga Shield"
-    }
   },
   {
-    "id": 5,
+    "id": 2,
     "position": { "lat": 67.39, "lng": -101.89 },
-    "information": {
-      "name": "Barley",
-      "description": "This is a 5",
+      "name": "",
       "region": "Southern Arctic"
-    }
   },
   {
-    "id": 6,
+    "id": 1,
     "position": { "lat": 60.4, "lng": -120.89 },
-    "information": {
-      "name": "Strawberry",
-      "description": "This is a 6",
+      "name": "",
       "region": "Taiga Plains"
-    }
   },
   {
-    "id": 7,
+    "id": 1,
     "position": { "lat": 60.51, "lng": -131.89 },
-    "information": {
-      "name": "Apples",
-      "description": "This is a 7",
+      "name": "",
       "region": "Boreal Cordillera"
-    }
   },
   {
-    "id": 8,
+    "id": 2,
     "position": { "lat": 60.62, "lng": -135.89 },
-    "information": {
-      "name": "Wild Leek",
-      "description": "This is a 8",
+      "name": "",
       "region": "Boreal Cordillera"
-    }
   },
   {
-    "id": 9,
+    "id": 3,
     "position": { "lat": 50.73, "lng": -101.89 },
-    "information": {
-      "name": "Grapes",
-      "description": "This is a 9",
+      "name": "",
       "region": "Prairies"
-    }
   },
   {
-    "id": 10,
+    "id": 2,
     "position": { "lat": 55.84, "lng": -101.89 },
-    "information": {
-      "name": "Beans",
-      "description": "This is a 10",
+      "name": "",
       "region": "Boreal Shield"
-    }
   }
 ]
