@@ -9,7 +9,7 @@ class LoginPage extends React.Component {
       email: "",
       password: "",
       errorMessage: " ",
-      sessionValue: ""
+      sessionValue: sessionStorage.getItem("currentUser")
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -72,8 +72,8 @@ class LoginPage extends React.Component {
   }
 
   render() {
-    console.log("I re rendered");
-    if (this.state.sessionValue !== "") {
+    console.log("I re rendered " + this.state.sessionValue);
+    if (this.state.sessionValue !== "" && this.state.sessionValue !== null) {
       return <Redirect to="/" />;
     } else {
       return (
@@ -151,6 +151,10 @@ class LoginPage extends React.Component {
                       value="Login"
                       className="loginButton"
                     />
+                    &nbsp;
+                    <button className="createAccountButton">
+                      Create an Account
+                    </button>
                   </div>
                 </form>
               </div>

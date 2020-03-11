@@ -24,7 +24,7 @@
 }
 
 .loginButton {
-  width: 45%;
+  width: 20%;
   height: 40px;
   background: #7764e4;
   outline: none;
@@ -38,4 +38,19 @@
 
 .loginButton:hover {
   background: #6454c0;
+}
+
+.createAccountButton {
+  width: 40%;
+  height: 40px;
+  background: white;
+  outline: none;
+  border-radius: 25px;
+  margin-top: 20px;
+  border: none;
+  opacity: 1;
+  border-style: solid;
+  border-width: 2px;
+  color: #7764e4;
+  font-weight: 600;
 }
