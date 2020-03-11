@@ -2,7 +2,7 @@ import React from "react";
 import "./css/InfoBar.css";
 import icon from "../../icons/chevron-down.svg";
 import { ReactSVG } from "react-svg";
-import Item from "./Item";
+// import Item from "./Item";
 import { Spinner, Dropdown, DropdownButton } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 import heart from "../../icons/heart.svg";
@@ -16,8 +16,21 @@ class ProductInfoSidebar extends React.Component {
     this.handleTabClick = this.handleTabClick.bind(this);
   }
 
+  neededInfo = null;
+  componentDidMount() {
+    fetch("http://localhost:8080/" + this.props.currentProduct)
+      .then(response => response.json())
+      .then(data => {
+        this.neededInfo = data;
+        this.setState(this.state);
+      })
+      .catch(() => {
+        console.log("Failed to retrieve product");
+      });
+  }
+
   handleBackClick() {
-    window.location.reload();
+    this.props.setCurrentPage("");
   }
 
   loadTab() {
@@ -96,20 +109,65 @@ class ProductInfoSidebar extends React.Component {
   }
 
   render() {
-    let productItems = null;
-    let number = 0;
+    // if (this.neededInfo !== null) {
+    //   console.log(this.neededInfo);
+    // }
     let tab = this.loadTab();
     let cardContent = "";
-    if (this.state.activeTab === "1") {
-      cardContent = <p>General info</p>;
+    if (this.state.activeTab === "1" && this.neededInfo !== null) {
+      cardContent = (
+        <div>
+          <div>Scientific name:</div>
+          <p style={{ fontWeight: "400" }}>{this.neededInfo.scientific_name}</p>
+
+          <div>Description:</div>
+          <p style={{ fontWeight: "400" }}>{this.neededInfo.description}</p>
+
+          <div>History:</div>
+          <p style={{ fontWeight: "400" }}>{this.neededInfo.history}</p>
+
+          <div>Fun Facts:</div>
+          <p style={{ fontWeight: "400" }}>{this.neededInfo.fun_fact}</p>
+        </div>
+      );
     }
 
-    if (this.state.activeTab === "2") {
-      cardContent = <p>AGRICULTURE info</p>;
+    if (this.state.activeTab === "2" && this.neededInfo !== null) {
+      cardContent = (
+        <div>
+          <div>Age:</div>
+          <p style={{ fontWeight: "400" }}>{this.neededInfo.age}</p>
+
+          <div>Season:</div>
+          <p style={{ fontWeight: "400" }}>{this.neededInfo.season}</p>
+
+          <div>Country of origin:</div>
+          <p style={{ fontWeight: "400" }}>{this.neededInfo.origin_country}</p>
+
+          <div>Growth phases:</div>
+          <p style={{ fontWeight: "400" }}>{this.neededInfo.growth_phases}</p>
+        </div>
+      );
     }
 
-    if (this.state.activeTab === "3") {
-      cardContent = <p>KITCHEN info</p>;
+    if (this.state.activeTab === "3" && this.neededInfo !== null) {
+      cardContent = (
+        <div>
+          <div style={{ color: "red" }}>Danger:</div>
+          <p style={{ fontWeight: "400", color: "red" }}>
+            {this.neededInfo.danger}
+          </p>
+
+          <div>Preservation technique:</div>
+          <p style={{ fontWeight: "400" }}>{this.neededInfo.preservation}</p>
+
+          <div>Shelf life:</div>
+          <p style={{ fontWeight: "400" }}>{this.neededInfo.shelf_life}</p>
+
+          <div>Cooking uses:</div>
+          <p style={{ fontWeight: "400" }}>{this.neededInfo.cooking_use}</p>
+        </div>
+      );
     }
 
     let moreButton = (
@@ -124,33 +182,6 @@ class ProductInfoSidebar extends React.Component {
         }}
       />
     );
-    if (this.props.currentMarkers.length === 0) {
-      productItems = (
-        <div
-          style={{
-            marginLeft: "40%",
-            marginTop: "50%"
-          }}
-        >
-          &nbsp;&nbsp;&nbsp;
-          <Spinner animation="grow" variant="primary" />
-          <br />
-          Loading...
-        </div>
-      );
-    } else {
-      productItems = this.props.currentMarkers.map(function(product) {
-        number = number + 1;
-        return (
-          <Item
-            number={number}
-            key={number}
-            name={product.information.name}
-            region={product.information.region}
-          />
-        );
-      });
-    }
 
     // let productItems = this.props.currentMarkers.map(product => <Item key={product.id} name={product.item}/>)
     return (
@@ -228,7 +259,9 @@ class ProductInfoSidebar extends React.Component {
         </div>
         <div>
           <div style={{ display: "inline-flex" }}>
-            <h2 class="head">Barley</h2>
+            <h2 className="head">
+              {this.neededInfo !== null ? this.neededInfo.name : ""}
+            </h2>
           </div>
           <div
             style={{

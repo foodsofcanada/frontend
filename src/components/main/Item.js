@@ -24,7 +24,10 @@ class Item extends React.Component {
     );
 
     return (
-      <div className=" d-flex justify-content-center">
+      <div
+        className=" d-flex justify-content-center"
+        id={this.props.actualProduct}
+      >
         <div className="item">
           <div
             className="head"

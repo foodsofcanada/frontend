@@ -17,9 +17,14 @@ class InfoBar extends React.Component {
     window.location.reload();
   }
 
+  handleButtonClick = event => {
+    this.props.setCurrentPage("products/" + event.currentTarget.id);
+  };
+
   render() {
     let productItems = null;
     let number = 0;
+
     if (this.props.currentMarkers.length === 0) {
       productItems = (
         <div
@@ -35,15 +40,23 @@ class InfoBar extends React.Component {
         </div>
       );
     } else {
-      productItems = this.props.currentMarkers.map(function(product) {
+      productItems = this.props.currentMarkers.map(product => {
         number = number + 1;
+
         return (
-          <Item
-            number={number}
+          <div
+            onClick={this.handleButtonClick}
             key={number}
-            name={product.name}
-            region={product.region}
-          />
+            id={product.prod_id}
+          >
+            <Item
+              number={number}
+              key={number}
+              name={product.name}
+              region={product.region}
+              actualProduct={product.prod_id}
+            />
+          </div>
         );
       });
     }

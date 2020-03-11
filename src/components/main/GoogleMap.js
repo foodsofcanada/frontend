@@ -74,21 +74,21 @@ class GoogleMap extends Component {
 
   showTop10Products = () => {
     fetch("http://localhost:8080/products")
-      .then (response => response.json())
-      .then (data => {
+      .then(response => response.json())
+      .then(data => {
         /*********************************************************************
          * TO BE CHANGED ONCE BACKEND HAS IMPLEMENTED TO FETCH /TOP10PRODUCTS
          *********************************************************************/
         let temp = top10Products;
-          temp.forEach(product => {
-            for (let index = 0; index < data.length; index++) {
-              const element = data[index];
-              if (product.id === element.prod_id) {
-                product.name = element.name;
-              }
+        temp.forEach(product => {
+          for (let index = 0; index < data.length; index++) {
+            const element = data[index];
+            if (product.prod_id === element.prod_id) {
+              product.name = element.name;
             }
-          });
-          this.props.setCurrentMarkers(temp);
+          }
+        });
+        this.props.setCurrentMarkers(temp);
       })
       .catch(() => {
         console.log("Failed to fetch top 10 products");
@@ -229,6 +229,7 @@ class GoogleMap extends Component {
         .then(response => response.json())
         .then(productsInRegion => {
           this.showProductsInRegion(productsInRegion);
+          this.props.setCurrentPage("");
         })
         .catch(() => {
           console.log("Failed to retrieve products in region");
@@ -281,7 +282,10 @@ class GoogleMap extends Component {
       regionsPolygons.forEach(region => {
         for (let index = 0; index < currentHighlightedRegions.length; index++) {
           const regionID = currentHighlightedRegions[index];
-          if (regionID === region.regionID && region.regionID !== regionInfo.regionID) {
+          if (
+            regionID === region.regionID &&
+            region.regionID !== regionInfo.regionID
+          ) {
             region.toggleHighlightRegion();
             currentHighlightedRegions = [];
           }

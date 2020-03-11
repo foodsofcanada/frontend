@@ -3,7 +3,7 @@ import React from "react";
 import InfoBar from "./InfoBar";
 import GoogleMap from "./GoogleMap";
 import SearchSideBar from "./SearchSidebar";
-// import ProductInfoSidebar from "./ProductInfoSidebar";
+import ProductInfoSidebar from "./ProductInfoSidebar";
 // import ProfileSidebar from "./ProfileSidebar";
 // import FavoritesBar from "./FavoritesBar";
 // import PantriesBar from "./PantriesBar";
@@ -27,11 +27,16 @@ class Main extends React.Component {
         showFav: false,
         showRegion: false,
         showProductInformation: false
-      }
+      },
+      currentPage: ""
     };
 
     this.openCloseBar = this.openCloseBar.bind(this);
   }
+
+  setCurrentPage = value => {
+    this.setState({ currentPage: value });
+  };
 
   componentDidUpdate() {
     console.log("Main component update!");
@@ -41,8 +46,6 @@ class Main extends React.Component {
     } else {
       document.getElementById("bar").style.width = "0";
     }
-
-    
   }
 
   setSelectedMarker = marker => {
@@ -67,7 +70,7 @@ class Main extends React.Component {
 
   render() {
     // const p = "hello";
-
+    console.log(this.state.currentPage + " this is the current page");
     return (
       //   <Link to="/settings">{p === "Hell" ? <h1>Hello</h1> : <h1>Ho</h1>}</Link>
       <div>
@@ -79,20 +82,29 @@ class Main extends React.Component {
             zIndex: "0"
           }}
         >
-          
           <GoogleMap
             language={this.props.language}
             setSelectedMarker={this.setSelectedMarker}
             currentMarkers={this.state.currentMarkers}
             setCurrentMarkers={this.setCurrentMarkers}
+            setCurrentPage={this.setCurrentPage}
             setSelectedRegion={this.setSelectedRegion}
           />
         </div>
-        <InfoBar
-          header={this.state.selectedRegion}
-          currentMarkers={this.state.currentMarkers}
-        />
-        <SearchSideBar/>
+        {this.state.currentPage.startsWith("products/") ? (
+          <ProductInfoSidebar
+            currentProduct={this.state.currentPage}
+            setCurrentPage={this.setCurrentPage}
+          />
+        ) : (
+          <InfoBar
+            header={this.state.selectedRegion}
+            currentMarkers={this.state.currentMarkers}
+            setCurrentPage={this.setCurrentPage}
+          />
+        )}
+
+        <SearchSideBar />
 
         {/* <ProductInfoSidebar
           header={this.state.selectedRegion}
