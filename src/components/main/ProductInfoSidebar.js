@@ -226,6 +226,9 @@ class ProductInfoSidebar extends React.Component {
               height: "146px",
               borderRadius: "50%"
             }}
+            controls={false}
+            indicators={false}
+            interval={900}
           >
             <Carousel.Item
               style={{
