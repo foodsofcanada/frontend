@@ -92,8 +92,7 @@ class Main extends React.Component {
             zIndex: "0"
           }}
         >
-          <SearchSidebar/>
-
+          
           <GoogleMap
             language={this.props.language}
             setSelectedMarker={this.setSelectedMarker}
