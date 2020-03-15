@@ -15,7 +15,7 @@ import SearchItem from "./SearchItem";
 
 class SearchSidebar extends Component {
   constructor(props) {
-    super(props);
+    super();
     this.state = {
       productsLoading: true,
       productsError: false,
@@ -27,24 +27,14 @@ class SearchSidebar extends Component {
       products: [],
       regions: [],
       seasons: ["Fall", "Spring", "Summer", "Winter"],
-      productTypes: [
-        "Seed",
-        "Grain",
-        "Plant",
-        "Herb",
-        "Fruit",
-        "Vegetable",
-        "Animal",
-        "By-product",
-        "Freshwater product",
-        "Saltwater product",
-        "Farmed product",
-        "Green house product",
-        "Aquaponic product",
-        "Sustainable",
-        "Endangered",
-        "Artisanal product"
-      ]
+      searchQuery: {
+        productsSearched: [1,2,3],
+        seasonSearched: ["spring","summer"],
+        regionSearched: [1,2] 
+      },
+      // productTypes: ["Seed","Grain","Plant","Herb","Fruit","Vegetable","Animal","By-product","Freshwater product","Saltwater product",
+        // "Farmed product","Green house product","Aquaponic product","Sustainable","Endangered","Artisanal product"]
+      
     };
   }
 
@@ -53,12 +43,20 @@ class SearchSidebar extends Component {
     fetch("http://localhost:8080/products")
       .then(response => response.json())
       .then(productsData => {
+        productsData = productsData.map( product => {
+          product.checked = false;
+          return product;
+        });
+        productsData.forEach(element => {
+          console.log(element.checked)
+        });
         this.setState({
           productsLoading: false,
           products: productsData
         });
       })
-      .catch(() => {
+      .catch((error) => {
+        console.log(error)
         console.log("Failed to retrieve products for SearchSidebar");
         this.setState({ productsError: true });
       }); //end of fetch
@@ -84,11 +82,47 @@ class SearchSidebar extends Component {
       }); //end of fetch
   }
 
-  handleChange(event) {
+  handleChange = (event) => {
+    console.log("item selected")
     const { name, value, type, checked } = event.target;
-    type === "checkbox"
-      ? this.setState({ [name]: checked })
-      : this.setState({ [name]: value });
+    
+    // (type === "checkbox") ? 
+    // () => {
+    //   this.setState({ [name]: checked });
+    //   if (name === "products" && checked) {
+    //   }
+    // } 
+    
+
+    // : 
+    
+    // this.setState({ [name]: value });
+
+
+    /************************************************************************************
+     * Fetch search results
+     * WIP (Working In Progress)
+     ************************************************************************************/
+    const requestOption = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state.searchQuery)
+    }
+
+    fetch("http://localhost:8080/search", requestOption)
+     .then(response => response.json())
+     .then(data => {
+       console.log(data);
+       this.props.setCurrentMarkers(data);
+     })
+     .catch( (error) => {
+       console.log("Failed to fetch search query.");
+      //  console.log("error:" + error)
+   });
+
+
   }
 
   render() {
@@ -103,6 +137,7 @@ class SearchSidebar extends Component {
               value={product.prod_id}
               className="products"
               name={product.name}
+              checked={product.checked}
               handleChange={this.handleChange}
             />
           );
@@ -138,19 +173,18 @@ class SearchSidebar extends Component {
           );
         });
 
-    const searchTypes = this.state.productTypesloading
-      ? "loading..."
-      : this.state.productTypes.map((type, index) => {
-          return (
-            <SearchItem
-              key={type}
-              value={type}
-              attributeName="types"
-              name={type}
-              handleChange={this.handleChange}
-            />
-          );
-        });
+    // const searchTypes = (this.state.productTypesloading) ? "loading..."
+    //   : this.state.productTypes.map((type, index) => {
+    //     return (
+    //       <SearchItem
+    //         key={type}
+    //         value={type}
+    //         attributeName="types"
+    //         name={type}
+    //         handleChange={this.handleChange}
+    //       />
+    //     );
+    //   });
     return (
       <div>
         <div>
@@ -176,8 +210,8 @@ class SearchSidebar extends Component {
               <h1>Seasons</h1>
               {searchSeasons}
 
-              <h1>Types</h1>
-              {searchTypes}
+              {/* <h1>Types</h1>
+              {searchTypes} */}
             </div>
           </div>
         </div>

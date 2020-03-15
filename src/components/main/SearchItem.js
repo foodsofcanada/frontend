@@ -10,7 +10,7 @@ class SearchItem extends Component {
         return (
             <div className="searchItem">
                 <label>
-                    <input type="checkbox" name={this.props.className} value={this.props.value}/>
+                    <input type="checkbox" name={this.props.className} value={this.props.value} onChange={this.props.handleChange}/>
                     {this.props.name}
                 </label>
             </div>

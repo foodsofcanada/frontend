@@ -104,7 +104,9 @@ class Main extends React.Component {
           />
         )}
 
-        <SearchSideBar />
+        <SearchSideBar 
+          setCurrentMarkers={this.setCurrentMarkers}
+        />
 
         {/* <ProductInfoSidebar
           header={this.state.selectedRegion}

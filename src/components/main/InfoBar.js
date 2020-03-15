@@ -53,7 +53,7 @@ class InfoBar extends React.Component {
               number={number}
               key={number}
               name={product.name}
-              region={product.region}
+              region={product.regionName}
               actualProduct={product.prod_id}
             />
           </div>

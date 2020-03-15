@@ -1,62 +1,62 @@
 [
   {
     "prod_id": 1,
-    "position": { "lat": 65.95, "lng": -103.89 },
+    "coordinates": "65.95,-103.89",
     "name": "",
-    "region": "Southern Arctic"
+    "regionName": "Southern Arctic"
   },
   {
     "prod_id": 2,
-    "position": { "lat": 63.06, "lng": -105.89 },
+    "coordinates": "63.06,-105.89",
     "name": " Leek",
-    "region": "Southern Arctic"
+    "regionName": "Southern Arctic"
   },
   {
     "prod_id": 3,
-    "position": { "lat": 62.17, "lng": -107.89 },
+    "coordinates": "62.17,-107.89",
     "name": "",
-    "region": "Taiga Shield"
+    "regionName": "Taiga Shield"
   },
   {
     "prod_id": 3,
-    "position": { "lat": 60.28, "lng": -111.89 },
+    "coordinates": "60.28,-111.89",
     "name": "",
-    "region": "Taiga Shield"
+    "regionName": "Taiga Shield"
   },
   {
     "prod_id": 2,
-    "position": { "lat": 67.39, "lng": -101.89 },
+    "coordinates": "67.39,-101.89",
     "name": "",
-    "region": "Southern Arctic"
+    "regionName": "Southern Arctic"
   },
   {
     "prod_id": 1,
-    "position": { "lat": 60.4, "lng": -120.89 },
+    "coordinates": "60.4,-120.89",
     "name": "",
-    "region": "Taiga Plains"
+    "regionName": "Taiga Plains"
   },
   {
     "prod_id": 1,
-    "position": { "lat": 60.51, "lng": -131.89 },
+    "coordinates": "60.51,-131.89",
     "name": "",
-    "region": "Boreal Cordillera"
+    "regionName": "Boreal Cordillera"
   },
   {
     "prod_id": 2,
-    "position": { "lat": 60.62, "lng": -135.89 },
+    "coordinates": "60.62,-135.89",
     "name": "",
-    "region": "Boreal Cordillera"
+    "regionName": "Boreal Cordillera"
   },
   {
     "prod_id": 3,
-    "position": { "lat": 50.73, "lng": -101.89 },
+    "coordinates": "50.73,-101.89",
     "name": "",
-    "region": "Prairies"
+    "regionName": "Prairies"
   },
   {
     "prod_id": 2,
-    "position": { "lat": 55.84, "lng": -101.89 },
+    "coordinates": "55.84,-101.89",
     "name": "",
-    "region": "Boreal Shield"
+    "regionName": "Boreal Shield"
   }
 ]
