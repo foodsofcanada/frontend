@@ -7,11 +7,12 @@ class SearchItem extends Component {
     // }
 
     render() {
+        // console.log(this.props.checked);
         return (
             <div className="searchItem">
                 <label>
-                    <input type="checkbox" name={this.props.className} value={this.props.value} onChange={this.props.handleChange}/>
-                    {this.props.name}
+                    <input type="checkbox" checked={this.props.checked} name={this.props.name} value={this.props.value} onChange={this.props.handleChange}/>
+                    {this.props.labelName}
                 </label>
             </div>
         );

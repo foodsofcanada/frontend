@@ -54,6 +54,7 @@ class Main extends React.Component {
   };
 
   setCurrentMarkers = markers => {
+    // console.log(markers)
     this.setState({ currentMarkers: markers });
   };
 
