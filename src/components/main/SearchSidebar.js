@@ -50,12 +50,6 @@ class SearchSidebar extends Component {
   }
 
   componentDidMount() {
-    document.getElementById('search').addEventListener("keypress", (event) => {
-      // console.log(event.keyCode)
-      if (event.keyCode === 13) {
-        this.handleChange(event);
-      }
-    });
 
     //Fetch products
     fetch("http://localhost:8080/products")
@@ -110,149 +104,148 @@ class SearchSidebar extends Component {
   handleChange = (event) => {
     let { name, value, type, checked } = event.target;
     let updatedSearchQuery = {...this.state.searchQuery};
-    // console.log(name === "seasons");
     if (type === "checkbox") {
+      this.setState((prevState) => {
       if (name === "products") {
-        let updatedProducts = [...this.state.products];
-        let productsSearched = [...updatedSearchQuery.productsSearched];
-        for (let index = 0; index < updatedProducts.length; index++) {
-          const product = updatedProducts[index];
-          value = parseInt(value);
-          if (product.prod_id === value) {
-            if (checked) {
-              if (this.state.isTop10Products) {
-                this.setState({isTop10Products: false});
-                productsSearched = [];
+          let updatedProducts = [...this.state.products];
+          updatedProducts.forEach(product => {
+            const intValue = parseInt(value);
+            if (product.prod_id === intValue) {
+              if (checked) {
+                updatedSearchQuery.productsSearched.push(intValue)
+              } else {
+                updatedSearchQuery.productsSearched.splice(updatedSearchQuery.productsSearched.indexOf(intValue), 1);
               }
-              productsSearched.push(value);
-              // console.log(productsSearched)
-            } else {
-              productsSearched.splice(productsSearched.indexOf(value), 1);
+              product.checked = checked;
             }
-            
-            product.checked = checked;
-            updatedSearchQuery.productsSearched = productsSearched;
-            console.log("state: " + this.state.searchQuery.productsSearched)
-            console.log("updated: " + updatedSearchQuery.productsSearched)
-            this.setState({searchQuery: updatedSearchQuery, products: updatedProducts});
-            // console.log(updatedSearchQuery.productsSearched)
+          });
+          return {
+            searchQuery: updatedSearchQuery,
+            products: updatedProducts
           }
-        }
         
       } else if(name === "regions") {
         /**********
          * Regions
          *********/
         let updatedRegions = [...this.state.regions];
-        let regionSearched = [...updatedSearchQuery.regionSearched];
-        for (let index = 0; index < updatedRegions.length; index++) {
-          const region = updatedRegions[index];
-          value = parseInt(value);
-          if (region.reg_id === value) {
+        updatedRegions.forEach(region => {
+          const intValue = parseInt(value);
+          if (region.reg_id === intValue) {
             if (checked) {
-              regionSearched.push(value);
+              updatedSearchQuery.regionSearched.push(intValue);
             } else {
-              regionSearched.splice(regionSearched.indexOf(value), 1);
+              updatedSearchQuery.regionSearched.splice(updatedSearchQuery.regionSearched.indexOf(intValue), 1);
             }
-            // console.log("regionSearched: " + regionSearched)
-            
             region.checked = checked;
-            updatedSearchQuery.regionSearched = regionSearched;
-            this.setState({searchQuery: updatedSearchQuery, regions: updatedRegions});
-            // console.log(updatedSearchQuery.productsSearched)
           }
+        });
+
+        return {
+          regions: updatedRegions,
+          searchQuery: updatedSearchQuery
         }
+
       } else if (name === "seasons") {
-        console.log(name);
         /*************************************************************************
         * Seasons
         **************************************************************************/
         let seasons = [...this.state.seasons];
-        let seasonSearched = [...updatedSearchQuery.seasonSearched];
-        for (let index = 0; index < seasons.length; index++) {
-          const season = seasons[index];
+        seasons.forEach(season => {
           if (season.name === value) {
             if (checked) {
-              seasonSearched.push(value);
+              updatedSearchQuery.seasonSearched.push(value);
             } else {
-              seasonSearched.splice(seasonSearched.indexOf(value), 1);
+              updatedSearchQuery.seasonSearched.splice(updatedSearchQuery.seasonSearched.indexOf(value), 1);
             }
-            console.log("seasonSearched: " + seasonSearched)
-            
             season.checked = checked;
-            updatedSearchQuery.seasonSearched = seasonSearched;
-            this.setState({searchQuery: updatedSearchQuery, seasons: seasons});
-            // console.log(updatedSearchQuery.seasonsSearched)
           }
-        }
-      }
-    } else {//if event is from search box
-      this.setState({search: value});
-      this.state.products.forEach(product => {
-        console.log(product.name, value)
-        console.log(product.name.toLowerCase() === value.toLowerCase())
-        if (product.name.toLowerCase() === value.toLowerCase()) {
-          let productsSearched = updatedSearchQuery.productsSearched;
-          productsSearched.push(product.prod_id);
-          updatedSearchQuery.productsSearched = productsSearched;
-          this.setState({searchQuery: updatedSearchQuery});
-        }
-      });
-    }
+        });
 
-    console.log(updatedSearchQuery)
-    /************************************************************************************
-     * Fetch search results
-     * WIP (Working In Progress)
-     * implement handle zero search result
-     ************************************************************************************/
-    
-    if (updatedSearchQuery.productsSearched.length === 0) {
-      //if zero products searched default to top10products
-      console.log("Searching top10products")
-      this.setState({isTop10Products: true});
-      // top10Products.forEach(element => {
-      //   if(updatedSearchQuery.productsSearched.indexOf(element.prod_id) === -1) {
-      //     updatedSearchQuery.productsSearched.push(element.prod_id);
-      //   }
-      // });
-      this.props.setCurrentMarkers(top10Products);
-    } else {
-      console.log("fetching")
-      console.log(this.state.searchQuery.productsSearched)
-      const requestOption = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        // body: JSON.stringify(this.state.searchQuery)
-        body: JSON.stringify(updatedSearchQuery)
-      // }
       }
+    }, () => {
+      this.fetchProducts();
+    });
 
-  
-      fetch("http://localhost:8080/search", requestOption)
-       .then(response => response.json())
-       .then(data => {
-        //  console.log(data);
-        if (data.length === 0) {
-          /********************************************************************************************
-           * Implement Zero Search Result
-           ********************************************************************************************/
-          console.log("Zero search result");
-          this.props.setCurrentMarkers([]);
-        } else {
-          this.props.setCurrentMarkers(data);
-        }
-         
-       })
-       .catch( (error) => {
-         console.log("Failed to fetch search query.");
-        //  console.log("error:" + error)
-     });
-  
     }
   }//end of HandleChange
+
+  fetchProducts = () => {
+    // console.log("fetching: ");
+    // console.log(this.state.searchQuery);
+    const requestOption = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state.searchQuery)
+    }
+
+  
+    fetch("http://localhost:8080/search", requestOption)
+    .then(response => response.json())
+    .then(data => {
+    //  console.log(data);
+    if (data.length === 0) {
+      /********************************************************************************************
+       * Implement Zero Search Result
+       ********************************************************************************************/
+      console.log("Zero search result");
+      this.props.setCurrentMarkers([]);
+    } else {
+      this.props.setCurrentMarkers(data);
+    }
+      
+    })
+    .catch( (error) => {
+      console.log("Failed to fetch search query.");
+    //  console.log("error:" + error)
+  });
+
+  }
+
+  handleSearchbox = (event) => {
+    const {value} = event.target;
+    this.setState({search: value});
+  }
+
+  handleKeyPress = (event) => {
+    const {value} = event.target;
+    if (event.key === "Enter") {
+      this.setState( () => {
+        
+        let updatedSearchQuery = {
+          productsSearched: [],
+          seasonSearched: [],
+          regionSearched: [] 
+        };
+
+        this.state.products.forEach(product => {
+          if (product.name.toLowerCase() === value.toLowerCase()) {
+            updatedSearchQuery.productsSearched.push(product.prod_id);
+          }
+        });
+
+        this.state.regions.forEach(region => {
+          if (region.name.toLowerCase() === value.toLowerCase()) {
+            updatedSearchQuery.regionSearched.push(region.reg_id);
+          }
+        });
+
+        this.state.seasons.forEach(season => {
+          if (season.name.toLowerCase() === value.toLowerCase()) {
+            updatedSearchQuery.seasonSearched.push(season.name);
+          }
+        });
+
+        return {
+          searchQuery: updatedSearchQuery
+        }
+      }, () => {
+        this.fetchProducts();
+      });
+      }
+  }
 
   render() {
     const searchProducts = this.state.productsError
@@ -328,7 +321,7 @@ class SearchSidebar extends Component {
               zIndex: "4"
             }}
           >
-            <input id="search" type="text" placeholder="Search Here..." onChange={this.handleChange} value={this.state.search} autoFocus/>
+            <input id="search" type="text" placeholder="Search Here..." onChange={this.handleSearchbox} onKeyPress={this.handleKeyPress} value={this.state.search} autoFocus/>
           </div>
           <div className="SearchSidebar">
             <div id="test">
