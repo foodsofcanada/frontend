@@ -1,6 +1,6 @@
 import React from "react";
 import "./css/login.css";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 class LoginPage extends React.Component {
   constructor() {
@@ -26,8 +26,7 @@ class LoginPage extends React.Component {
 
     if (this.state.email === "" && this.state.password === "") {
       this.setState({
-        errorMessage:
-          "Both email and password fields cannot be empty cannot be empty."
+        errorMessage: "Both email and password fields cannot be empty."
       });
       return;
     }
@@ -152,9 +151,11 @@ class LoginPage extends React.Component {
                       className="loginButton"
                     />
                     &nbsp;
-                    <button className="createAccountButton">
-                      Create an Account
-                    </button>
+                    <Link to="/register">
+                      <button className="createAccountButton">
+                        Create an Account
+                      </button>
+                    </Link>
                   </div>
                 </form>
               </div>
