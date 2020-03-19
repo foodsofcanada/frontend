@@ -18,7 +18,9 @@ class InfoBar extends React.Component {
   }
 
   handleButtonClick = event => {
-    this.props.setCurrentPage("products/" + event.currentTarget.id);
+    if (!isNaN(event.target.id) && event.target.id !== "") {
+      this.props.setCurrentPage("products/" + event.target.id);
+    }
   };
 
   render() {
@@ -55,6 +57,7 @@ class InfoBar extends React.Component {
               name={product.name}
               region={product.regionName}
               actualProduct={product.prod_id}
+              currPage={this.props.setCurrentPage}
             />
           </div>
         );

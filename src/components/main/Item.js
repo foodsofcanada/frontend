@@ -27,8 +27,9 @@ class Item extends React.Component {
       <div
         className=" d-flex justify-content-center"
         id={this.props.actualProduct}
+        onClick={this.handleClick}
       >
-        <div className="item">
+        <div className="item" id={this.props.actualProduct}>
           <div
             className="head"
             style={{
@@ -39,6 +40,7 @@ class Item extends React.Component {
               fontSize: "25px",
               width: "30px"
             }}
+            id={this.props.actualProduct}
           >
             {this.props.number}.
           </div>
@@ -51,6 +53,7 @@ class Item extends React.Component {
               fontSize: "14px",
               width: "120px"
             }}
+            id={this.props.actualProduct}
           >
             {this.props.name}
           </div>
@@ -66,10 +69,12 @@ class Item extends React.Component {
               textTransform: "uppercase",
               width: "30px"
             }}
+            id={this.props.actualProduct}
           >
             {this.props.region}
           </div>
           <div
+            id={this.props.actualProduct}
             style={{
               display: "inline-flex",
               color: "#8898AA",
@@ -99,7 +104,9 @@ class Item extends React.Component {
               }}
               id="dropdownB"
             >
-              <Dropdown.Item as="button">Add to Pantry</Dropdown.Item>
+              <Dropdown.Item as="button" style={{ color: "black" }}>
+                Add to Pantry
+              </Dropdown.Item>
             </DropdownButton>
           </div>
         </div>
