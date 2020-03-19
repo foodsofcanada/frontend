@@ -37,7 +37,7 @@ class SearchSidebar extends Component {
         seasonSearched: [],
         regionSearched: [] 
       },
-      isTop10Products: true
+      isSearchBox: false
       // searchQuery: {
       //   productsSearched: [1,2,3],
       //   seasonSearched: ["spring","summer"],
@@ -103,9 +103,24 @@ class SearchSidebar extends Component {
 
   handleChange = (event) => {
     let { name, value, type, checked } = event.target;
-    let updatedSearchQuery = {...this.state.searchQuery};
+    let updatedSearchQuery;
+    
     if (type === "checkbox") {
       this.setState((prevState) => {
+      if (this.state.isSearchBox) {
+        updatedSearchQuery = {
+          productsSearched: [],
+          seasonSearched: [],
+          regionSearched: [] 
+        };
+      } else {
+        updatedSearchQuery = {
+          productsSearched: [...prevState.searchQuery.productsSearched],
+          seasonSearched: [...prevState.searchQuery.seasonSearched],
+          regionSearched: [...prevState.searchQuery.regionSearched]
+        }
+        
+      }
       if (name === "products") {
           let updatedProducts = [...this.state.products];
           updatedProducts.forEach(product => {
@@ -119,9 +134,11 @@ class SearchSidebar extends Component {
               product.checked = checked;
             }
           });
+          
           return {
             searchQuery: updatedSearchQuery,
-            products: updatedProducts
+            products: updatedProducts,
+            isSearchBox : false
           }
         
       } else if(name === "regions") {
@@ -143,15 +160,16 @@ class SearchSidebar extends Component {
 
         return {
           regions: updatedRegions,
-          searchQuery: updatedSearchQuery
+          searchQuery: updatedSearchQuery,
+          isSearchBox : false
         }
 
       } else if (name === "seasons") {
         /*************************************************************************
         * Seasons
         **************************************************************************/
-        let seasons = [...this.state.seasons];
-        seasons.forEach(season => {
+        let updatedSeasons = [...this.state.seasons];
+        updatedSeasons.forEach(season => {
           if (season.name === value) {
             if (checked) {
               updatedSearchQuery.seasonSearched.push(value);
@@ -160,9 +178,17 @@ class SearchSidebar extends Component {
             }
             season.checked = checked;
           }
+
         });
 
+        return {
+          seasons: updatedSeasons,
+          searchQuery: updatedSearchQuery,
+          isSearchBox : false
+        }
+
       }
+
     }, () => {
       this.fetchProducts();
     });
@@ -239,7 +265,8 @@ class SearchSidebar extends Component {
         });
 
         return {
-          searchQuery: updatedSearchQuery
+          searchQuery: updatedSearchQuery,
+          isSearchBox : true
         }
       }, () => {
         this.fetchProducts();
