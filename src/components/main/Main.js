@@ -10,7 +10,6 @@ import ProductInfoSidebar from "./ProductInfoSidebar";
 import icon from "../../icons/chevron-down.svg";
 import { ReactSVG } from "react-svg";
 import "./css/Main.css";
-import SearchSidebar from "./SearchSidebar";
 
 class Main extends React.Component {
   constructor() {
@@ -20,6 +19,7 @@ class Main extends React.Component {
       selectedMarker: null,
       currentMarkers: [],
       tabOpen: true,
+      tabOpenSearch: true,
       selectedRegion: null,
       showState: {
         showTop10: true,
@@ -32,6 +32,7 @@ class Main extends React.Component {
     };
 
     this.openCloseBar = this.openCloseBar.bind(this);
+    this.openCloseSearchBar = this.openCloseSearchBar.bind(this);
   }
 
   setCurrentPage = value => {
@@ -45,6 +46,12 @@ class Main extends React.Component {
       document.getElementById("bar").style.width = "360px";
     } else {
       document.getElementById("bar").style.width = "0";
+    }
+
+    if (this.state.tabOpenSearch === true) {
+      document.getElementById("searchbar").style.width = "360px";
+    } else {
+      document.getElementById("searchbar").style.width = "0";
     }
   }
 
@@ -66,6 +73,12 @@ class Main extends React.Component {
   openCloseBar() {
     this.setState(prevState => ({
       tabOpen: !prevState.tabOpen
+    }));
+  }
+
+  openCloseSearchBar() {
+    this.setState(prevState => ({
+      tabOpenSearch: !prevState.tabOpenSearch
     }));
   }
 
@@ -105,9 +118,7 @@ class Main extends React.Component {
           />
         )}
 
-        <SearchSideBar 
-          setCurrentMarkers={this.setCurrentMarkers}
-        />
+        <SearchSideBar setCurrentMarkers={this.setCurrentMarkers} />
 
         {/* <ProductInfoSidebar
           header={this.state.selectedRegion}
@@ -133,6 +144,32 @@ class Main extends React.Component {
           onClick={this.openCloseBar}
         >
           {this.state.tabOpen ? (
+            <ReactSVG
+              src={icon}
+              style={{
+                height: "15px",
+                marginTop: "11px",
+                marginRight: "9px",
+                transform: "rotate(270deg)"
+              }}
+            />
+          ) : (
+            <ReactSVG
+              src={icon}
+              style={{
+                height: "15px",
+                marginTop: "11.5px",
+                marginLeft: "10.5px",
+                transform: "rotate(90deg)"
+              }}
+            />
+          )}
+        </div>
+        <div
+          className="d-flex justify-content-center pullTab2"
+          onClick={this.openCloseSearchBar}
+        >
+          {!this.state.tabOpenSearch ? (
             <ReactSVG
               src={icon}
               style={{

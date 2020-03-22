@@ -344,9 +344,9 @@ class SearchSidebar extends Component {
           <div
             style={{
               display: "inline-block",
-              right: "341px",
+              left: "-341px",
               marginTop: "10px",
-              position: "relative",
+              position: "absolute",
               zIndex: "4"
             }}
           >
@@ -360,7 +360,7 @@ class SearchSidebar extends Component {
               autoFocus
             />
           </div>
-          <div className="SearchSidebar">
+          <div className="SearchSidebar" id="searchbar">
             <div id="test" style={{ marginTop: "55px" }}>
               <div className="head">Products</div>
               {searchProducts}
