@@ -27,40 +27,38 @@ class SearchSidebar extends Component {
       products: [],
       regions: [],
       seasons: [
-        {checked: false, name: "Fall"}, 
-        {checked: false, name: "Spring"}, 
-        {checked: false, name: "Summer"}, 
-        {checked: false, name: "Winter"}
+        { checked: false, name: "Fall" },
+        { checked: false, name: "Spring" },
+        { checked: false, name: "Summer" },
+        { checked: false, name: "Winter" }
       ],
       searchQuery: {
         productsSearched: [],
         seasonSearched: [],
-        regionSearched: [] 
+        regionSearched: []
       },
       isSearchBox: false
       // searchQuery: {
       //   productsSearched: [1,2,3],
       //   seasonSearched: ["spring","summer"],
-      //   regionSearched: [1,2] 
+      //   regionSearched: [1,2]
       // },
       // productTypes: ["Seed","Grain","Plant","Herb","Fruit","Vegetable","Animal","By-product","Freshwater product","Saltwater product",
-        // "Farmed product","Green house product","Aquaponic product","Sustainable","Endangered","Artisanal product"]
-      
+      // "Farmed product","Green house product","Aquaponic product","Sustainable","Endangered","Artisanal product"]
     };
   }
 
   componentDidMount() {
-
     //Fetch products
     fetch("http://localhost:8080/products")
       .then(response => response.json())
       .then(productsData => {
-        const products = productsData.map( product => {
+        const products = productsData.map(product => {
           return {
             prod_id: product.prod_id,
             name: product.name,
-            checked: false,
-          }
+            checked: false
+          };
         });
         // productsData.forEach(element => {
         //   console.log(element.checked)
@@ -70,8 +68,8 @@ class SearchSidebar extends Component {
           products: products
         });
       })
-      .catch((error) => {
-        console.log(error)
+      .catch(error => {
+        console.log(error);
         console.log("Failed to retrieve products for SearchSidebar");
         this.setState({ productsError: true });
       }); //end of fetch
@@ -88,7 +86,7 @@ class SearchSidebar extends Component {
             reg_id: region.reg_id,
             name: region.name,
             checked: false
-          }
+          };
         });
         this.setState({
           regionsloading: false,
@@ -101,100 +99,105 @@ class SearchSidebar extends Component {
       }); //end of fetch
   }
 
-  handleChange = (event) => {
+  handleChange = event => {
     let { name, value, type, checked } = event.target;
     let updatedSearchQuery;
-    
+
     if (type === "checkbox") {
-      this.setState((prevState) => {
-      if (this.state.isSearchBox) {
-        updatedSearchQuery = {
-          productsSearched: [],
-          seasonSearched: [],
-          regionSearched: [] 
-        };
-      } else {
-        updatedSearchQuery = {
-          productsSearched: [...prevState.searchQuery.productsSearched],
-          seasonSearched: [...prevState.searchQuery.seasonSearched],
-          regionSearched: [...prevState.searchQuery.regionSearched]
-        }
-        
-      }
-      if (name === "products") {
-          let updatedProducts = [...this.state.products];
-          updatedProducts.forEach(product => {
-            const intValue = parseInt(value);
-            if (product.prod_id === intValue) {
-              if (checked) {
-                updatedSearchQuery.productsSearched.push(intValue)
-              } else {
-                updatedSearchQuery.productsSearched.splice(updatedSearchQuery.productsSearched.indexOf(intValue), 1);
+      this.setState(
+        prevState => {
+          if (this.state.isSearchBox) {
+            updatedSearchQuery = {
+              productsSearched: [],
+              seasonSearched: [],
+              regionSearched: []
+            };
+          } else {
+            updatedSearchQuery = {
+              productsSearched: [...prevState.searchQuery.productsSearched],
+              seasonSearched: [...prevState.searchQuery.seasonSearched],
+              regionSearched: [...prevState.searchQuery.regionSearched]
+            };
+          }
+          if (name === "products") {
+            let updatedProducts = [...this.state.products];
+            updatedProducts.forEach(product => {
+              const intValue = parseInt(value);
+              if (product.prod_id === intValue) {
+                if (checked) {
+                  updatedSearchQuery.productsSearched.push(intValue);
+                } else {
+                  updatedSearchQuery.productsSearched.splice(
+                    updatedSearchQuery.productsSearched.indexOf(intValue),
+                    1
+                  );
+                }
+                product.checked = checked;
               }
-              product.checked = checked;
-            }
-          });
-          
-          return {
-            searchQuery: updatedSearchQuery,
-            products: updatedProducts,
-            isSearchBox : false
-          }
-        
-      } else if(name === "regions") {
-        /**********
-         * Regions
-         *********/
-        let updatedRegions = [...this.state.regions];
-        updatedRegions.forEach(region => {
-          const intValue = parseInt(value);
-          if (region.reg_id === intValue) {
-            if (checked) {
-              updatedSearchQuery.regionSearched.push(intValue);
-            } else {
-              updatedSearchQuery.regionSearched.splice(updatedSearchQuery.regionSearched.indexOf(intValue), 1);
-            }
-            region.checked = checked;
-          }
-        });
+            });
 
-        return {
-          regions: updatedRegions,
-          searchQuery: updatedSearchQuery,
-          isSearchBox : false
+            return {
+              searchQuery: updatedSearchQuery,
+              products: updatedProducts,
+              isSearchBox: false
+            };
+          } else if (name === "regions") {
+            /**********
+             * Regions
+             *********/
+            let updatedRegions = [...this.state.regions];
+            updatedRegions.forEach(region => {
+              const intValue = parseInt(value);
+              if (region.reg_id === intValue) {
+                if (checked) {
+                  updatedSearchQuery.regionSearched.push(intValue);
+                } else {
+                  updatedSearchQuery.regionSearched.splice(
+                    updatedSearchQuery.regionSearched.indexOf(intValue),
+                    1
+                  );
+                }
+                region.checked = checked;
+              }
+            });
+
+            return {
+              regions: updatedRegions,
+              searchQuery: updatedSearchQuery,
+              isSearchBox: false
+            };
+          } else if (name === "seasons") {
+            /*************************************************************************
+             * Seasons
+             **************************************************************************/
+            let updatedSeasons = [...this.state.seasons];
+            updatedSeasons.forEach(season => {
+              if (season.name === value) {
+                if (checked) {
+                  updatedSearchQuery.seasonSearched.push(value);
+                } else {
+                  updatedSearchQuery.seasonSearched.splice(
+                    updatedSearchQuery.seasonSearched.indexOf(value),
+                    1
+                  );
+                }
+                season.checked = checked;
+              }
+            });
+
+            return {
+              seasons: updatedSeasons,
+              searchQuery: updatedSearchQuery,
+              isSearchBox: false
+            };
+          }
+        },
+        () => {
+          this.fetchProducts();
         }
-
-      } else if (name === "seasons") {
-        /*************************************************************************
-        * Seasons
-        **************************************************************************/
-        let updatedSeasons = [...this.state.seasons];
-        updatedSeasons.forEach(season => {
-          if (season.name === value) {
-            if (checked) {
-              updatedSearchQuery.seasonSearched.push(value);
-            } else {
-              updatedSearchQuery.seasonSearched.splice(updatedSearchQuery.seasonSearched.indexOf(value), 1);
-            }
-            season.checked = checked;
-          }
-
-        });
-
-        return {
-          seasons: updatedSeasons,
-          searchQuery: updatedSearchQuery,
-          isSearchBox : false
-        }
-
-      }
-
-    }, () => {
-      this.fetchProducts();
-    });
-
+      );
     }
-  }//end of HandleChange
+  }; //end of HandleChange
 
   fetchProducts = () => {
     // console.log("fetching: ");
@@ -205,74 +208,73 @@ class SearchSidebar extends Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(this.state.searchQuery)
-    }
+    };
 
-  
     fetch("http://localhost:8080/search", requestOption)
-    .then(response => response.json())
-    .then(data => {
-    //  console.log(data);
-    if (data.length === 0) {
-      /********************************************************************************************
-       * Implement Zero Search Result
-       ********************************************************************************************/
-      console.log("Zero search result");
-      this.props.setCurrentMarkers([]);
-    } else {
-      this.props.setCurrentMarkers(data);
-    }
-      
-    })
-    .catch( (error) => {
-      console.log("Failed to fetch search query.");
-    //  console.log("error:" + error)
-  });
-
-  }
-
-  handleSearchbox = (event) => {
-    const {value} = event.target;
-    this.setState({search: value});
-  }
-
-  handleKeyPress = (event) => {
-    const {value} = event.target;
-    if (event.key === "Enter") {
-      this.setState( () => {
-        
-        let updatedSearchQuery = {
-          productsSearched: [],
-          seasonSearched: [],
-          regionSearched: [] 
-        };
-
-        this.state.products.forEach(product => {
-          if (product.name.toLowerCase() === value.toLowerCase()) {
-            updatedSearchQuery.productsSearched.push(product.prod_id);
-          }
-        });
-
-        this.state.regions.forEach(region => {
-          if (region.name.toLowerCase() === value.toLowerCase()) {
-            updatedSearchQuery.regionSearched.push(region.reg_id);
-          }
-        });
-
-        this.state.seasons.forEach(season => {
-          if (season.name.toLowerCase() === value.toLowerCase()) {
-            updatedSearchQuery.seasonSearched.push(season.name);
-          }
-        });
-
-        return {
-          searchQuery: updatedSearchQuery,
-          isSearchBox : true
+      .then(response => response.json())
+      .then(data => {
+        //  console.log(data);
+        if (data.length === 0) {
+          /********************************************************************************************
+           * Implement Zero Search Result
+           ********************************************************************************************/
+          console.log("Zero search result");
+          this.props.setCurrentMarkers([]);
+        } else {
+          this.props.setCurrentMarkers(data);
         }
-      }, () => {
-        this.fetchProducts();
+      })
+      .catch(error => {
+        console.log("Failed to fetch search query.");
+        //  console.log("error:" + error)
       });
-      }
-  }
+  };
+
+  handleSearchbox = event => {
+    const { value } = event.target;
+    this.setState({ search: value });
+  };
+
+  handleKeyPress = event => {
+    const { value } = event.target;
+    if (event.key === "Enter") {
+      this.setState(
+        () => {
+          let updatedSearchQuery = {
+            productsSearched: [],
+            seasonSearched: [],
+            regionSearched: []
+          };
+
+          this.state.products.forEach(product => {
+            if (product.name.toLowerCase() === value.toLowerCase()) {
+              updatedSearchQuery.productsSearched.push(product.prod_id);
+            }
+          });
+
+          this.state.regions.forEach(region => {
+            if (region.name.toLowerCase() === value.toLowerCase()) {
+              updatedSearchQuery.regionSearched.push(region.reg_id);
+            }
+          });
+
+          this.state.seasons.forEach(season => {
+            if (season.name.toLowerCase() === value.toLowerCase()) {
+              updatedSearchQuery.seasonSearched.push(season.name);
+            }
+          });
+
+          return {
+            searchQuery: updatedSearchQuery,
+            isSearchBox: true
+          };
+        },
+        () => {
+          this.fetchProducts();
+        }
+      );
+    }
+  };
 
   render() {
     const searchProducts = this.state.productsError
@@ -311,7 +313,7 @@ class SearchSidebar extends Component {
 
     const searchSeasons = this.state.seasonsloading
       ? "loading..."
-      : this.state.seasons.map((season) => {
+      : this.state.seasons.map(season => {
           return (
             <SearchItem
               key={season.name}
@@ -348,17 +350,25 @@ class SearchSidebar extends Component {
               zIndex: "4"
             }}
           >
-            <input id="search" type="text" placeholder="Search Here..." onChange={this.handleSearchbox} onKeyPress={this.handleKeyPress} value={this.state.search} autoFocus/>
+            <input
+              id="search"
+              type="text"
+              placeholder="Search Here..."
+              onChange={this.handleSearchbox}
+              onKeyPress={this.handleKeyPress}
+              value={this.state.search}
+              autoFocus
+            />
           </div>
           <div className="SearchSidebar">
-            <div id="test">
-              <h1>Products</h1>
+            <div id="test" style={{ marginTop: "55px" }}>
+              <div className="head">Products</div>
               {searchProducts}
 
-              <h1>Regions</h1>
+              <div className="head">Regions</div>
               {searchRegions}
 
-              <h1>Seasons</h1>
+              <div className="head">Seasons</div>
               {searchSeasons}
 
               {/* <h1>Types</h1>
@@ -369,8 +379,6 @@ class SearchSidebar extends Component {
       </div>
     );
   }
-
-  
 }
 
 /****************************************************

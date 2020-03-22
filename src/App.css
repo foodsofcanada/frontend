@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+.custom-control-label:before {
+  background-color: red;
+}
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  background-color: #7765e4;
+}
