@@ -27,8 +27,6 @@ class GoogleMap extends Component {
     googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_KEY}&language=${this.props.language}`;
     window.document.body.appendChild(googleMapScript);
 
-    
-
     googleMapScript.addEventListener("load", () => {
       this.createGoogleMap();
       this.showTop10Products();
@@ -45,17 +43,18 @@ class GoogleMap extends Component {
     console.log("Google Map Component updated!");
     // console.log(regionsPolygons)
     /****************************************************
-     * unhighlight of currentlyHighlightedRegions 
+     * unhighlight of currentlyHighlightedRegions
      ***************************************************/
     let length = currentHighlightedRegions.length;
-    while(length !== 0) {
-      let pos = regionsPolygons.map( (element) => {
-        return element.regionID;
-      }).indexOf(currentHighlightedRegions[0]);
+    while (length !== 0) {
+      let pos = regionsPolygons
+        .map(element => {
+          return element.regionID;
+        })
+        .indexOf(currentHighlightedRegions[0]);
       regionsPolygons[pos].toggleHighlightRegion();
       length--;
     }
-
 
     /****************************************
      * Highlight region of currentMarkers
@@ -64,14 +63,15 @@ class GoogleMap extends Component {
     this.props.currentMarkers.forEach(marker => {
       if (currentHighlightedRegions.indexOf(marker.reg_id) === -1) {
         // console.log(marker)
-        let index = regionsPolygons.map( (element) => {
-        return element.regionID;
-        }).indexOf(marker.reg_id);
+        let index = regionsPolygons
+          .map(element => {
+            return element.regionID;
+          })
+          .indexOf(marker.reg_id);
         regionsPolygons[index].toggleHighlightRegion();
-        }   
+      }
     });
-
-  }//end of componentDidMount
+  } //end of componentDidMount
 
   createGoogleMap = () => {
     // var CANADA_BOUNDS = {
@@ -162,7 +162,11 @@ class GoogleMap extends Component {
       //every region
       // console.log("region: " + regions)
       let polygons = regions[regionsIndex].polygons;
-      for (let polygonsIndex = 0;polygonsIndex < polygons.length;polygonsIndex++) {
+      for (
+        let polygonsIndex = 0;
+        polygonsIndex < polygons.length;
+        polygonsIndex++
+      ) {
         //loop every polygons in a region
         //every polygons
         // console.log("polygons: " + polygons[polygonsIndex])
@@ -171,7 +175,11 @@ class GoogleMap extends Component {
         let polygonPaths = [];
         let outerPath = this.convertStringToArrayCoords(polygon.outerPath);
         polygonPaths.push(outerPath);
-        for (let innerIndex = 0;innerIndex < polygon.innerPaths.length;innerIndex++) {
+        for (
+          let innerIndex = 0;
+          innerIndex < polygon.innerPaths.length;
+          innerIndex++
+        ) {
           //loop every inner polygon
           // console.log("inner: " + polygon.innerPaths[innerIndex].innerPath)
           let innerPath = this.convertStringToArrayCoordsBackwards(
@@ -247,7 +255,7 @@ class GoogleMap extends Component {
       // this.googleMap.setZoom(6);
       this.props.setSelectedRegion(regionInfo.regionName, regionInfo.regionID);
       // fetch("http://localhost:8080/productRegion/" + regionInfo.regionID)
-
+      this.props.closeBar();
       const requestOption = {
         method: "POST",
         headers: {
@@ -258,7 +266,7 @@ class GoogleMap extends Component {
           regionSearched: [regionInfo.regionID],
           seasonSearched: []
         })
-      }
+      };
 
       fetch("http://localhost:8080/search", requestOption)
         .then(response => response.json())
@@ -343,7 +351,6 @@ class GoogleMap extends Component {
           const hightlightedRegion = currentHighlightedRegions[index];
           if (hightlightedRegion === regionInfo.regionID) {
             currentHighlightedRegions.splice(index, 1);
-            
           }
         }
       } else {
