@@ -235,65 +235,46 @@ class SearchSidebar extends Component {
     this.setState({ search: value });
   };
 
-  handleKeyPress = (event) => {
-    const {value} = event.target;
+  handleKeyPress = event => {
+    const { value } = event.target;
     if (event.key === "Enter") {
-      this.setState( () => {
-        
-        let updatedSearchQuery = {
-          productsSearched: [],
-          seasonSearched: [],
-          regionSearched: [] 
-        };
+      this.setState(
+        () => {
+          let updatedSearchQuery = {
+            productsSearched: [],
+            seasonSearched: [],
+            regionSearched: []
+          };
 
-        this.state.products.forEach(product => {
-          if (product.name.toLowerCase() === value.toLowerCase()) {
-            updatedSearchQuery.productsSearched.push(product.prod_id);
-          }
-        });
+          this.state.products.forEach(product => {
+            if (product.name.toLowerCase() === value.toLowerCase()) {
+              updatedSearchQuery.productsSearched.push(product.prod_id);
+            }
+          });
 
-        this.state.regions.forEach(region => {
-          if (region.name.toLowerCase() === value.toLowerCase()) {
-            updatedSearchQuery.regionSearched.push(region.reg_id);
-          }
-        });
+          this.state.regions.forEach(region => {
+            if (region.name.toLowerCase() === value.toLowerCase()) {
+              updatedSearchQuery.regionSearched.push(region.reg_id);
+            }
+          });
 
-        this.state.seasons.forEach(season => {
-          if (season.name.toLowerCase() === value.toLowerCase()) {
-            updatedSearchQuery.seasonSearched.push(season.name);
-          }
-        });
+          this.state.seasons.forEach(season => {
+            if (season.name.toLowerCase() === value.toLowerCase()) {
+              updatedSearchQuery.seasonSearched.push(season.name);
+            }
+          });
 
-        return {
-          searchQuery: updatedSearchQuery,
-          isSearchBox : true,
-          ...this.uncheckAllCategory()
+          return {
+            searchQuery: updatedSearchQuery,
+            isSearchBox: true
+          };
+        },
+        () => {
+          this.fetchProducts();
         }
-      }, () => {
-        this.fetchProducts();
-      });
-      }
-  }
-
-  toggleCategory = (category, checked) => {
-    return category.map(element => {
-      return {
-        ...element,
-        checked: checked
-      };
-    });
-  }
-
-  uncheckAllCategory = () => {
-      const updatedProducts = this.toggleCategory(this.state.products, false);
-      const updatedRegions = this.toggleCategory(this.state.regions, false);
-      const updatedSeasons = this.toggleCategory(this.state.seasons, false);
-      return (
-        {products: updatedProducts,
-        regions: updatedRegions,
-        seasons: updatedSeasons}
       );
-  }
+    }
+  };
 
   render() {
     const searchProducts = this.state.productsError
@@ -365,7 +346,7 @@ class SearchSidebar extends Component {
               display: "inline-block",
               left: "-341px",
               marginTop: "10px",
-              position: "absolute",
+              position: "relative",
               zIndex: "4"
             }}
           >
