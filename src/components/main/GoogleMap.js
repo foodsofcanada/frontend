@@ -255,7 +255,9 @@ class GoogleMap extends Component {
       // this.googleMap.setZoom(6);
       this.props.setSelectedRegion(regionInfo.regionName, regionInfo.regionID);
       // fetch("http://localhost:8080/productRegion/" + regionInfo.regionID)
-      this.props.closeBar();
+      if (this.props.closeBarState === true) {
+        this.props.closeBar();
+      }
       const requestOption = {
         method: "POST",
         headers: {
@@ -272,7 +274,9 @@ class GoogleMap extends Component {
         .then(response => response.json())
         .then(productsInRegion => {
           // console.log(productsInRegion)
-          this.props.setHeader("Products in " + regionInfo.regionName + " Region")
+          this.props.setHeader(
+            "Products in " + regionInfo.regionName + " Region"
+          );
           this.showProductsInRegion(productsInRegion);
           this.props.setCurrentPage("");
         })

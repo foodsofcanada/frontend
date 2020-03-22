@@ -63,8 +63,8 @@ class Main extends React.Component {
 
   setHeader = newHeader => {
     console.log("New Header: " + newHeader);
-    this.setState({header: newHeader});
-  }
+    this.setState({ header: newHeader });
+  };
 
   setCurrentMarkers = markers => {
     // console.log(markers)
@@ -111,6 +111,7 @@ class Main extends React.Component {
             setCurrentPage={this.setCurrentPage}
             setSelectedRegion={this.setSelectedRegion}
             closeBar={this.openCloseSearchBar}
+            closeBarState={this.state.tabOpenSearch}
           />
         </div>
         {this.state.currentPage.startsWith("products/") ? (
@@ -127,10 +128,10 @@ class Main extends React.Component {
           />
         )}
 
-        <SearchSideBar 
-          setCurrentMarkers={this.setCurrentMarkers} 
+        <SearchSideBar
+          setCurrentMarkers={this.setCurrentMarkers}
           setHeader={this.setHeader}
-          />
+        />
 
         {/* <ProductInfoSidebar
           header={this.state.selectedRegion}
