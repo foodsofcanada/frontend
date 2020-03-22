@@ -103,6 +103,7 @@ class Main extends React.Component {
             setCurrentMarkers={this.setCurrentMarkers}
             setCurrentPage={this.setCurrentPage}
             setSelectedRegion={this.setSelectedRegion}
+            closeBar={this.openCloseSearchBar}
           />
         </div>
         {this.state.currentPage.startsWith("products/") ? (
