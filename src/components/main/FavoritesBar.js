@@ -41,8 +41,8 @@ class FavoritesBar extends React.Component {
           <Item
             number={number}
             key={number}
-            name={product.information.name}
-            region={product.information.region}
+            name={product.name}
+            region={product.region}
           />
         );
       });
