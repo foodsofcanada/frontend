@@ -264,6 +264,7 @@ class GoogleMap extends Component {
         .then(response => response.json())
         .then(productsInRegion => {
           // console.log(productsInRegion)
+          this.props.setHeader("Products in " + regionInfo.regionName + " Region")
           this.showProductsInRegion(productsInRegion);
           this.props.setCurrentPage("");
         })

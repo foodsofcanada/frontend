@@ -8,7 +8,7 @@ class SearchItem extends Component {
 
   render() {
     // console.log(this.props.checked);
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <div
         className="searchItem custom-control custom-checkbox"
@@ -23,7 +23,7 @@ class SearchItem extends Component {
           onChange={this.props.handleChange}
           id={this.props.labelName}
         />
-        <label class="custom-control-label" for={this.props.labelName}>
+        <label className="custom-control-label" htmlFor={this.props.labelName}>
           {this.props.labelName}
         </label>
 

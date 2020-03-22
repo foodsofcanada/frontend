@@ -100,9 +100,10 @@ class InfoBar extends React.Component {
         </div>
         <div>
           <div className="head" style={{ marginBottom: "10px" }}>
-            {this.props.header === null
+            {this.props.header}
+            {/* {this.props.header === null
               ? "Top 10 searched products"
-              : "Products in " + this.props.header + " Region"}
+              : "Products in " + this.props.header + " Region"} */}
           </div>
         </div>
 

@@ -17,6 +17,7 @@ class Main extends React.Component {
 
     this.state = {
       selectedMarker: null,
+      header: "Top 10 searched products",
       currentMarkers: [],
       tabOpen: true,
       tabOpenSearch: true,
@@ -60,6 +61,11 @@ class Main extends React.Component {
     console.log("selected markers: " + marker.label.text);
   };
 
+  setHeader = newHeader => {
+    console.log("New Header: " + newHeader);
+    this.setState({header: newHeader});
+  }
+
   setCurrentMarkers = markers => {
     // console.log(markers)
     this.setState({ currentMarkers: markers });
@@ -99,6 +105,7 @@ class Main extends React.Component {
           <GoogleMap
             language={this.props.language}
             setSelectedMarker={this.setSelectedMarker}
+            setHeader={this.setHeader}
             currentMarkers={this.state.currentMarkers}
             setCurrentMarkers={this.setCurrentMarkers}
             setCurrentPage={this.setCurrentPage}
@@ -112,13 +119,17 @@ class Main extends React.Component {
           />
         ) : (
           <InfoBar
-            header={this.state.selectedRegion}
+            // header={this.state.selectedRegion}
+            header={this.state.header}
             currentMarkers={this.state.currentMarkers}
             setCurrentPage={this.setCurrentPage}
           />
         )}
 
-        <SearchSideBar setCurrentMarkers={this.setCurrentMarkers} />
+        <SearchSideBar 
+          setCurrentMarkers={this.setCurrentMarkers} 
+          setHeader={this.setHeader}
+          />
 
         {/* <ProductInfoSidebar
           header={this.state.selectedRegion}

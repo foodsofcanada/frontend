@@ -69,7 +69,7 @@ class SearchSidebar extends Component {
         });
       })
       .catch(error => {
-        console.log(error);
+        // console.log(error);
         console.log("Failed to retrieve products for SearchSidebar");
         this.setState({ productsError: true });
       }); //end of fetch
@@ -221,6 +221,12 @@ class SearchSidebar extends Component {
           console.log("Zero search result");
           this.props.setCurrentMarkers([]);
         } else {
+          // console.log(this.state.searchQuery.productsSearched.length)
+          if (this.state.searchQuery.productsSearched.length === 0) {
+            this.props.setHeader("Top 10 searched products");
+          } else {
+            this.props.setHeader("Showing search results");
+          }
           this.props.setCurrentMarkers(data);
         }
       })
