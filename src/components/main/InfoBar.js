@@ -17,8 +17,13 @@ class InfoBar extends React.Component {
     window.location.reload();
   }
 
+  handleProfileClick = event => {
+    this.props.setCurrentPage("profile/");
+  };
+
   handleButtonClick = event => {
     if (!isNaN(event.target.id) && event.target.id !== "") {
+      this.props.setPrevPage(this.props.currentPage);
       this.props.setCurrentPage("products/" + event.target.id);
     }
   };
@@ -96,7 +101,7 @@ class InfoBar extends React.Component {
             </div>
           )}
 
-          <div className="profilePic"></div>
+          <div className="profilePic" onClick={this.handleProfileClick}></div>
         </div>
         <div>
           <div className="head" style={{ marginBottom: "10px" }}>

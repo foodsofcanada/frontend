@@ -15,8 +15,14 @@ class PantriesBar extends React.Component {
   }
 
   handleBackClick() {
-    window.location.reload();
+    this.props.setCurrentPage("profile/");
   }
+
+  handlePantryClick = event => {
+    if (!isNaN(event.target.id) && event.target.id !== "") {
+      this.props.setCurrentPage("pantryInfo/" + event.target.id);
+    }
+  };
 
   newPantryButton() {
     return (
@@ -38,36 +44,7 @@ class PantriesBar extends React.Component {
   }
 
   render() {
-    let productItems = null;
     let newPantryButton = this.newPantryButton();
-    let number = 0;
-    if (this.props.currentMarkers.length === 0) {
-      productItems = (
-        <div
-          style={{
-            marginLeft: "40%",
-            marginTop: "50%"
-          }}
-        >
-          &nbsp;&nbsp;&nbsp;
-          <Spinner animation="grow" variant="primary" />
-          <br />
-          Loading...
-        </div>
-      );
-    } else {
-      productItems = this.props.currentMarkers.map(function(product) {
-        number = number + 1;
-        return (
-          <Item
-            number={number}
-            key={number}
-            name={product.information.name}
-            region={product.information.region}
-          />
-        );
-      });
-    }
 
     // let productItems = this.props.currentMarkers.map(product => <Item key={product.id} name={product.item}/>)
     return (
@@ -98,7 +75,9 @@ class PantriesBar extends React.Component {
         </div>
 
         {newPantryButton}
-        <Pantry name="Poutine" />
+        <div onClick={this.handlePantryClick} style={{ marginBottom: "15px" }}>
+          <Pantry name="Poutine" />
+        </div>
       </div>
     );
   }

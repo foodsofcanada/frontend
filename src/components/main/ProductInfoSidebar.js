@@ -30,7 +30,7 @@ class ProductInfoSidebar extends React.Component {
   }
 
   handleBackClick() {
-    this.props.setCurrentPage("");
+    this.props.setCurrentPage(this.props.prevPage);
   }
 
   loadTab() {
@@ -211,8 +211,6 @@ class ProductInfoSidebar extends React.Component {
             </div>
             Back
           </div>
-
-          <div className="profilePic"></div>
         </div>
         <div
           className="d-flex justify-content-center"

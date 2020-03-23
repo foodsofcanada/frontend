@@ -238,12 +238,20 @@ class SearchSidebar extends Component {
 
   handleSearchbox = event => {
     const { value } = event.target;
+    // this.props.setCurrentPage("");
     this.setState({ search: value });
+  };
+
+  /*This is what changes the sidebar when a checkbox is clicked */
+
+  handleCheckBoxClick = () => {
+    this.props.setCurrentPage("");
   };
 
   handleKeyPress = event => {
     const { value } = event.target;
     if (event.key === "Enter") {
+      this.props.setCurrentPage("");
       this.setState(
         () => {
           let updatedSearchQuery = {
@@ -289,14 +297,16 @@ class SearchSidebar extends Component {
       ? "loading..."
       : this.state.products.map(product => {
           return (
-            <SearchItem
-              key={product.name}
-              value={product.prod_id}
-              name={"products"}
-              labelName={product.name}
-              checked={product.checked}
-              handleChange={this.handleChange}
-            />
+            <div onClick={this.handleCheckBoxClick}>
+              <SearchItem
+                key={product.name}
+                value={product.prod_id}
+                name={"products"}
+                labelName={product.name}
+                checked={product.checked}
+                handleChange={this.handleChange}
+              />
+            </div>
           );
         });
 
@@ -306,14 +316,16 @@ class SearchSidebar extends Component {
       ? "loading..."
       : this.state.regions.map(region => {
           return (
-            <SearchItem
-              key={region.name}
-              value={region.reg_id}
-              name={"regions"}
-              labelName={region.name}
-              checked={region.checked}
-              handleChange={this.handleChange}
-            />
+            <div onClick={this.handleCheckBoxClick}>
+              <SearchItem
+                key={region.name}
+                value={region.reg_id}
+                name={"regions"}
+                labelName={region.name}
+                checked={region.checked}
+                handleChange={this.handleChange}
+              />
+            </div>
           );
         });
 
@@ -321,14 +333,16 @@ class SearchSidebar extends Component {
       ? "loading..."
       : this.state.seasons.map(season => {
           return (
-            <SearchItem
-              key={season.name}
-              value={season.name}
-              name={"seasons"}
-              labelName={season.name}
-              checked={season.checked}
-              handleChange={this.handleChange}
-            />
+            <div onClick={this.handleCheckBoxClick}>
+              <SearchItem
+                key={season.name}
+                value={season.name}
+                name={"seasons"}
+                labelName={season.name}
+                checked={season.checked}
+                handleChange={this.handleChange}
+              />
+            </div>
           );
         });
 

@@ -27,7 +27,7 @@ class Item extends React.Component {
       <div
         className=" d-flex justify-content-center"
         id={this.props.actualProduct}
-        onClick={this.handleClick}
+        // onClick={this.handleClick}
       >
         <div className="item" id={this.props.actualProduct}>
           <div

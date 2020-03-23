@@ -12,7 +12,6 @@
   transition: 0.3s;
 }
 
-
 .SearchSidebar {
   float: left;
   position: sticky;
@@ -36,7 +35,6 @@
   width: 5px;
   background-color: #f5f5f5;
 }
-
 
 /**  STYLE 1 */
 .sidebar::-webkit-scrollbar-thumb {
@@ -168,4 +166,33 @@
   /* height: 45px; */
 
   margin-top: 0px;
+}
+
+.editPantryButton {
+  display: inline;
+  float: right;
+  margin-right: 10px;
+  background-color: #7764e4;
+  border: #ffffff solid 2px;
+  border-radius: 12.5px;
+  margin-top: 5px;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 5px 5px 5px 5px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.editPantryButton:hover {
+  background-color: #9a8ceb;
+}
+
+.titlePlate::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #555;
+}
+.titlePlate::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
 }

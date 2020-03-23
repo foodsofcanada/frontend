@@ -16,7 +16,7 @@ class ProfileSidebar extends React.Component {
   }
 
   handleBackClick() {
-    window.location.reload();
+    this.props.setCurrentPage("");
   }
 
   handleTabClick(event) {
@@ -26,7 +26,12 @@ class ProfileSidebar extends React.Component {
   profileButtons() {
     return (
       <div>
-        <div className="profileOptions">
+        <div
+          className="profileOptions"
+          onClick={() => {
+            this.props.setCurrentPage("favorites/");
+          }}
+        >
           <div
             style={{
               position: "relative",
@@ -48,7 +53,12 @@ class ProfileSidebar extends React.Component {
           </div>
         </div>
 
-        <div className="profileOptions">
+        <div
+          className="profileOptions"
+          onClick={() => {
+            this.props.setCurrentPage("pantry/");
+          }}
+        >
           <div
             style={{
               position: "relative",

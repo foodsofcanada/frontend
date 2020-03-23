@@ -45,3 +45,10 @@
 .pullTab2:hover {
   background-color: #e6f1ff;
 }
+
+.head2 {
+  font-size: 20px;
+  letter-spacing: 0;
+  color: #172b4d;
+  font-weight: bold;
+}

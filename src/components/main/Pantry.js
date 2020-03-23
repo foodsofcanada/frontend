@@ -24,8 +24,9 @@ class Pantry extends React.Component {
     );
 
     return (
-      <div className="profileOptions">
+      <div className="profileOptions" id="1">
         <div
+          id="1"
           style={{
             position: "relative",
             top: "15px",
@@ -33,6 +34,7 @@ class Pantry extends React.Component {
           }}
         >
           <span
+            id="1"
             style={{
               backgroundColor: "#0CC8AC",
               width: "43px",
@@ -48,6 +50,7 @@ class Pantry extends React.Component {
           {this.props.name}
 
           <div
+            id="1"
             style={{
               display: "inline-flex",
               color: "#8898AA",

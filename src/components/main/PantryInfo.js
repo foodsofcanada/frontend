@@ -5,8 +5,9 @@ import { ReactSVG } from "react-svg";
 import Item from "./Item";
 
 import { Spinner } from "react-bootstrap";
+import Pantry from "./Pantry";
 
-class FavoritesBar extends React.Component {
+class PantryInfo extends React.Component {
   constructor(props) {
     super();
     this.state = {};
@@ -14,7 +15,7 @@ class FavoritesBar extends React.Component {
   }
 
   handleBackClick() {
-    this.props.setCurrentPage("profile/");
+    this.props.setCurrentPage("pantry/");
   }
 
   handleButtonClick = event => {
@@ -85,16 +86,67 @@ class FavoritesBar extends React.Component {
             </div>
             Back
           </div>
+          <div className="editPantryButton">Edit Pantry</div>
         </div>
-        <div>
-          <div className="head" style={{ marginBottom: "10px" }}>
-            Favorite Products
+
+        <div
+          style={{
+            marginTop: "50px",
+            marginLeft: "15px",
+            marginRight: "15px",
+            height: "110px",
+            display: "flex"
+          }}
+        >
+          <div
+            style={{
+              marginBottom: "10px",
+              width: "30%",
+              height: "96px",
+              display: "inline-block",
+              backgroundColor: "#0CC8AC",
+              borderRadius: "5px",
+              marginRight: "10px"
+            }}
+          >
+            &nbsp;
+          </div>
+          <div
+            className="titlePlate"
+            style={{
+              marginBottom: "10px",
+              width: "60%",
+              display: "inline-block",
+              padding: "0px 0px 0px 0px",
+              overflowX: "hidden"
+            }}
+          >
+            <div className="head2" style={{}}>
+              My Special Tools
+            </div>
+            <div style={{}}>Jane Doe</div>
           </div>
         </div>
+
+        <div
+          style={{
+            marginTop: "15px",
+            marginBottom: "15px",
+            marginLeft: "20px",
+            marginRight: "13px",
+            fontSize: "14.5px",
+            overflowX: "hidden"
+          }}
+        >
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus
+          urna duis convallis convallis tellus.
+        </div>
+
         <div style={{ marginBottom: "15px" }}>{productItems}</div>
       </div>
     );
   }
 }
 
-export default FavoritesBar;
+export default PantryInfo;

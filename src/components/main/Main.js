@@ -4,9 +4,10 @@ import InfoBar from "./InfoBar";
 import GoogleMap from "./GoogleMap";
 import SearchSideBar from "./SearchSidebar";
 import ProductInfoSidebar from "./ProductInfoSidebar";
-// import ProfileSidebar from "./ProfileSidebar";
-// import FavoritesBar from "./FavoritesBar";
-// import PantriesBar from "./PantriesBar";
+import ProfileSidebar from "./ProfileSidebar";
+import FavoritesBar from "./FavoritesBar";
+import PantriesBar from "./PantriesBar";
+import PantryInfo from "./PantryInfo";
 import icon from "../../icons/chevron-down.svg";
 import { ReactSVG } from "react-svg";
 import "./css/Main.css";
@@ -20,6 +21,7 @@ class Main extends React.Component {
       header: "Top 10 searched products",
       currentMarkers: [],
       tabOpen: true,
+
       tabOpenSearch: true,
       selectedRegion: null,
       showState: {
@@ -29,6 +31,7 @@ class Main extends React.Component {
         showRegion: false,
         showProductInformation: false
       },
+      prevPage: "",
       currentPage: ""
     };
 
@@ -38,6 +41,10 @@ class Main extends React.Component {
 
   setCurrentPage = value => {
     this.setState({ currentPage: value });
+  };
+
+  setPrevPage = value => {
+    this.setState({ prevPage: value });
   };
 
   componentDidUpdate() {
@@ -88,8 +95,75 @@ class Main extends React.Component {
     }));
   }
 
+  sidebarController = () => {
+    if (this.state.currentPage.startsWith("products/")) {
+      return (
+        <ProductInfoSidebar
+          currentProduct={this.state.currentPage}
+          setCurrentPage={this.setCurrentPage}
+          prevPage={this.state.prevPage}
+        />
+      );
+    }
+
+    if (this.state.currentPage.startsWith("profile/")) {
+      return (
+        <ProfileSidebar
+          header={this.state.selectedRegion}
+          currentMarkers={this.state.currentMarkers}
+          setCurrentPage={this.setCurrentPage}
+        />
+      );
+    }
+
+    if (this.state.currentPage.startsWith("favorites/")) {
+      return (
+        <FavoritesBar
+          header={this.state.selectedRegion}
+          currentMarkers={this.state.currentMarkers}
+          setCurrentPage={this.setCurrentPage}
+          currentPage={this.state.currentPage}
+          setPrevPage={this.setPrevPage}
+        />
+      );
+    }
+
+    if (this.state.currentPage.startsWith("pantry/")) {
+      return (
+        <PantriesBar
+          header={this.state.selectedRegion}
+          currentMarkers={this.state.currentMarkers}
+          setCurrentPage={this.setCurrentPage}
+        />
+      );
+    }
+
+    if (this.state.currentPage.startsWith("pantryInfo/")) {
+      return (
+        <PantryInfo
+          header={this.state.selectedRegion}
+          currentMarkers={this.state.currentMarkers}
+          setCurrentPage={this.setCurrentPage}
+          currentPage={this.state.currentPage}
+          setPrevPage={this.setPrevPage}
+        />
+      );
+    }
+    return (
+      <InfoBar
+        // header={this.state.selectedRegion}
+        header={this.state.header}
+        currentMarkers={this.state.currentMarkers}
+        setCurrentPage={this.setCurrentPage}
+        currentPage={this.state.currentPage}
+        setPrevPage={this.setPrevPage}
+      />
+    );
+  };
+
   render() {
     // const p = "hello";
+    const bar = this.sidebarController();
     console.log(this.state.currentPage + " this is the current page");
     return (
       //   <Link to="/settings">{p === "Hell" ? <h1>Hello</h1> : <h1>Ho</h1>}</Link>
@@ -114,44 +188,19 @@ class Main extends React.Component {
             closeBarState={this.state.tabOpenSearch}
           />
         </div>
-        {this.state.currentPage.startsWith("products/") ? (
-          <ProductInfoSidebar
-            currentProduct={this.state.currentPage}
-            setCurrentPage={this.setCurrentPage}
-          />
-        ) : (
-          <InfoBar
-            // header={this.state.selectedRegion}
-            header={this.state.header}
-            currentMarkers={this.state.currentMarkers}
-            setCurrentPage={this.setCurrentPage}
-          />
-        )}
+        {bar}
 
+        {/* <PantryInfo
+          header={this.state.selectedRegion}
+          currentMarkers={this.state.currentMarkers}
+          setCurrentPage={this.setCurrentPage}
+        /> */}
         <SearchSideBar
           setCurrentMarkers={this.setCurrentMarkers}
           setHeader={this.setHeader}
+          setCurrentPage={this.setCurrentPage}
         />
 
-        {/* <ProductInfoSidebar
-          header={this.state.selectedRegion}
-          currentMarkers={this.state.currentMarkers}
-        /> */}
-
-        {/* <ProfileSidebar
-          header={this.state.selectedRegion}
-          currentMarkers={this.state.currentMarkers}
-        /> */}
-
-        {/* <FavoritesBar
-          header={this.state.selectedRegion}
-          currentMarkers={this.state.currentMarkers}
-        /> */}
-        {/* 
-        <PantriesBar
-          header={this.state.selectedRegion}
-          currentMarkers={this.state.currentMarkers}
-        /> */}
         <div
           className="d-flex justify-content-center pullTab"
           onClick={this.openCloseBar}
