@@ -251,26 +251,14 @@ class GoogleMap extends Component {
       /**
        * Show products in region
        **/
-      // this.googleMap.panTo(event.latLng);
+      this.googleMap.panTo(event.latLng);
       // this.googleMap.setZoom(6);
       this.props.setSelectedRegion(regionInfo.regionName, regionInfo.regionID);
-      // fetch("http://localhost:8080/productRegion/" + regionInfo.regionID)
       if (this.props.closeBarState === true) {
         this.props.closeBar();
       }
-      const requestOption = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          productsSearched: [],
-          regionSearched: [regionInfo.regionID],
-          seasonSearched: []
-        })
-      };
 
-      fetch("http://localhost:8080/search", requestOption)
+      fetch("http://localhost:8080/productRegion/" + regionInfo.regionID)
         .then(response => response.json())
         .then(productsInRegion => {
           // console.log(productsInRegion)
