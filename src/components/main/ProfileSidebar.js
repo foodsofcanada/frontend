@@ -7,6 +7,7 @@ import settings from "../../icons/settings.svg";
 import mail from "../../icons/mail.svg";
 import pantry from "../../icons/pantry.svg";
 import { Link } from "react-router-dom";
+import SuggestPopup from "./popUp/SuggestPopup";
 
 class ProfileSidebar extends React.Component {
   constructor(props) {
@@ -100,7 +101,12 @@ class ProfileSidebar extends React.Component {
             </div>
           </div>
         </Link>
-        <div className="profileOptions">
+        <div
+          className="profileOptions"
+          onClick={() => {
+            document.getElementById("suggest").style.display = "inline-block";
+          }}
+        >
           <div
             style={{
               position: "relative",
@@ -128,76 +134,79 @@ class ProfileSidebar extends React.Component {
     // let productItems = this.props.currentMarkers.map(product => <Item key={product.id} name={product.item}/>)
     let proButtons = this.profileButtons();
     return (
-      <div className="sidebar" id="bar">
-        <div>
-          <div
-            className="backLink"
-            style={{
-              display: "inline",
-              marginTop: "90px"
-            }}
-            onClick={this.handleBackClick}
-          >
-            &nbsp;
-          </div>
-          <div
-            className="backLink"
-            style={{ display: "inline", marginTop: "90px" }}
-            onClick={this.handleBackClick}
-          >
-            <div className="backStuff ">
-              <ReactSVG
-                src={icon}
-                style={{
-                  height: "30px",
-                  transform: "rotate(90deg)",
-                  marginTop: "10px"
-                }}
-              />
-            </div>
-            Back
-          </div>
-
-          <div className=" profilePicBig "></div>
-          <div
-            className="head"
-            style={{
-              marginLeft: "auto",
-              marginRight: "auto",
-              width: "fit-content"
-            }}
-          >
-            Jane Doe
-          </div>
-          {proButtons}
-          <div
-            style={{
-              marginTop: "40%",
-              width: "100%",
-              marginLeft: "auto",
-              marginRight: "auto"
-            }}
-          >
+      <div>
+        <SuggestPopup />
+        <div className="sidebar" id="bar">
+          <div>
             <div
+              className="backLink"
               style={{
-                display: "flex",
-                marginLeft: "140px",
-                width: "fit-content",
-                marginBottom: "30px"
+                display: "inline",
+                marginTop: "90px"
+              }}
+              onClick={this.handleBackClick}
+            >
+              &nbsp;
+            </div>
+            <div
+              className="backLink"
+              style={{ display: "inline", marginTop: "90px" }}
+              onClick={this.handleBackClick}
+            >
+              <div className="backStuff ">
+                <ReactSVG
+                  src={icon}
+                  style={{
+                    height: "30px",
+                    transform: "rotate(90deg)",
+                    marginTop: "10px"
+                  }}
+                />
+              </div>
+              Back
+            </div>
+
+            <div className=" profilePicBig "></div>
+            <div
+              className="head"
+              style={{
+                marginLeft: "auto",
+                marginRight: "auto",
+                width: "fit-content"
               }}
             >
-              <button
+              Jane Doe
+            </div>
+            {proButtons}
+            <div
+              style={{
+                marginTop: "40%",
+                width: "100%",
+                marginLeft: "auto",
+                marginRight: "auto"
+              }}
+            >
+              <div
                 style={{
-                  height: "35px",
-                  width: "80px",
-                  borderRadius: "25px",
-                  color: "white",
-                  backgroundColor: "#7764E4",
-                  outline: "none"
+                  display: "flex",
+                  marginLeft: "140px",
+                  width: "fit-content",
+                  marginBottom: "30px"
                 }}
               >
-                Logout
-              </button>
+                <button
+                  style={{
+                    height: "35px",
+                    width: "80px",
+                    borderRadius: "25px",
+                    color: "white",
+                    backgroundColor: "#7764E4",
+                    outline: "none"
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
             </div>
           </div>
         </div>
