@@ -72,7 +72,7 @@ class GoogleMap extends Component {
       }
     });
   } //end of componentDidMount
-
+ 
   createGoogleMap = () => {
     // var CANADA_BOUNDS = {
     //   north: 85.06,
