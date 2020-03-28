@@ -55,7 +55,7 @@ class SearchSidebar extends Component {
       .then(productsData => {
         const products = productsData.map(product => {
           return {
-            prod_id: product.prod_id,
+            productId: product.productId,
             name: product.name,
             checked: false
           };
@@ -83,7 +83,7 @@ class SearchSidebar extends Component {
       .then(regionsData => {
         const regions = regionsData.map(region => {
           return {
-            reg_id: region.reg_id,
+            regionId: region.regionId,
             name: region.name,
             checked: false
           };
@@ -123,7 +123,7 @@ class SearchSidebar extends Component {
             let updatedProducts = [...this.state.products];
             updatedProducts.forEach(product => {
               const intValue = parseInt(value);
-              if (product.prod_id === intValue) {
+              if (product.productId === intValue) {
                 if (checked) {
                   updatedSearchQuery.productsSearched.push(intValue);
                 } else {
@@ -148,7 +148,7 @@ class SearchSidebar extends Component {
             let updatedRegions = [...this.state.regions];
             updatedRegions.forEach(region => {
               const intValue = parseInt(value);
-              if (region.reg_id === intValue) {
+              if (region.regionId === intValue) {
                 if (checked) {
                   updatedSearchQuery.regionSearched.push(intValue);
                 } else {
@@ -263,13 +263,13 @@ class SearchSidebar extends Component {
 
         this.state.products.forEach(product => {
           if (product.name.toLowerCase() === value.toLowerCase()) {
-            updatedSearchQuery.productsSearched.push(product.prod_id);
+            updatedSearchQuery.productsSearched.push(product.productId);
           }
         });
 
         this.state.regions.forEach(region => {
           if (region.name.toLowerCase() === value.toLowerCase()) {
-            updatedSearchQuery.regionSearched.push(region.reg_id);
+            updatedSearchQuery.regionSearched.push(region.regionId);
           }
         });
 
@@ -321,7 +321,7 @@ class SearchSidebar extends Component {
             <div onClick={this.handleCheckBoxClick}>
               <SearchItem
                 key={product.name}
-                value={product.prod_id}
+                value={product.productId}
                 name={"products"}
                 labelName={product.name}
                 checked={product.checked}
@@ -340,7 +340,7 @@ class SearchSidebar extends Component {
             <div onClick={this.handleCheckBoxClick}>
               <SearchItem
                 key={region.name}
-                value={region.reg_id}
+                value={region.regionId}
                 name={"regions"}
                 labelName={region.name}
                 checked={region.checked}

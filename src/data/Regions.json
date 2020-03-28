@@ -1,7 +1,7 @@
 [
 
   
-  {"name":"Arctic Archipelago", "reg_id":1,
+  {"regionName":"Arctic Archipelago", "regionId":1,
     "pushpins":"-99.4500729472482,77.1916282340687",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -33,7 +33,7 @@
   ]},
 
 
-  {"name":"Arctic Basin", "reg_id":2,
+  {"regionName":"Arctic Basin", "regionId":2,
     "pushpins":"-121.012037317334,79.5646309306065",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -47,7 +47,7 @@
     ]},
 
 
-  {"name":"Arctic Cordillera", "reg_id":3,
+  {"regionName":"Arctic Cordillera", "regionId":3,
     "pushpins":"-63.7666551926657,58.5620537329453\n-65.6145346162357,67.4473600825291\n-92.67033320191,80.0466407318409\n-75.8248565580618,80.2831553186379\n-76.9810342784382,81.8641927198528,0",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -97,7 +97,7 @@
   ]},
 
 
-  {"name":"Atlantic Highlands", "reg_id":4,
+  {"regionName":"Atlantic Highlands", "regionId":4,
     "pushpins":"-71.003399223733,46.0064507534117",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -112,7 +112,7 @@
   ]},
 
 
-  {"name":"Atlantic Maritime", "reg_id":5,
+  {"regionName":"Atlantic Maritime", "regionId":5,
     "pushpins":"-63.3810641298862,45.1372890565832",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -155,7 +155,7 @@
   ]},
 
 
-  {"name":"Boreal Cordillera", "reg_id":6,
+  {"regionName":"Boreal Cordillera", "regionId":6,
     "pushpins":"-129.570730143795,60.5358880373957",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -170,7 +170,7 @@
   ]},
 
 
-  {"name":"Boreal Plains", "reg_id":7,
+  {"regionName":"Boreal Plains", "regionId":7,
     "pushpins":"-115.594236688945,56.0665336287519",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -185,7 +185,7 @@
   ]},
 
 
-  {"name":"Boreal Shield", "reg_id":8,
+  {"regionName":"Boreal Shield", "regionId":8,
     "pushpins":"-72.0351303736775,49.3571990384869",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -248,7 +248,7 @@
   ]},
 
 
-  {"name":"Eastern Arctic", "reg_id":9,
+  {"regionName":"Eastern Arctic", "regionId":9,
     "pushpins":"-69.0895382695298,72.3016804870858",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -272,7 +272,7 @@
   ]},
 
 
-  {"name":"Great Lakes", "reg_id":10,
+  {"regionName":"Great Lakes", "regionId":10,
     "pushpins":"-80.8349727234468,45.3091526463693",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -306,7 +306,7 @@
   ]},
 
 
-  {"name":"Gulf of Saint Lawrence", "reg_id":11,
+  {"regionName":"Gulf of Saint Lawrence", "regionId":11,
     "pushpins":"-66.1946916524924,49.6911659643065",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -324,7 +324,7 @@
   ]},
 
 
-  {"name":"Hudson Bay Complex", "reg_id":12,
+  {"regionName":"Hudson Bay Complex", "regionId":12,
     "pushpins":"-87.5544137027147,60.0863529199206",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -361,7 +361,7 @@
   ]},
 
 
-  {"name":"Hudson Plains", "reg_id":13,
+  {"regionName":"Hudson Plains", "regionId":13,
     "pushpins":"-81.4106732640198,51.0890139639123",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -384,7 +384,7 @@
   ]},
 
 
-  {"name":"Mixedwood Plains", "reg_id":14,
+  {"regionName":"Mixedwood Plains", "regionId":14,
     "pushpins":"-80.1140121039203,43.6641350275013",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -423,7 +423,7 @@
   ]},
 
 
-  {"name":"Montane Cordillera", "reg_id":15,
+  {"regionName":"Montane Cordillera", "regionId":15,
     "pushpins":"-121.476719267903,53.0921133465958",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -438,7 +438,7 @@
   ]},
 
 
-  {"name":"Newfoundland-Labrador Shelves", "reg_id":16,
+  {"regionName":"Newfoundland-Labrador Shelves", "regionId":16,
     "pushpins":"-53.6731194091262,54.2876473174368",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -461,7 +461,7 @@
   ]},
 
 
-  {"name":"Northern Shelf", "reg_id":17,
+  {"regionName":"Northern Shelf", "regionId":17,
     "pushpins":"-130.356598567471,52.6533955450833",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -483,7 +483,7 @@
   ]},
 
 
-  {"name":"Northern Arctic", "reg_id":18,
+  {"regionName":"Northern Arctic", "regionId":18,
     "pushpins":"-81.2473784638654,70.9739246341374",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -754,7 +754,7 @@
   ]},
 
 
-  {"name":"Offshore Pacific", "reg_id":19,
+  {"regionName":"Offshore Pacific", "regionId":19,
     "pushpins":"-132.144843016815,50.3956748771154",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -769,7 +769,7 @@
   ]},
 
 
-  {"name":"Pacific Maritime", "reg_id":20,
+  {"regionName":"Pacific Maritime", "regionId":20,
     "pushpins":"-127.136185864538,52.1078485908016",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -832,7 +832,7 @@
   ]},
 
 
-  {"name":"Prairies", "reg_id":21,
+  {"regionName":"Prairies", "regionId":21,
     "pushpins":"-105.630015368382,50.8163305624878",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -847,7 +847,7 @@
   ]},
 
 
-  {"name":"Scotian Shelf", "reg_id":22,
+  {"regionName":"Scotian Shelf", "regionId":22,
     "pushpins":"-59.0479966671933,42.4839983241358",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -863,7 +863,7 @@
   ]},
 
 
-  {"name":"Semi-Arid Plateaux", "reg_id":23,
+  {"regionName":"Semi-Arid Plateaux", "regionId":23,
     "pushpins":"-120.585394405323,50.2094309827281",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -878,7 +878,7 @@
   ]},
 
 
-  {"name":"Southern Arctic", "reg_id":24,
+  {"regionName":"Southern Arctic", "regionId":24,
     "pushpins":"-109.400040054735,65.651906540682",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -965,7 +965,7 @@
   ]},
 
 
-  {"name":"Southern Shelf", "reg_id":25,
+  {"regionName":"Southern Shelf", "regionId":25,
     "pushpins":"-126.4207668746,48.9778668047625",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -980,7 +980,7 @@
   ]},
 
 
-  {"name":"Strait of Georgia", "reg_id":26,
+  {"regionName":"Strait of Georgia", "regionId":26,
     "pushpins":"-123.490309857175,49.1628607010072",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -999,7 +999,7 @@
   ]},
 
 
-  {"name":"Taiga Cordillera", "reg_id":27,
+  {"regionName":"Taiga Cordillera", "regionId":27,
     "pushpins":"-127.065135501226,63.9308211661736",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -1014,7 +1014,7 @@
   ]},
 
 
-  {"name":"Taiga Plains", "reg_id":28,
+  {"regionName":"Taiga Plains", "regionId":28,
     "pushpins":"-122.246784340089,59.9318834640286",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -1029,7 +1029,7 @@
   ]},
 
 
-  {"name":"Taiga Shield", "reg_id":29,
+  {"regionName":"Taiga Shield", "regionId":29,
     "pushpins":"-69.0259443950973,54.6732446264337\n-99.3096704448964,60.0124495431488",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -1084,7 +1084,7 @@
   ]},
 
 
-  {"name":"Tundra Cordillera", "reg_id":30,
+  {"regionName":"Tundra Cordillera", "regionId":30,
     "pushpins":"-136.457329930469,67.5313906346664",
     "polygonStyle":{
       "strokeColor":"#e6e600",
@@ -1099,7 +1099,7 @@
   ]},
 
 
-  {"name":"Western Arctic", "reg_id":31,
+  {"regionName":"Western Arctic", "regionId":31,
     "pushpins":"-129.469211197965,70.7176693199617",
     "polygonStyle":{
       "strokeColor":"#e6e600",
