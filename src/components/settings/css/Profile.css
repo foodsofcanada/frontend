@@ -38,7 +38,6 @@ input[type="password"] {
   color: #172b4d;
 }
 
-
 .saveProfile {
   width: 110px;
   height: 45px;
@@ -47,4 +46,12 @@ input[type="password"] {
   border-radius: 5px;
   opacity: 1;
   color: #ffffff;
+}
+
+.changePassword {
+  cursor: pointer;
+}
+
+.changePassword:hover {
+  text-decoration: underline #7764e4;
 }

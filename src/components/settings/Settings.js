@@ -3,11 +3,13 @@ import { Switch, Route } from "react-router-dom";
 import About from "./About";
 import NavBar from "./NavBar";
 import Profile from "./Profile";
+import PasswordPopup from "./popUp/PasswordPopup";
 
 function Settings() {
   return (
     // <Router>
     <div>
+      <PasswordPopup />
       <div
         style={{
           display: "inline-block",
