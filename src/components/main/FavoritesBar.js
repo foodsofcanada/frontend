@@ -49,14 +49,14 @@ class FavoritesBar extends React.Component {
           <div
             onClick={this.handleButtonClick}
             key={number}
-            id={product.prod_id}
+            id={product.productId}
           >
             <Item
               number={number}
               key={number}
               name={product.name}
               region={product.region}
-              actualProduct={product.prod_id}
+              actualProduct={product.productId}
               currPage={this.props.setCurrentPage}
             />
           </div>

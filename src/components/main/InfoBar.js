@@ -50,18 +50,19 @@ class InfoBar extends React.Component {
       productItems = this.props.currentMarkers.map(product => {
         number = number + 1;
 
+        console.log(product);
         return (
           <div
             onClick={this.handleButtonClick}
             key={number}
-            id={product.prod_id}
+            id={product.productId}
           >
             <Item
               number={number}
               key={number}
               name={product.name}
               region={product.regionName}
-              actualProduct={product.prod_id}
+              actualProduct={product.productId}
               currPage={this.props.setCurrentPage}
             />
           </div>
