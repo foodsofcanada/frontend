@@ -50,7 +50,6 @@ class InfoBar extends React.Component {
       productItems = this.props.currentMarkers.map(product => {
         number = number + 1;
 
-        console.log(product);
         return (
           <div
             onClick={this.handleButtonClick}

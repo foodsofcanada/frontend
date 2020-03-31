@@ -15,6 +15,16 @@
   fill: none;
 }
 
-.heart:hover {
-  fill: #7764e4;
+.heartDiv {
+  width: 35px;
+  height: 35px;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 10px;
+  border-radius: 50%;
+  margin-top: -10px;
+  transition: 0.5s;
+}
+.heartDiv:hover {
+  background-color: rgba(119, 100, 228, 0.164);
 }
