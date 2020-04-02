@@ -102,6 +102,8 @@ class GoogleMap extends Component {
     const email = sessionStorage.getItem("currentUser");
     if (email !== null && email !== "") {
       url += "/" + email;
+    } else {
+      url += "/\"\"";
     }
     fetch(url)
       .then(response => response.json())
