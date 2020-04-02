@@ -1,5 +1,6 @@
 import React, { Component, createRef } from "react";
 import Regions from "../../data/Regions.json";
+import favourite from "../../data/favourite.json";
 const mapStyles = {
   width: "100vw",
   height: "100vh"
@@ -101,7 +102,9 @@ class GoogleMap extends Component {
       .then(response => response.json())
       .then(data => {
         
-        this.props.setCurrentMarkers(data);
+        // this.props.setCurrentMarkers(data);
+        console.log(favourite)
+        this.props.setCurrentMarkers(favourite);
 
       })
       .catch(() => {

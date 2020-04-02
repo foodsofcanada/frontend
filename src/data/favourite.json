@@ -1,0 +1,28 @@
+
+[
+	{
+	  "coordinates": "65.95,-103.89",
+	  "regionId": 24,
+	  "regionName": "Southern Arctic",
+	  "productId": 1,
+	  "name": "Wild Leek",
+	  "isFavourite": true
+	},
+	{
+	  "coordinates": "63.06,-105.89",
+	  "regionId": 24,
+	  "regionName": "Southern Arctic",
+	  "productId": 2,
+	  "name": "Barley",
+	  "isFavourite": false
+	  
+	},
+	{
+	  "coordinates": "62.17,-107.89",
+	  "regionId": 29,
+	  "regionName": "Taiga Shield",
+	  "productId": 3,
+	  "name": "Sockeye Salmon",
+	  "isFavourite": false
+	}
+]

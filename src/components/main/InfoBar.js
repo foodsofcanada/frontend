@@ -28,6 +28,32 @@ class InfoBar extends React.Component {
     }
   };
 
+  handleHeartClick = (targetIndex) => {
+    // fetch()
+    //   .then(response => response.json())
+    //   .then(data => {
+        // if (data) {
+          const updatedCurrentMarkers = this.props.currentMarkers.map((product,index) => {
+            if(targetIndex === index) {
+              return {
+                ...product,
+                isFavourite: !product.isFavourite
+              }
+            } else {
+              return {
+                ...product
+              }
+            }
+            
+          });
+          console.log("updatedCurrentMarkers")
+          console.log(updatedCurrentMarkers)
+          this.props.setCurrentMarkers(updatedCurrentMarkers);
+        // }
+      // });
+  };
+
+
   render() {
     let productItems = null;
     let number = 0;
@@ -63,6 +89,8 @@ class InfoBar extends React.Component {
               region={product.regionName}
               actualProduct={product.productId}
               currPage={this.props.setCurrentPage}
+              isFavourite={product.isFavourite}
+              handleHeartClick={this.handleHeartClick}
             />
           </div>
         );

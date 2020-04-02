@@ -8,13 +8,14 @@ import { Dropdown, DropdownButton } from "react-bootstrap";
 class Item extends React.Component {
   constructor(props) {
     super();
-    this.state = { isLiked: false };
+    // this.state = { isLiked: false };
   }
 
   handleHeartClick = () => {
-    this.setState(prevstate => ({
-      isLiked: !prevstate.isLiked
-    }));
+    this.props.handleHeartClick(this.props.number-1)
+    // this.setState(prevstate => ({
+    //   isLiked: !prevstate.isLiked
+    // }));
   };
 
   render() {
@@ -31,7 +32,8 @@ class Item extends React.Component {
     );
 
     let heartIcon =
-      this.state.isLiked === true ? (
+      // this.state.isLiked === true ? (
+      this.props.isFavourite === true ? (
         <ReactSVG
           id="heart"
           className="heart"

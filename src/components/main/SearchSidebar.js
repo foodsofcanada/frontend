@@ -84,7 +84,7 @@ class SearchSidebar extends Component {
         const regions = regionsData.map(region => {
           return {
             regionId: region.regionId,
-            name: region.name,
+            name: region.regionName,
             checked: false
           };
         });

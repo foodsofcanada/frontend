@@ -120,6 +120,7 @@ class Main extends React.Component {
       return (
         <FavoritesBar
           header={this.state.selectedRegion}
+          setCurrentMarkers={this.setCurrentMarkers}
           currentMarkers={this.state.currentMarkers}
           setCurrentPage={this.setCurrentPage}
           currentPage={this.state.currentPage}
@@ -142,6 +143,7 @@ class Main extends React.Component {
       return (
         <PantryInfo
           header={this.state.selectedRegion}
+          setCurrentMarkers={this.setCurrentMarkers}
           currentMarkers={this.state.currentMarkers}
           setCurrentPage={this.setCurrentPage}
           currentPage={this.state.currentPage}
@@ -153,6 +155,7 @@ class Main extends React.Component {
       <InfoBar
         // header={this.state.selectedRegion}
         header={this.state.header}
+        setCurrentMarkers={this.setCurrentMarkers}
         currentMarkers={this.state.currentMarkers}
         setCurrentPage={this.setCurrentPage}
         currentPage={this.state.currentPage}
