@@ -71,8 +71,11 @@ class LoginPage extends React.Component {
   }
 
   render() {
-    console.log("I re rendered " + this.state.sessionValue);
-    if (this.state.sessionValue !== "" && this.state.sessionValue !== null) {
+    if (
+      this.state.sessionValue !== "" &&
+      this.state.sessionValue !== null &&
+      this.state.sessionValue !== "null"
+    ) {
       return <Redirect to="/" />;
     } else {
       return (

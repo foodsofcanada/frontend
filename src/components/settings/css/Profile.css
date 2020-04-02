@@ -55,3 +55,11 @@ input[type="password"] {
 .changePassword:hover {
   text-decoration: underline #7764e4;
 }
+
+.deleteText {
+  cursor: pointer;
+}
+
+.deleteText:hover {
+  text-decoration: underline #ff3d3d;
+}
