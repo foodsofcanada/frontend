@@ -98,13 +98,7 @@ class GoogleMap extends Component {
   };
 
   showTop10Products = () => {
-    let url = "http://localhost:8080/products/top";
-    const email = sessionStorage.getItem("currentUser");
-    if (email !== null && email !== "") {
-      url += "/" + email;
-    } else {
-      url += "/\"\"";
-    }
+    let url = this.appendEmail("http://localhost:8080/products/top");
     fetch(url)
       .then(response => response.json())
       .then(data => {
@@ -253,10 +247,11 @@ class GoogleMap extends Component {
         this.props.closeBar();
       }
 
-      fetch("http://localhost:8080/productRegion/" + regionInfo.regionId)
+      let url = this.appendEmail("http://localhost:8080/productRegion/" + regionInfo.regionId);
+      fetch(url)
         .then(response => response.json())
         .then(productsInRegion => {
-          // console.log(productsInRegion)
+          console.log(productsInRegion)
           this.props.setHeader(
             "Products in " + regionInfo.regionName + " Region"
           );
@@ -401,6 +396,16 @@ class GoogleMap extends Component {
     });
     return isHighlighted;
   };
+
+  appendEmail(url) {
+    const email = sessionStorage.getItem("currentUser");
+    if (email !== null && email !== "") {
+      url += "/" + email;
+    } else {
+      url += "/\"\"";
+    }
+    return url;
+  }
 
   render() {
     return (
