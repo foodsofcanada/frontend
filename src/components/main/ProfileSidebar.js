@@ -6,22 +6,48 @@ import heart from "../../icons/heart.svg";
 import settings from "../../icons/settings.svg";
 import mail from "../../icons/mail.svg";
 import pantry from "../../icons/pantry.svg";
-import { Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import SuggestPopup from "./popUp/SuggestPopup";
-
+import LogoutPopup from "./popUp/LogoutPopup";
 class ProfileSidebar extends React.Component {
   constructor(props) {
     super();
-    this.state = { activeTab: "1" };
+    this.state = {
+      currentUserInfo: { isExist: false },
+      email: sessionStorage.getItem("currentUser"),
+      isLogin: false,
+      isSetting: false
+    };
     this.handleBackClick = this.handleBackClick.bind(this);
+  }
+
+  componentDidMount() {
+    let url = "http://localhost:8080/members/" + this.state.email;
+
+    if (
+      this.state.email === null ||
+      this.state.email === "" ||
+      this.state.email === "null"
+    ) {
+      url = 'http://localhost:8080/members/""';
+    }
+
+    fetch(url, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(profileInfo => {
+        this.setState({ currentUserInfo: profileInfo });
+      })
+      .catch(() => {
+        console.log("Failed to retrieve profile");
+      });
   }
 
   handleBackClick() {
     this.props.setCurrentPage("");
-  }
-
-  handleTabClick(event) {
-    this.setState({ activeTab: event.currentTarget.id });
   }
 
   profileButtons() {
@@ -30,7 +56,9 @@ class ProfileSidebar extends React.Component {
         <div
           className="profileOptions"
           onClick={() => {
-            this.props.setCurrentPage("favorites/");
+            if (this.state.currentUserInfo.isExist) {
+              this.props.setCurrentPage("favorites/");
+            }
           }}
         >
           <div
@@ -57,7 +85,9 @@ class ProfileSidebar extends React.Component {
         <div
           className="profileOptions"
           onClick={() => {
-            this.props.setCurrentPage("pantry/");
+            if (this.state.currentUserInfo.isExist) {
+              this.props.setCurrentPage("pantry/");
+            }
           }}
         >
           <div
@@ -79,32 +109,39 @@ class ProfileSidebar extends React.Component {
             Pantries
           </div>
         </div>
-        <Link to="/settings/" style={{ textDecoration: "none" }}>
-          <div className="profileOptions">
-            <div
-              style={{
-                position: "relative",
-                top: "15px",
-                display: "inline-flex"
-              }}
-            >
-              <ReactSVG
-                src={settings}
-                style={{
-                  height: "25px",
 
-                  marginLeft: "20px",
-                  marginRight: "38px"
-                }}
-              />
-              Settings
-            </div>
+        <div className="profileOptions">
+          <div
+            style={{
+              position: "relative",
+              top: "15px",
+              display: "inline-flex"
+            }}
+            onClick={() => {
+              if (this.state.currentUserInfo.isExist) {
+                this.setState({ isSetting: true });
+              }
+            }}
+          >
+            <ReactSVG
+              src={settings}
+              style={{
+                height: "25px",
+
+                marginLeft: "20px",
+                marginRight: "38px"
+              }}
+            />
+            Settings
           </div>
-        </Link>
+        </div>
+
         <div
           className="profileOptions"
           onClick={() => {
-            document.getElementById("suggest").style.display = "inline-block";
+            if (this.state.currentUserInfo.isExist) {
+              document.getElementById("suggest").style.display = "inline-block";
+            }
           }}
         >
           <div
@@ -130,11 +167,60 @@ class ProfileSidebar extends React.Component {
     );
   }
 
+  handleLogin = () => {
+    sessionStorage.removeItem("currentUser");
+    this.setState({ isLogin: true });
+  };
+
+  handleLogout = () => {
+    sessionStorage.removeItem("currentUser");
+    document.getElementById("logoutPopup").style.display = "inline-block";
+    this.setState({ currentUserInfo: { isExist: false } });
+  };
   render() {
     // let productItems = this.props.currentMarkers.map(product => <Item key={product.id} name={product.item}/>)
+
+    if (this.state.isLogin) {
+      return <Redirect to="/login" />;
+    }
+
+    if (this.state.isSetting) {
+      return <Redirect to="/setting" />;
+    }
     let proButtons = this.profileButtons();
+
+    let logButton = this.state.currentUserInfo.isExist ? (
+      <button
+        style={{
+          height: "35px",
+          width: "80px",
+          borderRadius: "25px",
+          color: "white",
+          backgroundColor: "#7764E4",
+          outline: "none"
+        }}
+        onClick={this.handleLogout}
+      >
+        Logout
+      </button>
+    ) : (
+      <button
+        style={{
+          height: "35px",
+          width: "80px",
+          borderRadius: "25px",
+          color: "white",
+          backgroundColor: "#7764E4",
+          outline: "none"
+        }}
+        onClick={this.handleLogin}
+      >
+        Login
+      </button>
+    );
     return (
       <div>
+        <LogoutPopup />
         <SuggestPopup />
         <div className="sidebar" id="bar">
           <div>
@@ -175,7 +261,11 @@ class ProfileSidebar extends React.Component {
                 width: "fit-content"
               }}
             >
-              Jane Doe
+              {this.state.currentUserInfo.isExist
+                ? this.state.currentUserInfo.firstName +
+                  " " +
+                  this.state.currentUserInfo.lastName
+                : "Guest"}
             </div>
             {proButtons}
             <div
@@ -194,18 +284,7 @@ class ProfileSidebar extends React.Component {
                   marginBottom: "30px"
                 }}
               >
-                <button
-                  style={{
-                    height: "35px",
-                    width: "80px",
-                    borderRadius: "25px",
-                    color: "white",
-                    backgroundColor: "#7764E4",
-                    outline: "none"
-                  }}
-                >
-                  Logout
-                </button>
+                {logButton}
               </div>
             </div>
           </div>
