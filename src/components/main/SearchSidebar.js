@@ -38,7 +38,7 @@ class SearchSidebar extends Component {
         seasonSearched: [],
         regionSearched: []
       },
-      isSearchBox: false
+      // isSearchBox: false
       // searchQuery: {
       //   productsSearched: [1,2,3],
       //   seasonSearched: ["spring","summer"],
@@ -50,12 +50,6 @@ class SearchSidebar extends Component {
   }
 
   componentDidMount() {
-    const email = sessionStorage.getItem("currentUser");
-    console.log(sessionStorage.getItem("currentUser"))
-    if (email !== null && email !== "") {
-      console.log("setting: " + email)
-      this.setState({...this.state.searchQuery, email: email});
-    }
     //Fetch products
     fetch("http://localhost:8080/products")
       .then(response => response.json())
@@ -113,21 +107,13 @@ class SearchSidebar extends Component {
     if (type === "checkbox") {
       this.setState(
         prevState => {
-          if (this.state.isSearchBox) {
-            updatedSearchQuery = {
-              email: "",
-              productsSearched: [],
-              seasonSearched: [],
-              regionSearched: []
-            };
-          } else {
             updatedSearchQuery = {
               email: "",
               productsSearched: [...prevState.searchQuery.productsSearched],
               seasonSearched: [...prevState.searchQuery.seasonSearched],
               regionSearched: [...prevState.searchQuery.regionSearched]
             };
-          }
+
           const email = sessionStorage.getItem("currentUser");
           if (email !== null && email !== "") {
             updatedSearchQuery.email = email;
@@ -215,7 +201,7 @@ class SearchSidebar extends Component {
 
   fetchProducts = () => {
     // console.log("fetching: ");
-    console.log(this.state.searchQuery);
+    // console.log(this.state.searchQuery);
     const requestOption = {
       method: "POST",
       headers: {

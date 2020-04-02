@@ -29,16 +29,20 @@ class InfoBar extends React.Component {
   };
 
   handleHeartClick = (targetIndex) => {
-    // fetch()//add/delete product from favourite
-    //   .then(response => response.json())
-    //   .then(data => {
-        // if (data) {
+    const email = sessionStorage.getItem("currentUser");
+    if (email !== null && email !== "") {
+      const {productId, regionId, coordinates} = this.props.currentMarkers[targetIndex];
+      //add/delete product from favourite
+        fetch("http://localhost:8080/fav/" + email + "/" + productId + "/" + regionId + "/" + coordinates + "", {method: "POST"})
+          .then(response => response.json())
+          .then(data => {
           const updatedCurrentMarkers = this.props.currentMarkers.map((product,index) => {
             if(targetIndex === index) {
-              return {
-                ...product,
-                isFavourite: !product.isFavourite
-              }
+                  return {
+                    ...product,
+                    isFavourite: data
+                  }
+              
             } else {
               return {
                 ...product
@@ -49,8 +53,12 @@ class InfoBar extends React.Component {
           // console.log("updatedCurrentMarkers")
           // console.log(updatedCurrentMarkers)
           this.props.setCurrentMarkers(updatedCurrentMarkers);
-        // }
-      // });
+        });//end of fetch
+
+        } else {//user is guest
+          //prompt guest to login
+          console.log("user is guest")
+        }
   };
 
 
@@ -75,7 +83,7 @@ class InfoBar extends React.Component {
     } else {
       productItems = this.props.currentMarkers.map(product => {
         number = number + 1;
-
+        // console.log(product)
         return (
           <div
             onClick={this.handleButtonClick}
