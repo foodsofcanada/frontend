@@ -4,12 +4,14 @@ import About from "./About";
 import NavBar from "./NavBar";
 import Profile from "./Profile";
 import PasswordPopup from "./popUp/PasswordPopup";
+import DeleteAccountPopup from "./popUp/DeleteAccountPopup";
 
 function Settings() {
   return (
     // <Router>
     <div>
       <PasswordPopup />
+      <DeleteAccountPopup />
       <div
         style={{
           display: "inline-block",

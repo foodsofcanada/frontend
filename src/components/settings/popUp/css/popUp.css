@@ -10,6 +10,18 @@
   vertical-align: center;
 }
 
+.delete {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  z-index: 100;
+  margin-bottom: -100vh;
+  background-color: rgba(31, 29, 29, 0.589);
+  position: fixed;
+  overflow: hidden;
+  vertical-align: center;
+}
+
 .passwordBox {
   position: absolute;
   top: 50%;
@@ -20,6 +32,24 @@
   margin: 0 auto;
   width: 710px;
   height: 380px;
+  border-radius: 10px;
+  background-color: white;
+
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 30px 20px 30px;
+}
+
+.deleteBox {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  /* add code below to also center horizontally */
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 340px;
+  height: 210px;
   border-radius: 10px;
   background-color: white;
 
@@ -39,11 +69,28 @@
   border-radius: 5px;
   cursor: pointer;
   box-shadow: 0px 3px 6px #2c28281c;
-  margin-right: 20px;
+  margin-right: 30px;
 }
 
 .passwordButton:hover {
   background-color: #9a8ceb;
+}
+
+.deleteButton {
+  background-color: #ff3d3d;
+  color: white;
+  width: 130px;
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+  padding: 0 0 0 0;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 3px 6px #2c28281c;
+}
+
+.deleteButton:hover {
+  background-color: #ff6060;
 }
 
 .cancelButton {

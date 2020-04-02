@@ -79,7 +79,14 @@ class Profile extends React.Component {
         </div>
 
         <div>
-          <span style={{ color: "#FF3D3D", marginLeft: "20px" }}>
+          <span
+            style={{ color: "#FF3D3D", marginLeft: "20px" }}
+            className="deleteText"
+            onClick={() => {
+              document.getElementById("deletePopup").style.display =
+                "inline-block";
+            }}
+          >
             Delete account?
           </span>
 
