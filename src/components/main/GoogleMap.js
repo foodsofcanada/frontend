@@ -98,13 +98,18 @@ class GoogleMap extends Component {
   };
 
   showTop10Products = () => {
-    fetch("http://localhost:8080/products/top")
+    let url = "http://localhost:8080/products/top";
+    const email = sessionStorage.getItem("currentUser");
+    if (email !== null && email !== "") {
+      url += "/" + email;
+    }
+    fetch(url)
       .then(response => response.json())
       .then(data => {
         
-        // this.props.setCurrentMarkers(data);
-        console.log(favourite)
-        this.props.setCurrentMarkers(favourite);
+        this.props.setCurrentMarkers(data);
+        // console.log(favourite)
+        // this.props.setCurrentMarkers(favourite);
 
       })
       .catch(() => {

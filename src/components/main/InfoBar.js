@@ -29,7 +29,7 @@ class InfoBar extends React.Component {
   };
 
   handleHeartClick = (targetIndex) => {
-    // fetch()
+    // fetch()//add/delete product from favourite
     //   .then(response => response.json())
     //   .then(data => {
         // if (data) {
@@ -46,8 +46,8 @@ class InfoBar extends React.Component {
             }
             
           });
-          console.log("updatedCurrentMarkers")
-          console.log(updatedCurrentMarkers)
+          // console.log("updatedCurrentMarkers")
+          // console.log(updatedCurrentMarkers)
           this.props.setCurrentMarkers(updatedCurrentMarkers);
         // }
       // });

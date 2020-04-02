@@ -33,6 +33,7 @@ class SearchSidebar extends Component {
         { checked: false, name: "Winter" }
       ],
       searchQuery: {
+        email: "",
         productsSearched: [],
         seasonSearched: [],
         regionSearched: []
@@ -49,6 +50,12 @@ class SearchSidebar extends Component {
   }
 
   componentDidMount() {
+    const email = sessionStorage.getItem("currentUser");
+    console.log(sessionStorage.getItem("currentUser"))
+    if (email !== null && email !== "") {
+      console.log("setting: " + email)
+      this.setState({...this.state.searchQuery, email: email});
+    }
     //Fetch products
     fetch("http://localhost:8080/products")
       .then(response => response.json())
@@ -108,17 +115,24 @@ class SearchSidebar extends Component {
         prevState => {
           if (this.state.isSearchBox) {
             updatedSearchQuery = {
+              email: "",
               productsSearched: [],
               seasonSearched: [],
               regionSearched: []
             };
           } else {
             updatedSearchQuery = {
+              email: "",
               productsSearched: [...prevState.searchQuery.productsSearched],
               seasonSearched: [...prevState.searchQuery.seasonSearched],
               regionSearched: [...prevState.searchQuery.regionSearched]
             };
           }
+          const email = sessionStorage.getItem("currentUser");
+          if (email !== null && email !== "") {
+            updatedSearchQuery.email = email;
+          }
+
           if (name === "products") {
             let updatedProducts = [...this.state.products];
             updatedProducts.forEach(product => {
@@ -201,7 +215,7 @@ class SearchSidebar extends Component {
 
   fetchProducts = () => {
     // console.log("fetching: ");
-    // console.log(this.state.searchQuery);
+    console.log(this.state.searchQuery);
     const requestOption = {
       method: "POST",
       headers: {
@@ -256,10 +270,16 @@ class SearchSidebar extends Component {
       this.setState( () => {
         
         let updatedSearchQuery = {
+          email: "",
           productsSearched: [],
           seasonSearched: [],
           regionSearched: [] 
         };
+
+        const email = sessionStorage.getItem("currentUser");
+          if (email !== null && email !== "") {
+            updatedSearchQuery.email = email;
+          }
 
         this.state.products.forEach(product => {
           if (product.name.toLowerCase() === value.toLowerCase()) {
