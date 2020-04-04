@@ -11,6 +11,17 @@ class DeleteAccountPopup extends React.Component {
   }
 
   handleDelete = () => {
+    fetch(
+      "http://localhost:8080/members/" + sessionStorage.getItem("currentUser"),
+      {
+        method: "DELETE"
+      }
+    )
+      .then(response => response.json())
+      .then(data => {})
+      .catch(() => {
+        console.log("profile could not be deleted");
+      });
     this.setState(prevstate => ({
       isAccountDeleted: !prevstate.isAccountDeleted
     }));

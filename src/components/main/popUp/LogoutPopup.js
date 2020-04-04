@@ -10,6 +10,7 @@ class LogoutAccountPopup extends React.Component {
         onClick={event => {
           if (event.target.id === "logoutPopup") {
             document.getElementById("logoutPopup").style.display = "none";
+            window.location.reload();
           }
         }}
       >
@@ -40,6 +41,7 @@ class LogoutAccountPopup extends React.Component {
                   onClick={() => {
                     document.getElementById("logoutPopup").style.display =
                       "none";
+                    window.location.reload();
                   }}
                 >
                   Cancel
