@@ -20,8 +20,11 @@ class GoogleMap extends Component {
   }
 
   componentDidMount() {
-    if (document.getElementById('map') === null) {
-      const googleMapScript = document.createElement("script");
+    if (document.getElementById('map') !== null) {
+      var element = document.getElementById('map');
+      element.parentNode.removeChild(element);
+    }
+    const googleMapScript = document.createElement("script");
       googleMapScript.setAttribute("id", "map");
       googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_KEY}&language=${this.props.language}`;
       window.document.body.appendChild(googleMapScript);
@@ -31,7 +34,7 @@ class GoogleMap extends Component {
         this.showTop10Products();
         this.createRegions();
       });
-    }
+
     
   }
 
