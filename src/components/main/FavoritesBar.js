@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import "./css/InfoBar.css";
 import icon from "../../icons/chevron-down.svg";
 import { ReactSVG } from "react-svg";
@@ -18,7 +18,7 @@ class FavoritesBar extends Component {
   }
 
   componentDidUpdate() {
-    console.log("FavouriteBar updated")
+    console.log("FavouriteBar updated");
   }
 
   handleBackClick() {
@@ -32,7 +32,7 @@ class FavoritesBar extends Component {
     }
   };
 
-  handleHeartClick = (targetIndex) => {
+  handleHeartClick = targetIndex => {
     console.log("heart clicked");
     const email = sessionStorage.getItem("currentUser");
     if (email !== null && email !== "") {
@@ -54,22 +54,22 @@ class FavoritesBar extends Component {
       )
         .then(response => response.json())
         .then(data => {
-          
           this.fetchFavourites();
-          
         }); //end of fetch
     }
-  }
+  };
 
   fetchFavourites = () => {
-    fetch("http://localhost:8080/favourites/" + sessionStorage.getItem("currentUser"))
+    fetch(
+      "http://localhost:8080/favourites/" +
+        sessionStorage.getItem("currentUser")
+    )
       .then(response => response.json())
       .then(data => {
-        console.log(data)
+        console.log(data);
         this.props.setCurrentMarkers(data);
-    });
-  }
-
+      });
+  };
 
   render() {
     let productItems = null;
@@ -78,14 +78,12 @@ class FavoritesBar extends Component {
       productItems = (
         <div
           style={{
-            marginLeft: "40%",
-            marginTop: "50%"
+            marginLeft: "20px",
+            marginTop: "2.5%"
           }}
         >
-          &nbsp;&nbsp;&nbsp;
-          <Spinner animation="grow" variant="primary" />
+          Nothing to show here...For now
           <br />
-          Loading...
         </div>
       );
     } else {
