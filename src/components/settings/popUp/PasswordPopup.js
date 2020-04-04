@@ -2,6 +2,92 @@ import React from "react";
 import "./css/popUp.css";
 
 class PasswordPopup extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      email: sessionStorage.getItem("currentUser"),
+      password: "",
+      oldPassword: "",
+      newPassword: "",
+      confirmNewPassword: "",
+      errorMessage: ""
+    };
+  }
+
+  componentDidMount() {
+    let formData = JSON.stringify({
+      lastname: "",
+      firstname: "",
+      password: ""
+    });
+    fetch("http://localhost:8080/members/" + this.state.email, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: formData
+    })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ password: data.password });
+      })
+      .catch(() => {
+        this.setState({ errorMessage: "Something went wrong somewhere" });
+      });
+  }
+
+  handleChange = event => {
+    const { name, value } = event.target;
+    // const {name, value, type, checked} = event.target
+    this.setState({ [name]: value });
+  };
+
+  handleSubmit = () => {
+    if (
+      this.state.newPassword === "" ||
+      this.state.oldPassword === "" ||
+      this.state.confirmNewPassword === ""
+    ) {
+      this.setState({ errorMessage: "All fields must be filled" });
+      return;
+    }
+    if (this.state.oldPassword !== this.state.password) {
+      this.setState({ errorMessage: "Current password is wrong" });
+      return;
+    }
+
+    if (this.state.newPassword !== this.state.confirmNewPassword) {
+      this.setState({ errorMessage: "The new passwords do not match" });
+      return;
+    }
+    if (
+      this.state.newPassword !== "" &&
+      this.state.oldPassword !== "" &&
+      this.state.confirmNewPassword !== ""
+    ) {
+      let formData = JSON.stringify({
+        lastname: "",
+        firstname: "",
+        password: this.state.newPassword
+      });
+      fetch("http://localhost:8080/members/" + this.state.email, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          this.setState({ password: data.password });
+          this.setState({ errorMessage: "Password has been changed!" });
+        })
+        .catch(() => {
+          this.setState({ errorMessage: "Something went wrong somewhere" });
+        });
+    }
+  };
+
   render() {
     return (
       <div
@@ -10,6 +96,12 @@ class PasswordPopup extends React.Component {
         onClick={event => {
           if (event.target.id === "passwordPopup") {
             document.getElementById("passwordPopup").style.display = "none";
+            this.setState({
+              oldPassword: "",
+              newPassword: "",
+              confirmNewPassword: "",
+              errorMessage: ""
+            });
           }
         }}
       >
@@ -30,6 +122,12 @@ class PasswordPopup extends React.Component {
               className="cancelButton"
               onClick={() => {
                 document.getElementById("passwordPopup").style.display = "none";
+                this.setState({
+                  oldPassword: "",
+                  newPassword: "",
+                  confirmNewPassword: "",
+                  errorMessage: ""
+                });
               }}
             >
               Cancel
@@ -37,8 +135,9 @@ class PasswordPopup extends React.Component {
             <div
               className="passwordButton"
               style={{ display: "inline-block", float: "right" }}
+              onClick={this.handleSubmit}
             >
-              Save changes
+              Save Changes
             </div>
           </div>
           <div>
@@ -46,8 +145,11 @@ class PasswordPopup extends React.Component {
               <span>Current Password</span> &nbsp;
               <br />
               <input
-                type="text"
+                type="password"
                 className="textBoxes"
+                name="oldPassword"
+                value={this.state.oldPassword}
+                onChange={this.handleChange}
                 style={{
                   borderStyle: "solid",
                   backgroundColor: "rgb(244,248,247)",
@@ -56,14 +158,23 @@ class PasswordPopup extends React.Component {
                 }}
               />
             </label>
-            <span style={{ color: "red" }}>Error has occured</span>
+            {this.state.errorMessage !== "Password has been changed!" ? (
+              <span style={{ color: "red" }}>{this.state.errorMessage}</span>
+            ) : (
+              <span style={{ color: "rgb(105, 230, 105)" }}>
+                {this.state.errorMessage}
+              </span>
+            )}
             <br />
             <label className="label">
               <span>New Password</span> &nbsp;
               <br />
               <input
-                type="text"
+                type="password"
                 className="textBoxes"
+                name="newPassword"
+                onChange={this.handleChange}
+                value={this.state.newPassword}
                 style={{
                   borderStyle: "solid",
                   backgroundColor: "rgb(244,248,247)",
@@ -76,8 +187,11 @@ class PasswordPopup extends React.Component {
               <span>Confirm new Password</span> &nbsp;
               <br />
               <input
-                type="text"
+                type="password"
                 className="textBoxes"
+                name="confirmNewPassword"
+                onChange={this.handleChange}
+                value={this.state.confirmNewPassword}
                 style={{
                   borderStyle: "solid",
                   backgroundColor: "rgb(244,248,247)",

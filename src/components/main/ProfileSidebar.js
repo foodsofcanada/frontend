@@ -6,7 +6,7 @@ import heart from "../../icons/heart.svg";
 import settings from "../../icons/settings.svg";
 import mail from "../../icons/mail.svg";
 import pantry from "../../icons/pantry.svg";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import SuggestPopup from "./popUp/SuggestPopup";
 import LogoutPopup from "./popUp/LogoutPopup";
 import LoginPopup from "./popUp/LoginPopup";
@@ -118,20 +118,22 @@ class ProfileSidebar extends React.Component {
           </div>
         </div>
 
-        <div className="profileOptions">
+        <div
+          className="profileOptions"
+          onClick={() => {
+            if (this.state.currentUserInfo.isExist) {
+              this.setState({ isSetting: true });
+            } else {
+              document.getElementById("loginPopup").style.display =
+                "inline-block";
+            }
+          }}
+        >
           <div
             style={{
               position: "relative",
               top: "15px",
               display: "inline-flex"
-            }}
-            onClick={() => {
-              if (this.state.currentUserInfo.isExist) {
-                this.setState({ isSetting: true });
-              } else {
-                document.getElementById("loginPopup").style.display =
-                  "inline-block";
-              }
             }}
           >
             <ReactSVG
