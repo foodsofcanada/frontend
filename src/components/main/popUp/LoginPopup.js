@@ -1,15 +1,15 @@
 import React from "react";
 import "./css/popUp.css";
 
-class LogoutAccountPopup extends React.Component {
+class LoginPopup extends React.Component {
   render() {
     return (
       <div
-        id="logoutPopup"
+        id="loginPopup"
         className="suggest"
         onClick={event => {
-          if (event.target.id === "logoutPopup") {
-            document.getElementById("logoutPopup").style.display = "none";
+          if (event.target.id === "loginPopup") {
+            document.getElementById("loginPopup").style.display = "none";
           }
         }}
       >
@@ -23,7 +23,7 @@ class LogoutAccountPopup extends React.Component {
                 fontWeight: "600"
               }}
             >
-              Notice
+              Notice!
             </div>
 
             <div
@@ -32,13 +32,13 @@ class LogoutAccountPopup extends React.Component {
                 textAlign: "center"
               }}
             >
-              You have been Logged out
+              You have to be logged in to access this feature.
               <div>
                 <div
                   style={{ display: "inline-block", marginTop: "20px" }}
                   className="cancelButton"
                   onClick={() => {
-                    document.getElementById("logoutPopup").style.display =
+                    document.getElementById("loginPopup").style.display =
                       "none";
                   }}
                 >
@@ -53,4 +53,4 @@ class LogoutAccountPopup extends React.Component {
   }
 }
 
-export default LogoutAccountPopup;
+export default LoginPopup;

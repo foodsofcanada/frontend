@@ -9,6 +9,8 @@ import pantry from "../../icons/pantry.svg";
 import { Redirect, Link } from "react-router-dom";
 import SuggestPopup from "./popUp/SuggestPopup";
 import LogoutPopup from "./popUp/LogoutPopup";
+import LoginPopup from "./popUp/LoginPopup";
+
 class ProfileSidebar extends React.Component {
   constructor(props) {
     super();
@@ -58,6 +60,9 @@ class ProfileSidebar extends React.Component {
           onClick={() => {
             if (this.state.currentUserInfo.isExist) {
               this.props.setCurrentPage("favorites/");
+            } else {
+              document.getElementById("loginPopup").style.display =
+                "inline-block";
             }
           }}
         >
@@ -87,6 +92,9 @@ class ProfileSidebar extends React.Component {
           onClick={() => {
             if (this.state.currentUserInfo.isExist) {
               this.props.setCurrentPage("pantry/");
+            } else {
+              document.getElementById("loginPopup").style.display =
+                "inline-block";
             }
           }}
         >
@@ -120,6 +128,9 @@ class ProfileSidebar extends React.Component {
             onClick={() => {
               if (this.state.currentUserInfo.isExist) {
                 this.setState({ isSetting: true });
+              } else {
+                document.getElementById("loginPopup").style.display =
+                  "inline-block";
               }
             }}
           >
@@ -141,6 +152,9 @@ class ProfileSidebar extends React.Component {
           onClick={() => {
             if (this.state.currentUserInfo.isExist) {
               document.getElementById("suggest").style.display = "inline-block";
+            } else {
+              document.getElementById("loginPopup").style.display =
+                "inline-block";
             }
           }}
         >
@@ -185,7 +199,7 @@ class ProfileSidebar extends React.Component {
     }
 
     if (this.state.isSetting) {
-      return <Redirect to="/setting" />;
+      return <Redirect to="/settings" />;
     }
     let proButtons = this.profileButtons();
 
@@ -220,6 +234,7 @@ class ProfileSidebar extends React.Component {
     );
     return (
       <div>
+        <LoginPopup />
         <LogoutPopup />
         <SuggestPopup />
         <div className="sidebar" id="bar">

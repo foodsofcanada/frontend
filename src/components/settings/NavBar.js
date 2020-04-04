@@ -40,7 +40,7 @@ class NavBar extends React.Component {
                   style={{ height: "30px", transform: "rotate(90deg)" }}
                 />
               </div>
-              Jane Doe
+              Back
             </span>
           </Link>
           <br />
