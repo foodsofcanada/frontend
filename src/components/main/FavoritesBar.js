@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import "./css/InfoBar.css";
 import icon from "../../icons/chevron-down.svg";
 import { ReactSVG } from "react-svg";
@@ -6,11 +6,19 @@ import Item from "./Item";
 
 import { Spinner } from "react-bootstrap";
 
-class FavoritesBar extends React.Component {
+class FavoritesBar extends Component {
   constructor(props) {
     super();
     this.state = {};
     this.handleBackClick = this.handleBackClick.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchFavourites();
+  }
+
+  componentDidUpdate() {
+    console.log("FavouriteBar updated")
   }
 
   handleBackClick() {
@@ -23,6 +31,45 @@ class FavoritesBar extends React.Component {
       this.props.setCurrentPage("products/" + event.target.id);
     }
   };
+
+  handleHeartClick = (targetIndex) => {
+    console.log("heart clicked");
+    const email = sessionStorage.getItem("currentUser");
+    if (email !== null && email !== "") {
+      const { productId, regionId, coordinates } = this.props.currentMarkers[
+        targetIndex
+      ];
+      //add/delete product from favourite
+      fetch(
+        "http://localhost:8080/fav/" +
+          email +
+          "/" +
+          productId +
+          "/" +
+          regionId +
+          "/" +
+          coordinates +
+          "",
+        { method: "POST" }
+      )
+        .then(response => response.json())
+        .then(data => {
+          
+          this.fetchFavourites();
+          
+        }); //end of fetch
+    }
+  }
+
+  fetchFavourites = () => {
+    fetch("http://localhost:8080/favourites/" + sessionStorage.getItem("currentUser"))
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+        this.props.setCurrentMarkers(data);
+    });
+  }
+
 
   render() {
     let productItems = null;
@@ -55,9 +102,11 @@ class FavoritesBar extends React.Component {
               number={number}
               key={number}
               name={product.name}
-              region={product.region}
+              region={product.regionName}
               actualProduct={product.productId}
               currPage={this.props.setCurrentPage}
+              isFavourite={product.isFavourite}
+              handleHeartClick={this.handleHeartClick}
             />
           </div>
         );
