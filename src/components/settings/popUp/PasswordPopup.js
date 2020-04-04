@@ -14,28 +14,6 @@ class PasswordPopup extends React.Component {
     };
   }
 
-  componentDidMount() {
-    let formData = JSON.stringify({
-      lastname: "",
-      firstname: "",
-      password: ""
-    });
-    fetch("http://localhost:8080/members/" + this.state.email, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: formData
-    })
-      .then(response => response.json())
-      .then(data => {
-        this.setState({ password: data.password });
-      })
-      .catch(() => {
-        this.setState({ errorMessage: "Something went wrong somewhere" });
-      });
-  }
-
   handleChange = event => {
     const { name, value } = event.target;
     // const {name, value, type, checked} = event.target
@@ -52,8 +30,24 @@ class PasswordPopup extends React.Component {
       return;
     }
     if (this.state.oldPassword !== this.state.password) {
-      this.setState({ errorMessage: "Current password is wrong" });
-      return;
+      let formData = JSON.stringify({
+        email: this.state.email,
+        password: this.state.oldPassword
+      });
+
+      fetch("http://localhost:8080/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {})
+        .catch(() => {
+          this.setState({ errorMessage: "Current password is wrong" });
+          return;
+        });
     }
 
     if (this.state.newPassword !== this.state.confirmNewPassword) {
