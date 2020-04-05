@@ -34,7 +34,6 @@ class GoogleMap extends Component {
         this.showTop10Products();
         this.createRegions();
       });
-
     
   }
 
@@ -76,7 +75,7 @@ class GoogleMap extends Component {
       }
     });
   } //end of componentDidMount
- 
+
   createGoogleMap = () => {
     // var CANADA_BOUNDS = {
     //   north: 85.06,
@@ -106,11 +105,11 @@ class GoogleMap extends Component {
   };
 
   showTop10Products = () => {
-    let url = this.appendEmail("http://localhost:8080/products/top");
+    let url = this.appendEmail("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/products/top");
     fetch(url)
       .then(response => response.json())
       .then(data => {
-        
+
         this.props.setCurrentMarkers(data);
         // console.log(favourite)
         // this.props.setCurrentMarkers(favourite);
@@ -202,7 +201,7 @@ class GoogleMap extends Component {
   convertStringToArrayCoords = MultiGeometryCoordinates => {
     let finalData = [];
     var grouped = MultiGeometryCoordinates.split("\n");
-    grouped.forEach(function(item, i) {
+    grouped.forEach(function (item, i) {
       let a = item.trim().split(",");
 
       finalData.push({
@@ -255,7 +254,7 @@ class GoogleMap extends Component {
         this.props.closeBar();
       }
 
-      let url = this.appendEmail("http://localhost:8080/productRegion/" + regionInfo.regionId);
+      let url = this.appendEmail("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/productRegion/" + regionInfo.regionId);
       fetch(url)
         .then(response => response.json())
         .then(productsInRegion => {

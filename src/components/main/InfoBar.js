@@ -41,15 +41,15 @@ class InfoBar extends React.Component {
       ];
       //add/delete product from favourite
       fetch(
-        "http://localhost:8080/fav/" +
-          email +
-          "/" +
-          productId +
-          "/" +
-          regionId +
-          "/" +
-          coordinates +
-          "",
+        "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/fav/" +
+        email +
+        "/" +
+        productId +
+        "/" +
+        regionId +
+        "/" +
+        coordinates +
+        "",
         { method: "POST" }
       )
         .then(response => response.json())
@@ -140,24 +140,24 @@ class InfoBar extends React.Component {
                 &nbsp;
               </div>
             ) : (
-              <div
-                className="backLink"
-                style={{ display: "inline", marginTop: "90px" }}
-                onClick={this.handleBackClick}
-              >
-                <div className="backStuff ">
-                  <ReactSVG
-                    src={icon}
-                    style={{
-                      height: "30px",
-                      transform: "rotate(90deg)",
-                      marginTop: "10px"
-                    }}
-                  />
-                </div>
+                <div
+                  className="backLink"
+                  style={{ display: "inline", marginTop: "90px" }}
+                  onClick={this.handleBackClick}
+                >
+                  <div className="backStuff ">
+                    <ReactSVG
+                      src={icon}
+                      style={{
+                        height: "30px",
+                        transform: "rotate(90deg)",
+                        marginTop: "10px"
+                      }}
+                    />
+                  </div>
                 Back
-              </div>
-            )}
+                </div>
+              )}
 
             <div className="profilePic" onClick={this.handleProfileClick}></div>
           </div>

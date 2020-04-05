@@ -51,7 +51,7 @@ class Profile extends React.Component {
         password: ""
       });
 
-      fetch("http://localhost:8080/members/" + this.state.email, {
+      fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/members/" + this.state.email, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -70,14 +70,14 @@ class Profile extends React.Component {
   };
 
   componentDidMount() {
-    let url = "http://localhost:8080/members/" + this.state.email;
+    let url = "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/members/" + this.state.email;
 
     if (
       this.state.email === null ||
       this.state.email === "" ||
       this.state.email === "null"
     ) {
-      url = 'http://localhost:8080/members/""';
+      url = 'http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/members/""';
     }
 
     fetch(url, {

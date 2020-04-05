@@ -41,15 +41,15 @@ class FavoritesBar extends Component {
       ];
       //add/delete product from favourite
       fetch(
-        "http://localhost:8080/fav/" +
-          email +
-          "/" +
-          productId +
-          "/" +
-          regionId +
-          "/" +
-          coordinates +
-          "",
+        "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/fav/" +
+        email +
+        "/" +
+        productId +
+        "/" +
+        regionId +
+        "/" +
+        coordinates +
+        "",
         { method: "POST" }
       )
         .then(response => response.json())
@@ -61,8 +61,8 @@ class FavoritesBar extends Component {
 
   fetchFavourites = () => {
     fetch(
-      "http://localhost:8080/favourites/" +
-        sessionStorage.getItem("currentUser")
+      "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/favourites/" +
+      sessionStorage.getItem("currentUser")
     )
       .then(response => response.json())
       .then(data => {
