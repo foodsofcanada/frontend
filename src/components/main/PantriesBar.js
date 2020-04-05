@@ -34,6 +34,21 @@ class PantriesBar extends React.Component {
     this.props.setCurrentPage("profile/");
   }
 
+  handlePantryDelete = id => {
+    let pantryId = id.substring(id.lastIndexOf("/") + 1, id.length);
+
+    fetch("http://localhost:8080/deletepantry/" + pantryId + "/", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.fetchPantry();
+      });
+  };
   handlePantryClick = event => {
     if (!isNaN(event.target.id) && event.target.id !== "") {
       this.props.setCurrentPage(
@@ -73,7 +88,11 @@ class PantriesBar extends React.Component {
 
     if (this.props.userPantries.length !== 0) {
       pantries = this.props.userPantries.map(pantry => (
-        <Pantry name={pantry.pantryName} id={pantry.pantryId} />
+        <Pantry
+          name={pantry.pantryName}
+          id={pantry.pantryId}
+          handlePantryDelete={this.handlePantryDelete}
+        />
       ));
     }
     // let productItems = this.props.currentMarkers.map(product => <Item key={product.id} name={product.item}/>)

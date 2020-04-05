@@ -61,7 +61,7 @@ class CreatePantry extends React.Component {
         onClick={event => {
           if (event.target.id === "createPantry") {
             document.getElementById("createPantry").style.display = "none";
-            this.setState({ pantryDesc: "", pantryName: "" });
+            this.setState({ pantryDesc: "", pantryName: "", errorMessage: "" });
           }
         }}
       >
@@ -82,7 +82,11 @@ class CreatePantry extends React.Component {
               className="cancelButton"
               onClick={() => {
                 document.getElementById("createPantry").style.display = "none";
-                this.setState({ pantryDesc: "", pantryName: "" });
+                this.setState({
+                  pantryDesc: "",
+                  pantryName: "",
+                  errorMessage: ""
+                });
               }}
             >
               Cancel

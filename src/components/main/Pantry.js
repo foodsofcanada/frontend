@@ -10,6 +10,10 @@ class Pantry extends React.Component {
     super();
   }
 
+  handleDeletePantry = event => {
+    this.props.handlePantryDelete(event.target.id);
+  };
+
   render() {
     let moreButton = (
       <ReactSVG
@@ -82,7 +86,13 @@ class Pantry extends React.Component {
               }}
               id="dropdownB"
             >
-              <Dropdown.Item as="button">Delete Pantry</Dropdown.Item>
+              <Dropdown.Item
+                as="button"
+                id={"/" + this.props.id}
+                onClick={this.handleDeletePantry}
+              >
+                Delete Pantry
+              </Dropdown.Item>
             </DropdownButton>
           </div>
         </div>
