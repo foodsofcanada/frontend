@@ -71,6 +71,10 @@ class FavoritesBar extends Component {
       });
   };
 
+  handlePantryClick = value => {
+    this.props.setproductToAddToPantry(value);
+  };
+
   render() {
     let productItems = null;
     let number = 0;
@@ -101,10 +105,13 @@ class FavoritesBar extends Component {
               key={number}
               name={product.name}
               region={product.regionName}
+              regionId={product.regionId}
+              coordinates={product.coordinates}
               actualProduct={product.productId}
               currPage={this.props.setCurrentPage}
               isFavourite={product.isFavourite}
               handleHeartClick={this.handleHeartClick}
+              handlePantryClick={this.handlePantryClick}
             />
           </div>
         );

@@ -11,11 +11,25 @@ class Item extends React.Component {
     // this.state = { isLiked: false };
   }
 
+  handleDeleteFromPantry = () => {
+    this.props.handleDeleteFromPantry(this.props);
+  };
+
   handleHeartClick = () => {
-    this.props.handleHeartClick(this.props.number-1)
+    this.props.handleHeartClick(this.props.number - 1);
     // this.setState(prevstate => ({
     //   isLiked: !prevstate.isLiked
     // }));
+  };
+
+  handlePantryClick = () => {
+    const email = sessionStorage.getItem("currentUser");
+    if (email === null || email === "") {
+      document.getElementById("loginPopup").style.display = "inline-block";
+    } else {
+      document.getElementById("pantryList").style.display = "inline-block";
+      this.props.handlePantryClick(this.props);
+    }
   };
 
   render() {
@@ -132,9 +146,24 @@ class Item extends React.Component {
               }}
               id="dropdownB"
             >
-              <Dropdown.Item as="button" style={{ color: "black" }}>
+              <Dropdown.Item
+                as="button"
+                style={{ color: "black" }}
+                onClick={this.handlePantryClick}
+              >
                 Add to Pantry
               </Dropdown.Item>
+              {this.props.currentPage != null ? (
+                <Dropdown.Item
+                  as="button"
+                  style={{ color: "black" }}
+                  onClick={this.handleDeleteFromPantry}
+                >
+                  Delete from Pantry
+                </Dropdown.Item>
+              ) : (
+                ""
+              )}
             </DropdownButton>
           </div>
         </div>

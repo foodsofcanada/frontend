@@ -10,23 +10,62 @@ import { Spinner, Dropdown, DropdownButton } from "react-bootstrap";
 class PantriesBar extends React.Component {
   constructor(props) {
     super();
-    this.state = {};
+    this.state = { email: sessionStorage.getItem("currentUser") };
     this.handleBackClick = this.handleBackClick.bind(this);
+  }
+
+  fetchPantry = () => {
+    const email = this.state.email;
+
+    if (email !== null && email !== "") {
+      fetch("http://localhost:8080/userPantries/" + email + "/")
+        .then(response => response.json())
+        .then(data => {
+          this.props.setUserPantries(data);
+        });
+    }
+  };
+
+  componentDidMount() {
+    this.fetchPantry();
   }
 
   handleBackClick() {
     this.props.setCurrentPage("profile/");
   }
 
+  handlePantryDelete = id => {
+    let pantryId = id.substring(id.lastIndexOf("/") + 1, id.length);
+
+    fetch("http://localhost:8080/deletepantry/" + pantryId + "/", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.fetchPantry();
+      });
+  };
   handlePantryClick = event => {
     if (!isNaN(event.target.id) && event.target.id !== "") {
-      this.props.setCurrentPage("pantryInfo/" + event.target.id);
+      this.props.setCurrentPage(
+        "pantryinfo/" + this.state.email + "/" + event.target.id
+      );
     }
   };
 
   newPantryButton() {
     return (
-      <div className="profileOptions">
+      <div
+        className="profileOptions"
+        onClick={() => {
+          document.getElementById("createPantry").style.display =
+            "inline-block";
+        }}
+      >
         <div
           style={{
             position: "relative",
@@ -45,7 +84,17 @@ class PantriesBar extends React.Component {
 
   render() {
     let newPantryButton = this.newPantryButton();
+    let pantries = null;
 
+    if (this.props.userPantries.length !== 0) {
+      pantries = this.props.userPantries.map(pantry => (
+        <Pantry
+          name={pantry.pantryName}
+          id={pantry.pantryId}
+          handlePantryDelete={this.handlePantryDelete}
+        />
+      ));
+    }
     // let productItems = this.props.currentMarkers.map(product => <Item key={product.id} name={product.item}/>)
     return (
       <div className="sidebar" id="bar">
@@ -76,7 +125,7 @@ class PantriesBar extends React.Component {
 
         {newPantryButton}
         <div onClick={this.handlePantryClick} style={{ marginBottom: "15px" }}>
-          <Pantry name="Poutine" />
+          {pantries}
         </div>
       </div>
     );

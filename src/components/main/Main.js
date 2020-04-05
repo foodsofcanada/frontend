@@ -11,6 +11,10 @@ import PantryInfo from "./PantryInfo";
 import icon from "../../icons/chevron-down.svg";
 import { ReactSVG } from "react-svg";
 import "./css/Main.css";
+import CreatePantry from "./popUp/CreatePantryPopup";
+import PantryPopup from "./popUp/ListOfPantriesPopup";
+import AddedPopup from "./popUp/ProductAddedPopup";
+import NotAddedPopup from "./popUp/ProductNotAddedPopup";
 
 class Main extends React.Component {
   constructor() {
@@ -21,23 +25,29 @@ class Main extends React.Component {
       header: "Top 10 searched products",
       currentMarkers: [],
       tabOpen: true,
-
+      userPantries: [],
       tabOpenSearch: true,
       selectedRegion: null,
-      showState: {
-        showTop10: true,
-        showPantries: false,
-        showFav: false,
-        showRegion: false,
-        showProductInformation: false
-      },
       prevPage: "",
-      currentPage: ""
+      currentPage: "",
+      productToAddToPantry: null
     };
 
     this.openCloseBar = this.openCloseBar.bind(this);
     this.openCloseSearchBar = this.openCloseSearchBar.bind(this);
   }
+
+  setproductToAddToPantry = value => {
+    let prod = {
+      prodId: value.actualProduct,
+      regId: value.regionId,
+      coordinates: value.coordinates
+    };
+    this.setState({ productToAddToPantry: prod });
+  };
+  setUserPantries = value => {
+    this.setState({ userPantries: value });
+  };
 
   setCurrentPage = value => {
     this.setState({ currentPage: value });
@@ -125,6 +135,7 @@ class Main extends React.Component {
           setCurrentPage={this.setCurrentPage}
           currentPage={this.state.currentPage}
           setPrevPage={this.setPrevPage}
+          setproductToAddToPantry={this.setproductToAddToPantry}
         />
       );
     }
@@ -134,12 +145,14 @@ class Main extends React.Component {
         <PantriesBar
           header={this.state.selectedRegion}
           currentMarkers={this.state.currentMarkers}
+          userPantries={this.state.userPantries}
+          setUserPantries={this.setUserPantries}
           setCurrentPage={this.setCurrentPage}
         />
       );
     }
 
-    if (this.state.currentPage.startsWith("pantryInfo/")) {
+    if (this.state.currentPage.startsWith("pantryinfo/")) {
       return (
         <PantryInfo
           header={this.state.selectedRegion}
@@ -148,6 +161,7 @@ class Main extends React.Component {
           setCurrentPage={this.setCurrentPage}
           currentPage={this.state.currentPage}
           setPrevPage={this.setPrevPage}
+          setproductToAddToPantry={this.setproductToAddToPantry}
         />
       );
     }
@@ -160,6 +174,7 @@ class Main extends React.Component {
         setCurrentPage={this.setCurrentPage}
         currentPage={this.state.currentPage}
         setPrevPage={this.setPrevPage}
+        setproductToAddToPantry={this.setproductToAddToPantry}
       />
     );
   };
@@ -171,6 +186,14 @@ class Main extends React.Component {
     return (
       //   <Link to="/settings">{p === "Hell" ? <h1>Hello</h1> : <h1>Ho</h1>}</Link>
       <div>
+        <PantryPopup
+          userPantries={this.state.userPantries}
+          setUserPantries={this.setUserPantries}
+          product={this.state.productToAddToPantry}
+        />
+        <NotAddedPopup />
+        <AddedPopup />
+        <CreatePantry setUserPantries={this.setUserPantries} />
         <div
           style={{
             display: "inline-flex",

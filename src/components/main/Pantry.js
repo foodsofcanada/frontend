@@ -10,6 +10,10 @@ class Pantry extends React.Component {
     super();
   }
 
+  handleDeletePantry = event => {
+    this.props.handlePantryDelete(event.target.id);
+  };
+
   render() {
     let moreButton = (
       <ReactSVG
@@ -24,9 +28,9 @@ class Pantry extends React.Component {
     );
 
     return (
-      <div className="profileOptions" id="1">
+      <div className="profileOptions" id={this.props.id}>
         <div
-          id="1"
+          id={this.props.id}
           style={{
             position: "relative",
             top: "15px",
@@ -34,7 +38,7 @@ class Pantry extends React.Component {
           }}
         >
           <span
-            id="1"
+            id={this.props.id}
             style={{
               backgroundColor: "#0CC8AC",
               width: "43px",
@@ -47,14 +51,23 @@ class Pantry extends React.Component {
               position: "relative"
             }}
           ></span>
-          {this.props.name}
-
           <div
-            id="1"
+            id={this.props.id}
+            style={{
+              width: "100px",
+              height: "40px",
+              marginLeft: "20px",
+              display: "inline-block"
+            }}
+          >
+            {this.props.name}
+          </div>
+          <div
+            id={this.props.id}
             style={{
               display: "inline-flex",
               color: "#8898AA",
-              marginLeft: "100px",
+              marginLeft: "45px",
               fontSize: "10px",
               position: "relative",
               top: "-3.8px",
@@ -67,13 +80,19 @@ class Pantry extends React.Component {
                 top: "-4.5px",
                 height: "10px",
                 width: "30px",
-                backgroundCo7lor: "rgba(0,0,0,0) !important",
+                backgroundColor: "rgba(0,0,0,0) !important",
                 marginRight: "20px",
                 marginLeft: "10px"
               }}
               id="dropdownB"
             >
-              <Dropdown.Item as="button">Delete Pantry</Dropdown.Item>
+              <Dropdown.Item
+                as="button"
+                id={"/" + this.props.id}
+                onClick={this.handleDeletePantry}
+              >
+                Delete Pantry
+              </Dropdown.Item>
             </DropdownButton>
           </div>
         </div>
