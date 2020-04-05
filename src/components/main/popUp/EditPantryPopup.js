@@ -48,7 +48,6 @@ class EditPantry extends React.Component {
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data);
           this.props.setPantryInfo(data.pantryName, data.description);
           this.setState({ errorMessage: "Pantry has been edited!" });
           // fetch("http://localhost:8080/userPantries/" + this.state.email + "/")
