@@ -29,6 +29,10 @@ class InfoBar extends React.Component {
     }
   };
 
+  handlePantryClick = value => {
+    this.props.setproductToAddToPantry(value);
+  };
+
   handleHeartClick = targetIndex => {
     const email = sessionStorage.getItem("currentUser");
     if (email !== null && email !== "") {
@@ -96,7 +100,7 @@ class InfoBar extends React.Component {
     } else {
       productItems = this.props.currentMarkers.map(product => {
         number = number + 1;
-        // console.log(product)
+        // console.log(product);
         return (
           <div
             onClick={this.handleButtonClick}
@@ -108,10 +112,13 @@ class InfoBar extends React.Component {
               key={number}
               name={product.name}
               region={product.regionName}
+              regionId={product.regionId}
+              coordinates={product.coordinates}
               actualProduct={product.productId}
               currPage={this.props.setCurrentPage}
               isFavourite={product.isFavourite}
               handleHeartClick={this.handleHeartClick}
+              handlePantryClick={this.handlePantryClick}
             />
           </div>
         );

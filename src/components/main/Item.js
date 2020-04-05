@@ -22,6 +22,9 @@ class Item extends React.Component {
     const email = sessionStorage.getItem("currentUser");
     if (email === null || email === "") {
       document.getElementById("loginPopup").style.display = "inline-block";
+    } else {
+      document.getElementById("pantryList").style.display = "inline-block";
+      this.props.handlePantryClick(this.props);
     }
   };
 

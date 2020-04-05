@@ -10,13 +10,77 @@ import Pantry from "./Pantry";
 class PantryInfo extends React.Component {
   constructor(props) {
     super();
-    this.state = {};
+    let str = props.currentPage;
+    let id = str.substring(str.lastIndexOf("/") + 1, str.length);
+    this.state = {
+      name: "",
+      description: "",
+      email: sessionStorage.getItem("currentUser"),
+      currentUserInfo: { isExist: true },
+      pantryProducts: [],
+      pantryId: id
+    };
     this.handleBackClick = this.handleBackClick.bind(this);
+  }
+
+  componentDidMount() {
+    let endPoint = this.props.currentPage;
+    fetch("http://localhost:8080/" + endPoint)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ name: data.pantryName, description: data.description });
+      });
+
+    let url = "http://localhost:8080/members/" + this.state.email;
+
+    if (
+      this.state.email === null ||
+      this.state.email === "" ||
+      this.state.email === "null"
+    ) {
+      url = 'http://localhost:8080/members/""';
+    }
+
+    fetch(url, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+      .then(response => response.json())
+      .then(profileInfo => {
+        this.setState({ currentUserInfo: profileInfo });
+      })
+      .catch(() => {
+        console.log("Failed to retrieve profile");
+      });
+
+    fetch(
+      "http://localhost:8080/productsInPantry/" +
+        this.state.email +
+        "/" +
+        this.state.pantryId,
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(pantryProducts => {
+        this.props.setCurrentMarkers(pantryProducts);
+      })
+      .catch(() => {
+        console.log("Failed to retrieve profile");
+      });
   }
 
   handleBackClick() {
     this.props.setCurrentPage("pantry/");
   }
+
+  handlePantryClick = value => {
+    this.props.setproductToAddToPantry(value);
+  };
 
   handleButtonClick = event => {
     if (!isNaN(event.target.id) && event.target.id !== "") {
@@ -32,14 +96,13 @@ class PantryInfo extends React.Component {
       productItems = (
         <div
           style={{
-            marginLeft: "40%",
-            marginTop: "50%"
+            marginLeft: "20px",
+            marginTop: "2.5%",
+            fontWeight: "bold"
           }}
         >
-          &nbsp;&nbsp;&nbsp;
-          <Spinner animation="grow" variant="primary" />
+          This pantry is empty...For now
           <br />
-          Loading...
         </div>
       );
     } else {
@@ -56,9 +119,14 @@ class PantryInfo extends React.Component {
               number={number}
               key={number}
               name={product.name}
-              region={product.region}
+              region={product.regionName}
+              regionId={product.regionId}
+              coordinates={product.coordinates}
               actualProduct={product.productId}
               currPage={this.props.setCurrentPage}
+              isFavourite={product.isFavourite}
+              handleHeartClick={this.handleHeartClick}
+              handlePantryClick={this.handlePantryClick}
             />
           </div>
         );
@@ -122,9 +190,12 @@ class PantryInfo extends React.Component {
             }}
           >
             <div className="head2" style={{}}>
-              My Special Tools
+              {this.state.name}
             </div>
-            <div style={{}}>Jane Doe</div>
+            <div style={{}}>
+              {this.state.currentUserInfo.firstName}{" "}
+              {this.state.currentUserInfo.lastName}
+            </div>
           </div>
         </div>
 
@@ -138,9 +209,7 @@ class PantryInfo extends React.Component {
             overflowX: "hidden"
           }}
         >
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Lectus
-          urna duis convallis convallis tellus.
+          {this.state.description}
         </div>
 
         <div style={{ marginBottom: "15px" }}>{productItems}</div>

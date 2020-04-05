@@ -10,23 +10,20 @@ import { Spinner, Dropdown, DropdownButton } from "react-bootstrap";
 class PantriesBar extends React.Component {
   constructor(props) {
     super();
-    this.state = {};
+    this.state = { email: sessionStorage.getItem("currentUser") };
     this.handleBackClick = this.handleBackClick.bind(this);
   }
 
   fetchPantry = () => {
-    const email = sessionStorage.getItem("currentUser");
+    const email = this.state.email;
 
     if (email !== null && email !== "") {
-      //add/delete product from favourite
       fetch("http://localhost:8080/userPantries/" + email + "/")
         .then(response => response.json())
         .then(data => {
           this.props.setUserPantries(data);
         });
-      // console.log("updatedCurrentMarkers")
-      // console.log(updatedCurrentMarkers
-    } //end of fetch
+    }
   };
 
   componentDidMount() {
@@ -39,7 +36,9 @@ class PantriesBar extends React.Component {
 
   handlePantryClick = event => {
     if (!isNaN(event.target.id) && event.target.id !== "") {
-      this.props.setCurrentPage("pantryInfo/" + event.target.id);
+      this.props.setCurrentPage(
+        "pantryinfo/" + this.state.email + "/" + event.target.id
+      );
     }
   };
 
