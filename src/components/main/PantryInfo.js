@@ -3,7 +3,7 @@ import "./css/InfoBar.css";
 import icon from "../../icons/chevron-down.svg";
 import { ReactSVG } from "react-svg";
 import Item from "./Item";
-
+import EditPantry from "./popUp/EditPantryPopup";
 import { Spinner } from "react-bootstrap";
 import Pantry from "./Pantry";
 
@@ -118,6 +118,10 @@ class PantryInfo extends React.Component {
     }
   };
 
+  setPantryInfo = (newName, newDescription) => {
+    this.setState({ name: newName, description: newDescription });
+  };
+
   render() {
     let productItems = null;
     let number = 0;
@@ -165,84 +169,104 @@ class PantryInfo extends React.Component {
 
     // let productItems = this.props.currentMarkers.map(product => <Item key={product.id} name={product.item}/>)
     return (
-      <div className="sidebar" id="bar">
-        <div>
-          <div
-            className="backLink"
-            style={{ display: "inline", marginTop: "90px" }}
-            onClick={this.handleBackClick}
-          >
-            <div className="backStuff ">
-              <ReactSVG
-                src={icon}
-                style={{
-                  height: "30px",
-                  transform: "rotate(90deg)",
-                  marginTop: "10px"
-                }}
-              />
+      <div>
+        {this.state.name !== "" && this.state.description !== "" ? (
+          <EditPantry
+            id={this.state.pantryId}
+            name={this.state.name}
+            description={this.state.description}
+            setPantryInfo={this.setPantryInfo}
+          />
+        ) : (
+          ""
+        )}
+        <div className="sidebar" id="bar">
+          <div>
+            <div
+              className="backLink"
+              style={{ display: "inline", marginTop: "90px" }}
+              onClick={this.handleBackClick}
+            >
+              <div className="backStuff ">
+                <ReactSVG
+                  src={icon}
+                  style={{
+                    height: "30px",
+                    transform: "rotate(90deg)",
+                    marginTop: "10px"
+                  }}
+                />
+              </div>
+              Back
             </div>
-            Back
+            <div
+              className="editPantryButton"
+              onClick={() => {
+                document.getElementById("editPantry").style.display =
+                  "inline-block";
+              }}
+            >
+              Edit Pantry
+            </div>
           </div>
-          <div className="editPantryButton">Edit Pantry</div>
-        </div>
 
-        <div
-          style={{
-            marginTop: "50px",
-            marginLeft: "15px",
-            marginRight: "15px",
-            height: "110px",
-            display: "flex"
-          }}
-        >
           <div
             style={{
-              marginBottom: "10px",
-              width: "30%",
-              height: "96px",
-              display: "inline-block",
-              backgroundColor: "#0CC8AC",
-              borderRadius: "5px",
-              marginRight: "10px"
+              marginTop: "50px",
+              marginLeft: "15px",
+              marginRight: "15px",
+              height: "110px",
+              display: "flex"
             }}
           >
-            &nbsp;
+            <div
+              style={{
+                marginBottom: "10px",
+                width: "30%",
+                height: "96px",
+                display: "inline-block",
+                backgroundColor: "#0CC8AC",
+                borderRadius: "5px",
+                marginRight: "10px"
+              }}
+            >
+              &nbsp;
+            </div>
+            <div
+              className="titlePlate"
+              style={{
+                marginBottom: "10px",
+                width: "60%",
+                display: "inline-block",
+                padding: "0px 0px 0px 0px",
+                overflowX: "hidden"
+              }}
+            >
+              <div className="head2" style={{}}>
+                {this.state.name}
+              </div>
+              <div style={{}}>
+                {this.state.currentUserInfo.firstName}{" "}
+                {this.state.currentUserInfo.lastName}
+              </div>
+            </div>
           </div>
+
           <div
-            className="titlePlate"
             style={{
-              marginBottom: "10px",
-              width: "60%",
-              display: "inline-block",
-              padding: "0px 0px 0px 0px",
+              marginTop: "15px",
+              marginBottom: "15px",
+              marginLeft: "20px",
+              marginRight: "13px",
+              fontSize: "14.5px",
               overflowX: "hidden"
             }}
           >
-            <div className="head2" style={{}}>
-              {this.state.name}
-            </div>
-            <div style={{}}>
-              {this.state.currentUserInfo.firstName}{" "}
-              {this.state.currentUserInfo.lastName}
-            </div>
+            {this.state.description}
           </div>
-        </div>
 
-        <div
-          style={{
-            marginTop: "15px",
-            marginBottom: "15px",
-            marginLeft: "20px",
-            marginRight: "13px",
-            fontSize: "14.5px",
-            overflowX: "hidden"
-          }}
-        >
-          {this.state.description}
+          <div style={{ marginBottom: "15px" }}>{productItems}</div>
         </div>
-
-        <div style={{ marginBottom: "15px" }}>{productItems}</div>
       </div>
     );
   }
