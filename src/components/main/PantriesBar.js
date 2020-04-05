@@ -14,6 +14,25 @@ class PantriesBar extends React.Component {
     this.handleBackClick = this.handleBackClick.bind(this);
   }
 
+  fetchPantry = () => {
+    const email = sessionStorage.getItem("currentUser");
+
+    if (email !== null && email !== "") {
+      //add/delete product from favourite
+      fetch("http://localhost:8080/userPantries/" + email + "/")
+        .then(response => response.json())
+        .then(data => {
+          this.props.setUserPantries(data);
+        });
+      // console.log("updatedCurrentMarkers")
+      // console.log(updatedCurrentMarkers
+    } //end of fetch
+  };
+
+  componentDidMount() {
+    this.fetchPantry();
+  }
+
   handleBackClick() {
     this.props.setCurrentPage("profile/");
   }
@@ -26,7 +45,13 @@ class PantriesBar extends React.Component {
 
   newPantryButton() {
     return (
-      <div className="profileOptions">
+      <div
+        className="profileOptions"
+        onClick={() => {
+          document.getElementById("createPantry").style.display =
+            "inline-block";
+        }}
+      >
         <div
           style={{
             position: "relative",
@@ -45,7 +70,13 @@ class PantriesBar extends React.Component {
 
   render() {
     let newPantryButton = this.newPantryButton();
+    let pantries = null;
 
+    if (this.props.userPantries.length !== 0) {
+      pantries = this.props.userPantries.map(pantry => (
+        <Pantry name={pantry.pantryName} id={pantry.pantryId} />
+      ));
+    }
     // let productItems = this.props.currentMarkers.map(product => <Item key={product.id} name={product.item}/>)
     return (
       <div className="sidebar" id="bar">
@@ -76,7 +107,7 @@ class PantriesBar extends React.Component {
 
         {newPantryButton}
         <div onClick={this.handlePantryClick} style={{ marginBottom: "15px" }}>
-          <Pantry name="Poutine" />
+          {pantries}
         </div>
       </div>
     );

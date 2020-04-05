@@ -11,6 +11,7 @@ import PantryInfo from "./PantryInfo";
 import icon from "../../icons/chevron-down.svg";
 import { ReactSVG } from "react-svg";
 import "./css/Main.css";
+import CreatePantry from "./popUp/CreatePantryPopup";
 
 class Main extends React.Component {
   constructor() {
@@ -21,6 +22,7 @@ class Main extends React.Component {
       header: "Top 10 searched products",
       currentMarkers: [],
       tabOpen: true,
+      userPantries: [],
 
       tabOpenSearch: true,
       selectedRegion: null,
@@ -38,6 +40,10 @@ class Main extends React.Component {
     this.openCloseBar = this.openCloseBar.bind(this);
     this.openCloseSearchBar = this.openCloseSearchBar.bind(this);
   }
+
+  setUserPantries = value => {
+    this.setState({ userPantries: value });
+  };
 
   setCurrentPage = value => {
     this.setState({ currentPage: value });
@@ -134,6 +140,8 @@ class Main extends React.Component {
         <PantriesBar
           header={this.state.selectedRegion}
           currentMarkers={this.state.currentMarkers}
+          userPantries={this.state.userPantries}
+          setUserPantries={this.setUserPantries}
           setCurrentPage={this.setCurrentPage}
         />
       );
@@ -171,6 +179,7 @@ class Main extends React.Component {
     return (
       //   <Link to="/settings">{p === "Hell" ? <h1>Hello</h1> : <h1>Ho</h1>}</Link>
       <div>
+        <CreatePantry setUserPantries={this.setUserPantries} />
         <div
           style={{
             display: "inline-flex",

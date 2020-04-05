@@ -12,10 +12,17 @@ class Item extends React.Component {
   }
 
   handleHeartClick = () => {
-    this.props.handleHeartClick(this.props.number-1)
+    this.props.handleHeartClick(this.props.number - 1);
     // this.setState(prevstate => ({
     //   isLiked: !prevstate.isLiked
     // }));
+  };
+
+  handlePantryClick = () => {
+    const email = sessionStorage.getItem("currentUser");
+    if (email === null || email === "") {
+      document.getElementById("loginPopup").style.display = "inline-block";
+    }
   };
 
   render() {
@@ -132,7 +139,11 @@ class Item extends React.Component {
               }}
               id="dropdownB"
             >
-              <Dropdown.Item as="button" style={{ color: "black" }}>
+              <Dropdown.Item
+                as="button"
+                style={{ color: "black" }}
+                onClick={this.handlePantryClick}
+              >
                 Add to Pantry
               </Dropdown.Item>
             </DropdownButton>
