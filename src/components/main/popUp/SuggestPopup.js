@@ -2,6 +2,52 @@ import React from "react";
 import "./css/popUp.css";
 
 class SuggestPopup extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      productName: "",
+      productDesc: "",
+      email: sessionStorage.getItem("currentUser"),
+      errorMessage: ""
+    };
+  }
+
+  handleChange = event => {
+    const { name, value } = event.target;
+    // const {name, value, type, checked} = event.target
+    this.setState({ [name]: value });
+  };
+
+  handleSubmit = () => {
+    if (this.state.productDesc === "" || this.state.productName === "") {
+      this.setState({ errorMessage: "All fields must be filled" });
+      return;
+    }
+
+    if (this.state.productDesc !== "" && this.state.productName !== "") {
+      fetch(
+        "http://localhost:8080/suggest/" +
+          this.state.productName +
+          "/" +
+          this.state.productDesc,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      )
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          this.setState({ errorMessage: "Suggestion has been sent!" });
+        })
+        .catch(() => {
+          this.setState({ errorMessage: "Suggestion could not be sent." });
+        });
+    }
+  };
+
   render() {
     return (
       <div
@@ -37,6 +83,7 @@ class SuggestPopup extends React.Component {
             <div
               className="suggestButton"
               style={{ display: "inline-block", float: "right" }}
+              onClick={this.handleSubmit}
             >
               Send Suggestion
             </div>
@@ -50,10 +97,21 @@ class SuggestPopup extends React.Component {
                 style={{
                   borderStyle: "solid",
                   backgroundColor: "rgb(244,248,247)",
-                  marginBottom: "20px"
+                  marginBottom: "20px",
+                  marginRight: "50px "
                 }}
+                value={this.state.productName}
+                name="productName"
+                onChange={this.handleChange}
               />
             </label>
+            {this.state.errorMessage !== "Suggestion has been sent!" ? (
+              <span style={{ color: "red" }}>{this.state.errorMessage}</span>
+            ) : (
+              <span style={{ color: "rgb(105, 230, 105)" }}>
+                {this.state.errorMessage}
+              </span>
+            )}
 
             <br />
             <label className="label">
@@ -65,6 +123,9 @@ class SuggestPopup extends React.Component {
                   borderStyle: "solid",
                   backgroundColor: "rgb(244,248,247)"
                 }}
+                value={this.state.productDesc}
+                name="productDesc"
+                onChange={this.handleChange}
               />
             </label>
           </div>
