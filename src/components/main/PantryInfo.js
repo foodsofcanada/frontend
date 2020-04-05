@@ -137,7 +137,6 @@ class PantryInfo extends React.Component {
     } else {
       productItems = this.props.currentMarkers.map(product => {
         number = number + 1;
-
         return (
           <div
             onClick={this.handleButtonClick}

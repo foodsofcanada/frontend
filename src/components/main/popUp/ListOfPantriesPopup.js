@@ -103,7 +103,7 @@ class PantryPopup extends React.Component {
       "/" +
       this.props.product.prodId +
       "/" +
-      this.props.product.prodId +
+      this.props.product.regId +
       "/''";
 
     fetch(url, {
