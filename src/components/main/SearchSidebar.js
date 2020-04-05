@@ -51,7 +51,7 @@ class SearchSidebar extends Component {
 
   componentDidMount() {
     //Fetch products
-    fetch("http://localhost:8080/products")
+    fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/products")
       .then(response => response.json())
       .then(productsData => {
         const products = productsData.map(product => {
@@ -79,7 +79,7 @@ class SearchSidebar extends Component {
      * Note: region most likely to fetched in main component and passed down in props
      *********************************************************************************/
     //fetch regions name
-    fetch("http://localhost:8080/regions")
+    fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/regions")
       .then(response => response.json())
       .then(regionsData => {
         const regions = regionsData.map(region => {
@@ -107,12 +107,12 @@ class SearchSidebar extends Component {
     if (type === "checkbox") {
       this.setState(
         prevState => {
-            updatedSearchQuery = {
-              email: "",
-              productsSearched: [...prevState.searchQuery.productsSearched],
-              seasonSearched: [...prevState.searchQuery.seasonSearched],
-              regionSearched: [...prevState.searchQuery.regionSearched]
-            };
+          updatedSearchQuery = {
+            email: "",
+            productsSearched: [...prevState.searchQuery.productsSearched],
+            seasonSearched: [...prevState.searchQuery.seasonSearched],
+            regionSearched: [...prevState.searchQuery.regionSearched]
+          };
 
           const email = sessionStorage.getItem("currentUser");
           if (email !== null && email !== "") {
@@ -210,7 +210,7 @@ class SearchSidebar extends Component {
       body: JSON.stringify(this.state.searchQuery)
     };
 
-    fetch("http://localhost:8080/search", requestOption)
+    fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/search", requestOption)
       .then(response => response.json())
       .then(data => {
         //  console.log(data);
@@ -250,22 +250,22 @@ class SearchSidebar extends Component {
   };
 
   handleKeyPress = (event) => {
-    const {value} = event.target;
+    const { value } = event.target;
     if (event.key === "Enter") {
       this.props.setCurrentPage("");
-      this.setState( () => {
-        
+      this.setState(() => {
+
         let updatedSearchQuery = {
           email: "",
           productsSearched: [],
           seasonSearched: [],
-          regionSearched: [] 
+          regionSearched: []
         };
 
         const email = sessionStorage.getItem("currentUser");
-          if (email !== null && email !== "") {
-            updatedSearchQuery.email = email;
-          }
+        if (email !== null && email !== "") {
+          updatedSearchQuery.email = email;
+        }
 
         this.state.products.forEach(product => {
           if (product.name.toLowerCase() === value.toLowerCase()) {
@@ -287,13 +287,13 @@ class SearchSidebar extends Component {
 
         return {
           searchQuery: updatedSearchQuery,
-          isSearchBox : true,
+          isSearchBox: true,
           ...this.uncheckAllCategory()
         }
       }, () => {
         this.fetchProducts();
       });
-      }
+    }
   }
 
   toggleCategory = (category, checked) => {
@@ -306,14 +306,16 @@ class SearchSidebar extends Component {
   }
 
   uncheckAllCategory = () => {
-      const updatedProducts = this.toggleCategory(this.state.products, false);
-      const updatedRegions = this.toggleCategory(this.state.regions, false);
-      const updatedSeasons = this.toggleCategory(this.state.seasons, false);
-      return (
-        {products: updatedProducts,
+    const updatedProducts = this.toggleCategory(this.state.products, false);
+    const updatedRegions = this.toggleCategory(this.state.regions, false);
+    const updatedSeasons = this.toggleCategory(this.state.seasons, false);
+    return (
+      {
+        products: updatedProducts,
         regions: updatedRegions,
-        seasons: updatedSeasons}
-      );
+        seasons: updatedSeasons
+      }
+    );
   }
 
 
@@ -321,8 +323,8 @@ class SearchSidebar extends Component {
     const searchProducts = this.state.productsError
       ? "Failed to load. Please try again later."
       : this.state.productsLoading
-      ? "loading..."
-      : this.state.products.map(product => {
+        ? "loading..."
+        : this.state.products.map(product => {
           return (
             <div onClick={this.handleCheckBoxClick}>
               <SearchItem
@@ -340,8 +342,8 @@ class SearchSidebar extends Component {
     const searchRegions = this.state.regionsError
       ? "Failed to load. Please try again later."
       : this.state.regionsloading
-      ? "loading..."
-      : this.state.regions.map(region => {
+        ? "loading..."
+        : this.state.regions.map(region => {
           return (
             <div onClick={this.handleCheckBoxClick}>
               <SearchItem
@@ -359,19 +361,19 @@ class SearchSidebar extends Component {
     const searchSeasons = this.state.seasonsloading
       ? "loading..."
       : this.state.seasons.map(season => {
-          return (
-            <div onClick={this.handleCheckBoxClick}>
-              <SearchItem
-                key={season.name}
-                value={season.name}
-                name={"seasons"}
-                labelName={season.name}
-                checked={season.checked}
-                handleChange={this.handleChange}
-              />
-            </div>
-          );
-        });
+        return (
+          <div onClick={this.handleCheckBoxClick}>
+            <SearchItem
+              key={season.name}
+              value={season.name}
+              name={"seasons"}
+              labelName={season.name}
+              checked={season.checked}
+              handleChange={this.handleChange}
+            />
+          </div>
+        );
+      });
 
     // const searchTypes = (this.state.productTypesloading) ? "loading..."
     //   : this.state.productTypes.map((type, index) => {
