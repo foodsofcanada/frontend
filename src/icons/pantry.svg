@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 18">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+       
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="pantry" transform="translate(-244 -243)">
+    <g id="credit-card" transform="translate(245 244)">
+      <rect id="Rectangle_1501" data-name="Rectangle 1501" class="cls-1" width="22" height="16" rx="2"/>
+      <line id="Line_52" data-name="Line 52" class="cls-1" y2="16" transform="translate(11)"/>
+    </g>
+    <circle id="Ellipse_405" data-name="Ellipse 405" class="cls-1" cx="1" cy="1" r="1" transform="translate(250 250)"/>
+    <circle id="Ellipse_406" data-name="Ellipse 406" class="cls-1" cx="1" cy="1" r="1" transform="translate(260 250)"/>
+  </g>
+</svg>

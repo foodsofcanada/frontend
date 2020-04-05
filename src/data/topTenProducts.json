@@ -1,0 +1,72 @@
+[
+  {
+    "prod_id": 1,
+    "coordinates": "65.95,-103.89",
+    "name": "Wild Leek",
+    "reg_id": 24,
+    "regionName": "Southern Arctic"
+  },
+  {
+    "prod_id": 2,
+    "coordinates": "63.06,-105.89",
+    "name": "Barley",
+    "reg_id": 24,
+    "regionName": "Southern Arctic"
+  },
+  {
+    "prod_id": 3,
+    "coordinates": "62.17,-107.89",
+    "name": "Sockeye Salmon",
+    "reg_id": 29,
+    "regionName": "Taiga Shield"
+  },
+  {
+    "prod_id": 3,
+    "coordinates": "60.28,-111.89",
+    "name": "Sockeye Salmon",
+    "reg_id": 29,
+    "regionName": "Taiga Shield"
+  },
+  {
+    "prod_id": 2,
+    "coordinates": "67.39,-101.89",
+    "name": "Barley",
+    "reg_id": 24,
+    "regionName": "Southern Arctic"
+  },
+  {
+    "prod_id": 1,
+    "coordinates": "60.4,-120.89",
+    "name": "Wild Leek",
+    "reg_id": 28,
+    "regionName": "Taiga Plains"
+  },
+  {
+    "prod_id": 1,
+    "coordinates": "60.51,-131.89",
+    "name": "Wild Leek",
+    "reg_id": 6,
+    "regionName": "Boreal Cordillera"
+  },
+  {
+    "prod_id": 2,
+    "coordinates": "60.62,-135.89",
+    "name": "Barley",
+    "reg_id": 6,
+    "regionName": "Boreal Cordillera"
+  },
+  {
+    "prod_id": 3,
+    "coordinates": "50.73,-101.89",
+    "name": "Sockeye Salmon",
+    "reg_id": 21,
+    "regionName": "Prairies"
+  },
+  {
+    "prod_id": 2,
+    "coordinates": "55.84,-101.89",
+    "name": "Barley",
+    "reg_id": 8,
+    "regionName": "Boreal Shield"
+  }
+]

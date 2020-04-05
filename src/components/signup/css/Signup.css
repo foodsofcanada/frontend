@@ -1,0 +1,62 @@
+.loginBox {
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px #2c28281c;
+  background: #ffffff;
+  margin-top: 50px;
+  margin-bottom: 70px;
+  width: 75%;
+
+  padding-top: 15px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.textbox {
+  width: 500px !important;
+}
+
+.nameBoxes {
+  width: 220px !important;
+}
+
+.textboxLabels {
+  font-weight: bold;
+  font-size: large;
+}
+
+.label {
+  height: 80px;
+}
+
+.loginPageButton {
+  width: 20%;
+  height: 40px;
+  background: #ffffff;
+  outline: none;
+  border-radius: 25px;
+  margin-top: 20px;
+  border: none;
+  opacity: 1;
+  color: #7764e4;
+  border-style: solid;
+  border-width: 2px;
+  font-weight: 600;
+}
+
+.registerAccountButton:hover {
+  background: #6454c0;
+}
+
+.registerAccountButton {
+  width: 40%;
+  height: 40px;
+  background: #7764e4;
+  outline: none;
+  border-radius: 25px;
+  margin-top: 20px;
+  border: none;
+  opacity: 1;
+  border-style: solid;
+  border-width: 2px;
+  color: white;
+  font-weight: 600;
+}

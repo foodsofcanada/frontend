@@ -1,24 +1,35 @@
-import React, { useState, useEffect } from "react";
-import Main from './Main_Components/Main.js';
-import Dashboard from './Dashboard_Components/Dashboard.js';
-import ProfileSetting from './ProfileSetting.js';
-import ProfileSideBar from './ProfileSideBar.js';
+import React, { Component } from "react";
+//import logo from './logo.svg';
+import "./App.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
+import Settings from "./components/settings/Settings";
+import Main from "./components/main/Main";
+import LoginPage from "./components/login/login";
+import SignUp from "./components/signup/Signup";
 
-export default function App() {
-	
-  return (
-	<div style={{ width: "100vw", height: "100vh" }}>
-		<Main />
-		{
-			/* Conditional rendering 
-			
-				1. Show Main component when user first enters the website
-				2. If the user login as an admin show Dashboard component
-				3. In the profileSideBar component, if user clicks on the profile icon display ProfileSetting component
-				3.1. If the admin clicks on the profile icon in the Dashboard component display ProfileSetting component
-				4. 
-			*/
-		}
-	</div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      language: "en"
+    };
+  }
+
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route path="/settings" component={Settings} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/register" component={SignUp} />
+        </Switch>
+        {/* <Settings /> */}
+      </Router>
+      //<Settings />
+    );
+  }
 }
+
+export default App;
