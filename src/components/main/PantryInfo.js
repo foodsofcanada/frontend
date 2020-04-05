@@ -23,7 +23,55 @@ class PantryInfo extends React.Component {
     this.handleBackClick = this.handleBackClick.bind(this);
   }
 
+  handleDeleteFromPantry = product => {
+    console.log(product);
+
+    fetch(
+      "http://localhost:8080/deleteproduct/" +
+        this.state.pantryId +
+        "/" +
+        product.actualProduct +
+        "/" +
+        product.regionId +
+        "/",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.fetchProductsInPantry();
+      });
+  };
+
+  fetchProductsInPantry = () => {
+    fetch(
+      "http://localhost:8080/productsInPantry/" +
+        this.state.email +
+        "/" +
+        this.state.pantryId,
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+      .then(response => response.json())
+      .then(pantryProducts => {
+        this.props.setCurrentMarkers(pantryProducts);
+      })
+      .catch(() => {
+        console.log("Failed to retrieve profile");
+      });
+  };
+
   componentDidMount() {
+    this.fetchProductsInPantry();
+
     let endPoint = this.props.currentPage;
     fetch("http://localhost:8080/" + endPoint)
       .then(response => response.json())
@@ -49,25 +97,6 @@ class PantryInfo extends React.Component {
       .then(response => response.json())
       .then(profileInfo => {
         this.setState({ currentUserInfo: profileInfo });
-      })
-      .catch(() => {
-        console.log("Failed to retrieve profile");
-      });
-
-    fetch(
-      "http://localhost:8080/productsInPantry/" +
-        this.state.email +
-        "/" +
-        this.state.pantryId,
-      {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    )
-      .then(response => response.json())
-      .then(pantryProducts => {
-        this.props.setCurrentMarkers(pantryProducts);
       })
       .catch(() => {
         console.log("Failed to retrieve profile");
@@ -124,9 +153,11 @@ class PantryInfo extends React.Component {
               coordinates={product.coordinates}
               actualProduct={product.productId}
               currPage={this.props.setCurrentPage}
+              currentPage={this.props.currentPage}
               isFavourite={product.isFavourite}
               handleHeartClick={this.handleHeartClick}
               handlePantryClick={this.handlePantryClick}
+              handleDeleteFromPantry={this.handleDeleteFromPantry}
             />
           </div>
         );

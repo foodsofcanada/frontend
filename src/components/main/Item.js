@@ -11,6 +11,10 @@ class Item extends React.Component {
     // this.state = { isLiked: false };
   }
 
+  handleDeleteFromPantry = () => {
+    this.props.handleDeleteFromPantry(this.props);
+  };
+
   handleHeartClick = () => {
     this.props.handleHeartClick(this.props.number - 1);
     // this.setState(prevstate => ({
@@ -149,6 +153,17 @@ class Item extends React.Component {
               >
                 Add to Pantry
               </Dropdown.Item>
+              {this.props.currentPage != null ? (
+                <Dropdown.Item
+                  as="button"
+                  style={{ color: "black" }}
+                  onClick={this.handleDeleteFromPantry}
+                >
+                  Delete from Pantry
+                </Dropdown.Item>
+              ) : (
+                ""
+              )}
             </DropdownButton>
           </div>
         </div>
