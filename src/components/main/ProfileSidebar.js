@@ -24,14 +24,14 @@ class ProfileSidebar extends React.Component {
   }
 
   componentDidMount() {
-    let url = "http://localhost:8080/members/" + this.state.email;
+    let url = "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/members/" + this.state.email;
 
     if (
       this.state.email === null ||
       this.state.email === "" ||
       this.state.email === "null"
     ) {
-      url = 'http://localhost:8080/members/""';
+      url = 'http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/members/""';
     }
 
     fetch(url, {
@@ -220,20 +220,20 @@ class ProfileSidebar extends React.Component {
         Logout
       </button>
     ) : (
-      <button
-        style={{
-          height: "35px",
-          width: "80px",
-          borderRadius: "25px",
-          color: "white",
-          backgroundColor: "#7764E4",
-          outline: "none"
-        }}
-        onClick={this.handleLogin}
-      >
-        Login
-      </button>
-    );
+        <button
+          style={{
+            height: "35px",
+            width: "80px",
+            borderRadius: "25px",
+            color: "white",
+            backgroundColor: "#7764E4",
+            outline: "none"
+          }}
+          onClick={this.handleLogin}
+        >
+          Login
+        </button>
+      );
     return (
       <div>
         <LoginPopup />
@@ -280,8 +280,8 @@ class ProfileSidebar extends React.Component {
             >
               {this.state.currentUserInfo.isExist
                 ? this.state.currentUserInfo.firstName +
-                  " " +
-                  this.state.currentUserInfo.lastName
+                " " +
+                this.state.currentUserInfo.lastName
                 : "Guest"}
             </div>
             {proButtons}

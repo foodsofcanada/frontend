@@ -12,13 +12,13 @@ class DeleteAccountPopup extends React.Component {
 
   handleDelete = () => {
     fetch(
-      "http://localhost:8080/members/" + sessionStorage.getItem("currentUser"),
+      "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/members/" + sessionStorage.getItem("currentUser"),
       {
         method: "DELETE"
       }
     )
       .then(response => response.json())
-      .then(data => {})
+      .then(data => { })
       .catch(() => {
         console.log("profile could not be deleted");
       });

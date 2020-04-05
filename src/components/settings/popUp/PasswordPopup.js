@@ -20,7 +20,7 @@ class PasswordPopup extends React.Component {
       firstname: "",
       password: ""
     });
-    fetch("http://localhost:8080/members/" + this.state.email, {
+    fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/members/" + this.state.email, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"
@@ -70,7 +70,7 @@ class PasswordPopup extends React.Component {
         firstname: "",
         password: this.state.newPassword
       });
-      fetch("http://localhost:8080/members/" + this.state.email, {
+      fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/members/" + this.state.email, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
@@ -161,10 +161,10 @@ class PasswordPopup extends React.Component {
             {this.state.errorMessage !== "Password has been changed!" ? (
               <span style={{ color: "red" }}>{this.state.errorMessage}</span>
             ) : (
-              <span style={{ color: "rgb(105, 230, 105)" }}>
-                {this.state.errorMessage}
-              </span>
-            )}
+                <span style={{ color: "rgb(105, 230, 105)" }}>
+                  {this.state.errorMessage}
+                </span>
+              )}
             <br />
             <label className="label">
               <span>New Password</span> &nbsp;

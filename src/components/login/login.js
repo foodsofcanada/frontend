@@ -47,7 +47,7 @@ class LoginPage extends React.Component {
         password: this.state.password
       });
 
-      fetch("http://localhost:8080/login", {
+      fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

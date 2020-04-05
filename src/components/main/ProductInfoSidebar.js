@@ -18,7 +18,7 @@ class ProductInfoSidebar extends React.Component {
 
   neededInfo = null;
   componentDidMount() {
-    fetch("http://localhost:8080/" + this.props.currentProduct)
+    fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/" + this.props.currentProduct)
       .then(response => response.json())
       .then(data => {
         this.neededInfo = data;
@@ -61,8 +61,8 @@ class ProductInfoSidebar extends React.Component {
           {this.state.activeTab === "1" ? (
             <span className="tabTitle activeTab"> GENERAL</span>
           ) : (
-            <span className="tabTitle"> GENERAL</span>
-          )}
+              <span className="tabTitle"> GENERAL</span>
+            )}
         </div>
         <div
           style={{
@@ -78,8 +78,8 @@ class ProductInfoSidebar extends React.Component {
           {this.state.activeTab === "2" ? (
             <span className="tabTitle activeTab"> AGRICULTURE</span>
           ) : (
-            <span className="tabTitle"> AGRICULTURE</span>
-          )}
+              <span className="tabTitle"> AGRICULTURE</span>
+            )}
         </div>
         <div
           style={{
@@ -97,8 +97,8 @@ class ProductInfoSidebar extends React.Component {
           {this.state.activeTab === "3" ? (
             <span className="tabTitle activeTab"> KITCHEN</span>
           ) : (
-            <span className="tabTitle"> KITCHEN</span>
-          )}
+              <span className="tabTitle"> KITCHEN</span>
+            )}
         </div>
       </div>
     );
