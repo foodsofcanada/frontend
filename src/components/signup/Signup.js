@@ -90,20 +90,23 @@ class LoginPage extends React.Component {
         lastname: this.state.lastName
       });
 
-      fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/registration", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: formData
-      })
+      fetch(
+        "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/registration",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: formData
+        }
+      )
         .then(response => response.json())
         .then(data => {
           console.log(data);
           if (data === true) {
             this.setState({
               errorMessage:
-                "Account has been created, Please Click Login button."
+                "Account has been created, Please Click the Login button."
             });
           } else {
             this.setState({ errorMessage: "Account already exists" });
@@ -136,29 +139,29 @@ class LoginPage extends React.Component {
               Create an account
             </div>
             {this.state.errorMessage ===
-              "Account has been created. Please Click the Login button." ? (
-                <div
-                  className="d-flex justify-content-center"
-                  style={{
-                    width: "100%",
-                    color: "rgb(105, 230, 105)",
-                    marginBottom: "20px"
-                  }}
-                >
-                  {this.state.errorMessage}
-                </div>
-              ) : (
-                <div
-                  className="d-flex justify-content-center"
-                  style={{
-                    width: "100%",
-                    color: "red",
-                    marginBottom: "20px"
-                  }}
-                >
-                  {this.state.errorMessage}
-                </div>
-              )}
+            "Account has been created, Please Click the Login button." ? (
+              <div
+                className="d-flex justify-content-center"
+                style={{
+                  width: "100%",
+                  color: "rgb(105, 230, 105)",
+                  marginBottom: "20px"
+                }}
+              >
+                {this.state.errorMessage}
+              </div>
+            ) : (
+              <div
+                className="d-flex justify-content-center"
+                style={{
+                  width: "100%",
+                  color: "red",
+                  marginBottom: "20px"
+                }}
+              >
+                {this.state.errorMessage}
+              </div>
+            )}
 
             <div
               style={{
