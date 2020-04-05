@@ -60,3 +60,23 @@
   color: white;
   font-weight: 600;
 }
+
+.continueAsGuestButton {
+  width: 60%;
+  height: 40px;
+  background: #7764e4;
+  outline: none;
+  border-radius: 25px;
+  margin-top: 20px;
+  border: none;
+  opacity: 1;
+  border-style: solid;
+  border-width: 2px;
+  color: white;
+  font-weight: 600;
+}
+
+.continueAsGuestButton:hover {
+  background-color: #ffffff;
+  color: #7764e4;
+}

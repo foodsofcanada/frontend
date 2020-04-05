@@ -282,10 +282,22 @@ class LoginPage extends React.Component {
             height: "100vh",
             width: "30%",
             backgroundColor: "#8574e7",
-            display: "inline"
+            display: "inline",
+            textAlign: "center",
+            color: "white"
           }}
-          className="d-flex justify-content-center"
-        ></div>
+        >
+          <div className="head" style={{ color: "white", marginTop: "50%" }}>
+            Welcome to foods of canada
+          </div>
+          <br />
+          <div>Don't want to create an account? You could: </div>
+          <Link to="/">
+            <button className="continueAsGuestButton">
+              Continue As a Guest
+            </button>
+          </Link>
+        </div>
       </div>
     );
   }
