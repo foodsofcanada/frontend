@@ -18,9 +18,12 @@ class ProductInfoSidebar extends React.Component {
 
   neededInfo = null;
   componentDidMount() {
-    fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/" + this.props.currentProduct)
-      .then(response => response.json())
-      .then(data => {
+    fetch(
+      "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/" +
+        this.props.currentProduct
+    )
+      .then((response) => response.json())
+      .then((data) => {
         this.neededInfo = data;
         this.setState(this.state);
       })
@@ -42,7 +45,7 @@ class ProductInfoSidebar extends React.Component {
           borderRadius: "15px",
           height: "10%",
           boxShadow: "0px 6px 6px #00000029",
-          lineHeight: "45px"
+          lineHeight: "45px",
         }}
       >
         <div
@@ -52,7 +55,7 @@ class ProductInfoSidebar extends React.Component {
             textAlign: "center",
             height: "100%",
 
-            borderRadius: "15px 0  0 15px"
+            borderRadius: "15px 0  0 15px",
           }}
           className="tab"
           onClick={this.handleTabClick}
@@ -61,15 +64,15 @@ class ProductInfoSidebar extends React.Component {
           {this.state.activeTab === "1" ? (
             <span className="tabTitle activeTab"> GENERAL</span>
           ) : (
-              <span className="tabTitle"> GENERAL</span>
-            )}
+            <span className="tabTitle"> GENERAL</span>
+          )}
         </div>
         <div
           style={{
             display: "inline-block",
             width: "33.3%",
             textAlign: "center",
-            height: "100%"
+            height: "100%",
           }}
           className="tab"
           onClick={this.handleTabClick}
@@ -78,8 +81,8 @@ class ProductInfoSidebar extends React.Component {
           {this.state.activeTab === "2" ? (
             <span className="tabTitle activeTab"> AGRICULTURE</span>
           ) : (
-              <span className="tabTitle"> AGRICULTURE</span>
-            )}
+            <span className="tabTitle"> AGRICULTURE</span>
+          )}
         </div>
         <div
           style={{
@@ -88,7 +91,7 @@ class ProductInfoSidebar extends React.Component {
             textAlign: "center",
             height: "100%",
 
-            borderRadius: "0 15px 15px 0"
+            borderRadius: "0 15px 15px 0",
           }}
           className="tab"
           onClick={this.handleTabClick}
@@ -97,8 +100,8 @@ class ProductInfoSidebar extends React.Component {
           {this.state.activeTab === "3" ? (
             <span className="tabTitle activeTab"> KITCHEN</span>
           ) : (
-              <span className="tabTitle"> KITCHEN</span>
-            )}
+            <span className="tabTitle"> KITCHEN</span>
+          )}
         </div>
       </div>
     );
@@ -178,7 +181,7 @@ class ProductInfoSidebar extends React.Component {
 
           marginLeft: "25px",
           stroke: "#172B4D",
-          fill: "none"
+          fill: "none",
         }}
       />
     );
@@ -205,7 +208,7 @@ class ProductInfoSidebar extends React.Component {
                 style={{
                   height: "30px",
                   transform: "rotate(90deg)",
-                  marginTop: "10px"
+                  marginTop: "10px",
                 }}
               />
             </div>
@@ -215,14 +218,14 @@ class ProductInfoSidebar extends React.Component {
         <div
           className="d-flex justify-content-center"
           style={{
-            marginTop: "75px"
+            marginTop: "75px",
           }}
         >
           <Carousel
             style={{
               width: "146px",
               height: "146px",
-              borderRadius: "50%"
+              borderRadius: "50%",
             }}
             controls={false}
             indicators={false}
@@ -234,7 +237,7 @@ class ProductInfoSidebar extends React.Component {
                 width: "146px",
                 height: "146px",
                 borderRadius: "50%",
-                backgroundSize: "cover"
+                backgroundSize: "cover",
               }}
             ></Carousel.Item>
             <Carousel.Item
@@ -243,7 +246,7 @@ class ProductInfoSidebar extends React.Component {
                 width: "146px",
                 height: "146px",
                 borderRadius: "50%",
-                backgroundSize: "cover"
+                backgroundSize: "cover",
               }}
             ></Carousel.Item>
             <Carousel.Item
@@ -253,7 +256,7 @@ class ProductInfoSidebar extends React.Component {
                 height: "146px",
                 borderRadius: "50%",
                 backgroundSize: "cover",
-                backgroundRepeat: "no-repeat"
+                backgroundRepeat: "no-repeat",
               }}
             ></Carousel.Item>
           </Carousel>
@@ -271,10 +274,10 @@ class ProductInfoSidebar extends React.Component {
               marginRight: "10px",
               fontSize: "10px",
               position: "relative",
-              top: "15px"
+              top: "15px",
             }}
           >
-            <ReactSVG
+            {/* <ReactSVG
               className="infoHeart"
               src={heart}
               style={{
@@ -296,7 +299,7 @@ class ProductInfoSidebar extends React.Component {
               id="dropdownB"
             >
               <Dropdown.Item as="button">Add to Pantry</Dropdown.Item>
-            </DropdownButton>
+            </DropdownButton> */}
           </div>
         </div>
         <div
@@ -308,7 +311,7 @@ class ProductInfoSidebar extends React.Component {
             marginLeft: "10px",
             boxShadow: "0px 3px 6px #00000029",
             color: "#5C5CA7",
-            fontWeight: "bold"
+            fontWeight: "bold",
           }}
         >
           {tab}
