@@ -14,26 +14,49 @@ class InfoBar extends React.Component {
     this.handleBackClick = this.handleBackClick.bind(this);
   }
 
+  componentDidMount() {
+    if (!this.props.url.endsWith("search")) {
+      fetch(this.props.url)
+        .then((response) => response.json())
+        .then((productsInRegion) => {
+          console.log(productsInRegion);
+          this.props.setCurrentMarkers(productsInRegion);
+        })
+        .catch(() => {
+          console.log("Failed to retrieve products");
+        }); //Fetch closing brackets
+    } else {
+      fetch(this.props.url, this.props.body)
+        .then((response) => response.json())
+        .then((productsInRegion) => {
+          console.log(productsInRegion);
+          this.props.setCurrentMarkers(productsInRegion);
+        })
+        .catch(() => {
+          console.log("Failed to retrieve products");
+        });
+    }
+  }
   handleBackClick() {
     window.location.reload();
   }
 
-  handleProfileClick = event => {
+  handleProfileClick = (event) => {
     this.props.setCurrentPage("profile/");
   };
 
-  handleButtonClick = event => {
+  handleButtonClick = (event) => {
     if (!isNaN(event.target.id) && event.target.id !== "") {
       this.props.setPrevPage(this.props.currentPage);
       this.props.setCurrentPage("products/" + event.target.id);
     }
   };
 
-  handlePantryClick = value => {
+  handlePantryClick = (value) => {
     this.props.setproductToAddToPantry(value);
   };
 
-  handleHeartClick = targetIndex => {
+  handleHeartClick = (targetIndex) => {
     const email = sessionStorage.getItem("currentUser");
     if (email !== null && email !== "") {
       const { productId, regionId, coordinates } = this.props.currentMarkers[
@@ -42,28 +65,28 @@ class InfoBar extends React.Component {
       //add/delete product from favourite
       fetch(
         "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/fav/" +
-        email +
-        "/" +
-        productId +
-        "/" +
-        regionId +
-        "/" +
-        coordinates +
-        "",
+          email +
+          "/" +
+          productId +
+          "/" +
+          regionId +
+          "/" +
+          coordinates +
+          "",
         { method: "POST" }
       )
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
           const updatedCurrentMarkers = this.props.currentMarkers.map(
             (product, index) => {
               if (targetIndex === index) {
                 return {
                   ...product,
-                  isFavourite: data
+                  isFavourite: data,
                 };
               } else {
                 return {
-                  ...product
+                  ...product,
                 };
               }
             }
@@ -88,7 +111,7 @@ class InfoBar extends React.Component {
         <div
           style={{
             marginLeft: "40%",
-            marginTop: "50%"
+            marginTop: "50%",
           }}
         >
           &nbsp;&nbsp;&nbsp;
@@ -98,7 +121,7 @@ class InfoBar extends React.Component {
         </div>
       );
     } else {
-      productItems = this.props.currentMarkers.map(product => {
+      productItems = this.props.currentMarkers.map((product) => {
         number = number + 1;
         // console.log(product);
         return (
@@ -140,24 +163,24 @@ class InfoBar extends React.Component {
                 &nbsp;
               </div>
             ) : (
-                <div
-                  className="backLink"
-                  style={{ display: "inline", marginTop: "90px" }}
-                  onClick={this.handleBackClick}
-                >
-                  <div className="backStuff ">
-                    <ReactSVG
-                      src={icon}
-                      style={{
-                        height: "30px",
-                        transform: "rotate(90deg)",
-                        marginTop: "10px"
-                      }}
-                    />
-                  </div>
-                Back
+              <div
+                className="backLink"
+                style={{ display: "inline", marginTop: "90px" }}
+                onClick={this.handleBackClick}
+              >
+                <div className="backStuff ">
+                  <ReactSVG
+                    src={icon}
+                    style={{
+                      height: "30px",
+                      transform: "rotate(90deg)",
+                      marginTop: "10px",
+                    }}
+                  />
                 </div>
-              )}
+                Back
+              </div>
+            )}
 
             <div className="profilePic" onClick={this.handleProfileClick}></div>
           </div>

@@ -30,30 +30,41 @@ class Main extends React.Component {
       selectedRegion: null,
       prevPage: "",
       currentPage: "",
-      productToAddToPantry: null
+      productToAddToPantry: null,
+      url: "",
+      searchBody: null,
     };
 
     this.openCloseBar = this.openCloseBar.bind(this);
     this.openCloseSearchBar = this.openCloseSearchBar.bind(this);
   }
 
-  setproductToAddToPantry = value => {
+  //this sets the url that the info bar would use to refetch
+  setUrl = (value) => {
+    this.setState({ url: value });
+  };
+
+  setBody = (value) => {
+    this.setState({ searchBody: value });
+  };
+
+  setproductToAddToPantry = (value) => {
     let prod = {
       prodId: value.actualProduct,
       regId: value.regionId,
-      coordinates: value.coordinates
+      coordinates: value.coordinates,
     };
     this.setState({ productToAddToPantry: prod });
   };
-  setUserPantries = value => {
+  setUserPantries = (value) => {
     this.setState({ userPantries: value });
   };
 
-  setCurrentPage = value => {
+  setCurrentPage = (value) => {
     this.setState({ currentPage: value });
   };
 
-  setPrevPage = value => {
+  setPrevPage = (value) => {
     this.setState({ prevPage: value });
   };
 
@@ -73,17 +84,17 @@ class Main extends React.Component {
     }
   }
 
-  setSelectedMarker = marker => {
+  setSelectedMarker = (marker) => {
     // this.setState( {selectedMarker: marker} );
     console.log("selected markers: " + marker.label.text);
   };
 
-  setHeader = newHeader => {
+  setHeader = (newHeader) => {
     console.log("New Header: " + newHeader);
     this.setState({ header: newHeader });
   };
 
-  setCurrentMarkers = markers => {
+  setCurrentMarkers = (markers) => {
     // console.log(markers)
     this.setState({ currentMarkers: markers });
   };
@@ -94,14 +105,14 @@ class Main extends React.Component {
   };
 
   openCloseBar() {
-    this.setState(prevState => ({
-      tabOpen: !prevState.tabOpen
+    this.setState((prevState) => ({
+      tabOpen: !prevState.tabOpen,
     }));
   }
 
   openCloseSearchBar() {
-    this.setState(prevState => ({
-      tabOpenSearch: !prevState.tabOpenSearch
+    this.setState((prevState) => ({
+      tabOpenSearch: !prevState.tabOpenSearch,
     }));
   }
 
@@ -174,6 +185,8 @@ class Main extends React.Component {
         setCurrentPage={this.setCurrentPage}
         currentPage={this.state.currentPage}
         setPrevPage={this.setPrevPage}
+        url={this.state.url}
+        body={this.state.searchBody}
         setproductToAddToPantry={this.setproductToAddToPantry}
       />
     );
@@ -199,7 +212,7 @@ class Main extends React.Component {
             display: "inline-flex",
             width: "100%",
             position: "fixed",
-            zIndex: "0"
+            zIndex: "0",
           }}
         >
           <GoogleMap
@@ -212,6 +225,7 @@ class Main extends React.Component {
             setSelectedRegion={this.setSelectedRegion}
             closeBar={this.openCloseSearchBar}
             closeBarState={this.state.tabOpenSearch}
+            setUrl={this.setUrl}
           />
         </div>
         {bar}
@@ -225,6 +239,8 @@ class Main extends React.Component {
           setCurrentMarkers={this.setCurrentMarkers}
           setHeader={this.setHeader}
           setCurrentPage={this.setCurrentPage}
+          setUrl={this.setUrl}
+          setBody={this.setBody}
         />
 
         <div
@@ -238,7 +254,7 @@ class Main extends React.Component {
                 height: "15px",
                 marginTop: "11px",
                 marginRight: "9px",
-                transform: "rotate(270deg)"
+                transform: "rotate(270deg)",
               }}
             />
           ) : (
@@ -248,7 +264,7 @@ class Main extends React.Component {
                 height: "15px",
                 marginTop: "11.5px",
                 marginLeft: "10.5px",
-                transform: "rotate(90deg)"
+                transform: "rotate(90deg)",
               }}
             />
           )}
@@ -264,7 +280,7 @@ class Main extends React.Component {
                 height: "15px",
                 marginTop: "11px",
                 marginRight: "9px",
-                transform: "rotate(270deg)"
+                transform: "rotate(270deg)",
               }}
             />
           ) : (
@@ -274,7 +290,7 @@ class Main extends React.Component {
                 height: "15px",
                 marginTop: "11.5px",
                 marginLeft: "10.5px",
-                transform: "rotate(90deg)"
+                transform: "rotate(90deg)",
               }}
             />
           )}

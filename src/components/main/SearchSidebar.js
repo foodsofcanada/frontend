@@ -30,13 +30,13 @@ class SearchSidebar extends Component {
         { checked: false, name: "Fall" },
         { checked: false, name: "Spring" },
         { checked: false, name: "Summer" },
-        { checked: false, name: "Winter" }
+        { checked: false, name: "Winter" },
       ],
       searchQuery: {
         email: "",
         productsSearched: [],
         seasonSearched: [],
-        regionSearched: []
+        regionSearched: [],
       },
       // isSearchBox: false
       // searchQuery: {
@@ -51,14 +51,16 @@ class SearchSidebar extends Component {
 
   componentDidMount() {
     //Fetch products
-    fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/products")
-      .then(response => response.json())
-      .then(productsData => {
-        const products = productsData.map(product => {
+    fetch(
+      "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/products"
+    )
+      .then((response) => response.json())
+      .then((productsData) => {
+        const products = productsData.map((product) => {
           return {
             productId: product.productId,
             name: product.name,
-            checked: false
+            checked: false,
           };
         });
         // productsData.forEach(element => {
@@ -66,10 +68,10 @@ class SearchSidebar extends Component {
         // });
         this.setState({
           productsLoading: false,
-          products: products
+          products: products,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         // console.log(error);
         console.log("Failed to retrieve products for SearchSidebar");
         this.setState({ productsError: true });
@@ -79,19 +81,21 @@ class SearchSidebar extends Component {
      * Note: region most likely to fetched in main component and passed down in props
      *********************************************************************************/
     //fetch regions name
-    fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/regions")
-      .then(response => response.json())
-      .then(regionsData => {
-        const regions = regionsData.map(region => {
+    fetch(
+      "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/regions"
+    )
+      .then((response) => response.json())
+      .then((regionsData) => {
+        const regions = regionsData.map((region) => {
           return {
             regionId: region.regionId,
             name: region.regionName,
-            checked: false
+            checked: false,
           };
         });
         this.setState({
           regionsloading: false,
-          regions: regions
+          regions: regions,
         });
       })
       .catch(() => {
@@ -100,18 +104,18 @@ class SearchSidebar extends Component {
       }); //end of fetch
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     let { name, value, type, checked } = event.target;
     let updatedSearchQuery;
 
     if (type === "checkbox") {
       this.setState(
-        prevState => {
+        (prevState) => {
           updatedSearchQuery = {
             email: "",
             productsSearched: [...prevState.searchQuery.productsSearched],
             seasonSearched: [...prevState.searchQuery.seasonSearched],
-            regionSearched: [...prevState.searchQuery.regionSearched]
+            regionSearched: [...prevState.searchQuery.regionSearched],
           };
 
           const email = sessionStorage.getItem("currentUser");
@@ -121,7 +125,7 @@ class SearchSidebar extends Component {
 
           if (name === "products") {
             let updatedProducts = [...this.state.products];
-            updatedProducts.forEach(product => {
+            updatedProducts.forEach((product) => {
               const intValue = parseInt(value);
               if (product.productId === intValue) {
                 if (checked) {
@@ -139,14 +143,14 @@ class SearchSidebar extends Component {
             return {
               searchQuery: updatedSearchQuery,
               products: updatedProducts,
-              isSearchBox: false
+              isSearchBox: false,
             };
           } else if (name === "regions") {
             /**********
              * Regions
              *********/
             let updatedRegions = [...this.state.regions];
-            updatedRegions.forEach(region => {
+            updatedRegions.forEach((region) => {
               const intValue = parseInt(value);
               if (region.regionId === intValue) {
                 if (checked) {
@@ -164,14 +168,14 @@ class SearchSidebar extends Component {
             return {
               regions: updatedRegions,
               searchQuery: updatedSearchQuery,
-              isSearchBox: false
+              isSearchBox: false,
             };
           } else if (name === "seasons") {
             /*************************************************************************
              * Seasons
              **************************************************************************/
             let updatedSeasons = [...this.state.seasons];
-            updatedSeasons.forEach(season => {
+            updatedSeasons.forEach((season) => {
               if (season.name === value) {
                 if (checked) {
                   updatedSearchQuery.seasonSearched.push(value);
@@ -188,7 +192,7 @@ class SearchSidebar extends Component {
             return {
               seasons: updatedSeasons,
               searchQuery: updatedSearchQuery,
-              isSearchBox: false
+              isSearchBox: false,
             };
           }
         },
@@ -205,14 +209,17 @@ class SearchSidebar extends Component {
     const requestOption = {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(this.state.searchQuery)
+      body: JSON.stringify(this.state.searchQuery),
     };
 
-    fetch("http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/search", requestOption)
-      .then(response => response.json())
-      .then(data => {
+    fetch(
+      "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/search",
+      requestOption
+    )
+      .then((response) => response.json())
+      .then((data) => {
         //  console.log(data);
         if (data.length === 0) {
           /********************************************************************************************
@@ -227,10 +234,14 @@ class SearchSidebar extends Component {
           } else {
             this.props.setHeader("Showing search results");
           }
+          this.props.setUrl(
+            "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/search"
+          );
+          this.props.setBody(requestOption);
           this.props.setCurrentMarkers(data);
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.log("Failed to fetch search query.");
         //  console.log("error:" + error)
       });
@@ -242,8 +253,7 @@ class SearchSidebar extends Component {
     this.props.setCurrentPage("");
   };
 
-
-  handleSearchbox = event => {
+  handleSearchbox = (event) => {
     const { value } = event.target;
     // this.props.setCurrentPage("");
     this.setState({ search: value });
@@ -253,78 +263,77 @@ class SearchSidebar extends Component {
     const { value } = event.target;
     if (event.key === "Enter") {
       this.props.setCurrentPage("");
-      this.setState(() => {
+      this.setState(
+        () => {
+          let updatedSearchQuery = {
+            email: "",
+            productsSearched: [],
+            seasonSearched: [],
+            regionSearched: [],
+          };
 
-        let updatedSearchQuery = {
-          email: "",
-          productsSearched: [],
-          seasonSearched: [],
-          regionSearched: []
-        };
+          const email = sessionStorage.getItem("currentUser");
+          if (email !== null && email !== "") {
+            updatedSearchQuery.email = email;
+          }
 
-        const email = sessionStorage.getItem("currentUser");
-        if (email !== null && email !== "") {
-          updatedSearchQuery.email = email;
+          this.state.products.forEach((product) => {
+            if (product.name.toLowerCase() === value.toLowerCase()) {
+              updatedSearchQuery.productsSearched.push(product.productId);
+            }
+          });
+
+          this.state.regions.forEach((region) => {
+            if (region.name.toLowerCase() === value.toLowerCase()) {
+              updatedSearchQuery.regionSearched.push(region.regionId);
+            }
+          });
+
+          this.state.seasons.forEach((season) => {
+            if (season.name.toLowerCase() === value.toLowerCase()) {
+              updatedSearchQuery.seasonSearched.push(season.name);
+            }
+          });
+
+          return {
+            searchQuery: updatedSearchQuery,
+            isSearchBox: true,
+            ...this.uncheckAllCategory(),
+          };
+        },
+        () => {
+          this.fetchProducts();
         }
-
-        this.state.products.forEach(product => {
-          if (product.name.toLowerCase() === value.toLowerCase()) {
-            updatedSearchQuery.productsSearched.push(product.productId);
-          }
-        });
-
-        this.state.regions.forEach(region => {
-          if (region.name.toLowerCase() === value.toLowerCase()) {
-            updatedSearchQuery.regionSearched.push(region.regionId);
-          }
-        });
-
-        this.state.seasons.forEach(season => {
-          if (season.name.toLowerCase() === value.toLowerCase()) {
-            updatedSearchQuery.seasonSearched.push(season.name);
-          }
-        });
-
-        return {
-          searchQuery: updatedSearchQuery,
-          isSearchBox: true,
-          ...this.uncheckAllCategory()
-        }
-      }, () => {
-        this.fetchProducts();
-      });
+      );
     }
-  }
+  };
 
   toggleCategory = (category, checked) => {
-    return category.map(element => {
+    return category.map((element) => {
       return {
         ...element,
-        checked: checked
+        checked: checked,
       };
     });
-  }
+  };
 
   uncheckAllCategory = () => {
     const updatedProducts = this.toggleCategory(this.state.products, false);
     const updatedRegions = this.toggleCategory(this.state.regions, false);
     const updatedSeasons = this.toggleCategory(this.state.seasons, false);
-    return (
-      {
-        products: updatedProducts,
-        regions: updatedRegions,
-        seasons: updatedSeasons
-      }
-    );
-  }
-
+    return {
+      products: updatedProducts,
+      regions: updatedRegions,
+      seasons: updatedSeasons,
+    };
+  };
 
   render() {
     const searchProducts = this.state.productsError
       ? "Failed to load. Please try again later."
       : this.state.productsLoading
-        ? "loading..."
-        : this.state.products.map(product => {
+      ? "loading..."
+      : this.state.products.map((product) => {
           return (
             <div onClick={this.handleCheckBoxClick}>
               <SearchItem
@@ -342,8 +351,8 @@ class SearchSidebar extends Component {
     const searchRegions = this.state.regionsError
       ? "Failed to load. Please try again later."
       : this.state.regionsloading
-        ? "loading..."
-        : this.state.regions.map(region => {
+      ? "loading..."
+      : this.state.regions.map((region) => {
           return (
             <div onClick={this.handleCheckBoxClick}>
               <SearchItem
@@ -360,20 +369,20 @@ class SearchSidebar extends Component {
 
     const searchSeasons = this.state.seasonsloading
       ? "loading..."
-      : this.state.seasons.map(season => {
-        return (
-          <div onClick={this.handleCheckBoxClick}>
-            <SearchItem
-              key={season.name}
-              value={season.name}
-              name={"seasons"}
-              labelName={season.name}
-              checked={season.checked}
-              handleChange={this.handleChange}
-            />
-          </div>
-        );
-      });
+      : this.state.seasons.map((season) => {
+          return (
+            <div onClick={this.handleCheckBoxClick}>
+              <SearchItem
+                key={season.name}
+                value={season.name}
+                name={"seasons"}
+                labelName={season.name}
+                checked={season.checked}
+                handleChange={this.handleChange}
+              />
+            </div>
+          );
+        });
 
     // const searchTypes = (this.state.productTypesloading) ? "loading..."
     //   : this.state.productTypes.map((type, index) => {
@@ -396,7 +405,7 @@ class SearchSidebar extends Component {
               left: "-341px",
               marginTop: "10px",
               position: "relative",
-              zIndex: "4"
+              zIndex: "4",
             }}
           >
             <input
