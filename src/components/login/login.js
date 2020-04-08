@@ -9,7 +9,7 @@ class LoginPage extends React.Component {
       email: "",
       password: "",
       errorMessage: " ",
-      sessionValue: sessionStorage.getItem("currentUser")
+      sessionValue: sessionStorage.getItem("currentUser"),
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,7 +26,7 @@ class LoginPage extends React.Component {
 
     if (this.state.email === "" && this.state.password === "") {
       this.setState({
-        errorMessage: "Both email and password fields cannot be empty."
+        errorMessage: "Both email and password fields cannot be empty.",
       });
       return;
     }
@@ -44,7 +44,7 @@ class LoginPage extends React.Component {
     if (this.state.email !== "" && this.state.password !== "") {
       let formData = JSON.stringify({
         email: this.state.email,
-        password: this.state.password
+        password: this.state.password,
       });
 
       fetch(
@@ -52,18 +52,19 @@ class LoginPage extends React.Component {
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
           },
-          body: formData
+          body: formData,
         }
       )
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
           console.log(data);
+
           this.setState({ errorMessage: "" });
           sessionStorage.setItem("currentUser", data.email);
           this.setState({
-            sessionValue: sessionStorage.getItem("currentUser")
+            sessionValue: sessionStorage.getItem("currentUser"),
           });
         })
         .catch(() => {
@@ -88,7 +89,7 @@ class LoginPage extends React.Component {
               height: "100vh",
               width: "70%",
               backgroundColor: "white",
-              display: "inline"
+              display: "inline",
             }}
             className="d-flex justify-content-center"
           >
@@ -104,14 +105,14 @@ class LoginPage extends React.Component {
                 style={{
                   width: "100%",
                   color: "red",
-                  marginBottom: "20px"
+                  marginBottom: "20px",
                 }}
               >
                 {this.state.errorMessage}
               </div>
               <div
                 style={{
-                  width: "100%"
+                  width: "100%",
                 }}
                 className="d-flex justify-content-center"
               >
@@ -124,7 +125,7 @@ class LoginPage extends React.Component {
                       style={{
                         borderStyle: "solid",
                         backgroundColor: "rgb(244,248,247)",
-                        marginBottom: "20px"
+                        marginBottom: "20px",
                       }}
                       className="textbox"
                       name="email"
@@ -141,7 +142,7 @@ class LoginPage extends React.Component {
                       style={{
                         borderStyle: "solid",
                         backgroundColor: "rgb(244,248,247)",
-                        marginBottom: "20px"
+                        marginBottom: "20px",
                       }}
                       name="password"
                       className="textbox"
@@ -174,7 +175,7 @@ class LoginPage extends React.Component {
               backgroundColor: "#8574e7",
               display: "inline",
               textAlign: "center",
-              color: "white"
+              color: "white",
             }}
           >
             <div className="head" style={{ color: "white", marginTop: "50%" }}>
