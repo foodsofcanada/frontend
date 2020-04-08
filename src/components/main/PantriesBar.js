@@ -18,9 +18,13 @@ class PantriesBar extends React.Component {
     const email = this.state.email;
 
     if (email !== null && email !== "") {
-      fetch("http://localhost:8080/userPantries/" + email + "/")
-        .then(response => response.json())
-        .then(data => {
+      fetch(
+        "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/userPantries/" +
+          email +
+          "/"
+      )
+        .then((response) => response.json())
+        .then((data) => {
           this.props.setUserPantries(data);
         });
     }
@@ -34,22 +38,27 @@ class PantriesBar extends React.Component {
     this.props.setCurrentPage("profile/");
   }
 
-  handlePantryDelete = id => {
+  handlePantryDelete = (id) => {
     let pantryId = id.substring(id.lastIndexOf("/") + 1, id.length);
 
-    fetch("http://localhost:8080/deletepantry/" + pantryId + "/", {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json"
+    fetch(
+      "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/deletepantry/" +
+        pantryId +
+        "/",
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    })
-      .then(response => response.json())
-      .then(data => {
+    )
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data);
         this.fetchPantry();
       });
   };
-  handlePantryClick = event => {
+  handlePantryClick = (event) => {
     if (!isNaN(event.target.id) && event.target.id !== "") {
       this.props.setCurrentPage(
         "pantryinfo/" + this.state.email + "/" + event.target.id
@@ -70,7 +79,7 @@ class PantriesBar extends React.Component {
           style={{
             position: "relative",
             top: "15px",
-            display: "inline-flex"
+            display: "inline-flex",
           }}
         >
           <div style={{ color: "#0CC8AC" }} className="plus">
@@ -87,7 +96,7 @@ class PantriesBar extends React.Component {
     let pantries = null;
 
     if (this.props.userPantries.length !== 0) {
-      pantries = this.props.userPantries.map(pantry => (
+      pantries = this.props.userPantries.map((pantry) => (
         <Pantry
           name={pantry.pantryName}
           id={pantry.pantryId}
@@ -110,7 +119,7 @@ class PantriesBar extends React.Component {
                 style={{
                   height: "30px",
                   transform: "rotate(90deg)",
-                  marginTop: "10px"
+                  marginTop: "10px",
                 }}
               />
             </div>

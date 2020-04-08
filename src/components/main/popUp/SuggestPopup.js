@@ -8,11 +8,11 @@ class SuggestPopup extends React.Component {
       productName: "",
       productDesc: "",
       email: sessionStorage.getItem("currentUser"),
-      errorMessage: ""
+      errorMessage: "",
     };
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
     // const {name, value, type, checked} = event.target
     this.setState({ [name]: value });
@@ -26,19 +26,19 @@ class SuggestPopup extends React.Component {
 
     if (this.state.productDesc !== "" && this.state.productName !== "") {
       fetch(
-        "http://localhost:8080/suggest/" +
+        "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/suggest/" +
           this.state.productName +
           "/" +
           this.state.productDesc,
         {
           method: "POST",
           headers: {
-            "Content-Type": "application/json"
-          }
+            "Content-Type": "application/json",
+          },
         }
       )
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
           console.log(data);
           this.setState({ errorMessage: "Suggestion has been sent!" });
         })
@@ -53,7 +53,7 @@ class SuggestPopup extends React.Component {
       <div
         id="suggest"
         className="suggest"
-        onClick={event => {
+        onClick={(event) => {
           if (event.target.id === "suggest") {
             document.getElementById("suggest").style.display = "none";
           }
@@ -65,7 +65,7 @@ class SuggestPopup extends React.Component {
               style={{
                 display: "inline-block",
                 lineHeight: "40px",
-                fontSize: "18px"
+                fontSize: "18px",
               }}
             >
               Suggest a Product
@@ -98,7 +98,7 @@ class SuggestPopup extends React.Component {
                   borderStyle: "solid",
                   backgroundColor: "rgb(244,248,247)",
                   marginBottom: "20px",
-                  marginRight: "50px "
+                  marginRight: "50px ",
                 }}
                 value={this.state.productName}
                 name="productName"
@@ -121,7 +121,7 @@ class SuggestPopup extends React.Component {
                 className="prodDesc"
                 style={{
                   borderStyle: "solid",
-                  backgroundColor: "rgb(244,248,247)"
+                  backgroundColor: "rgb(244,248,247)",
                 }}
                 value={this.state.productDesc}
                 name="productDesc"

@@ -21,7 +21,7 @@ class PantryPopup extends React.Component {
           style={{
             position: "relative",
             top: "15px",
-            display: "inline-flex"
+            display: "inline-flex",
           }}
         >
           <div style={{ color: "#0CC8AC" }} className="plus">
@@ -37,9 +37,13 @@ class PantryPopup extends React.Component {
     const email = this.state.email;
 
     if (email !== null && email !== "") {
-      fetch("http://localhost:8080/userPantries/" + email + "/")
-        .then(response => response.json())
-        .then(data => {
+      fetch(
+        "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/userPantries/" +
+          email +
+          "/"
+      )
+        .then((response) => response.json())
+        .then((data) => {
           this.props.setUserPantries(data);
         });
     } //end of fetch
@@ -47,7 +51,7 @@ class PantryPopup extends React.Component {
 
   loadPantryList() {
     if (this.props.userPantries.length !== 0) {
-      return this.props.userPantries.map(pantry => (
+      return this.props.userPantries.map((pantry) => (
         <div
           className="profileOptions"
           id={pantry.pantryId}
@@ -58,7 +62,7 @@ class PantryPopup extends React.Component {
             style={{
               position: "relative",
               top: "15px",
-              display: "inline-flex"
+              display: "inline-flex",
             }}
           >
             <span
@@ -72,7 +76,7 @@ class PantryPopup extends React.Component {
                 marginRight: "38px",
 
                 top: "-7px",
-                position: "relative"
+                position: "relative",
               }}
             ></span>
             <div
@@ -81,7 +85,7 @@ class PantryPopup extends React.Component {
                 width: "100px",
                 height: "40px",
                 marginLeft: "20px",
-                display: "inline-block"
+                display: "inline-block",
               }}
             >
               {pantry.pantryName}
@@ -96,9 +100,9 @@ class PantryPopup extends React.Component {
     this.fetchPantry();
   }
 
-  handlePantryAdd = event => {
+  handlePantryAdd = (event) => {
     let url =
-      "http://localhost:8080/pantryproduct/" +
+      "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/pantryproduct/" +
       event.currentTarget.id +
       "/" +
       this.props.product.prodId +
@@ -109,11 +113,11 @@ class PantryPopup extends React.Component {
     fetch(url, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         if (data) {
           document.getElementById("addedPopup").style.display = "inline-block";
         } else {
@@ -133,7 +137,7 @@ class PantryPopup extends React.Component {
       <div
         id="pantryList"
         className="suggest"
-        onClick={event => {
+        onClick={(event) => {
           if (event.target.id === "pantryList") {
             document.getElementById("pantryList").style.display = "none";
           }
@@ -145,7 +149,7 @@ class PantryPopup extends React.Component {
               style={{
                 display: "inline-block",
                 lineHeight: "40px",
-                fontSize: "18px"
+                fontSize: "18px",
               }}
             >
               Add to a Pantry

@@ -8,11 +8,11 @@ class CreatePantry extends React.Component {
       pantryName: "",
       pantryDesc: "",
       email: sessionStorage.getItem("currentUser"),
-      errorMessage: ""
+      errorMessage: "",
     };
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
     // const {name, value, type, checked} = event.target
     this.setState({ [name]: value });
@@ -28,21 +28,28 @@ class CreatePantry extends React.Component {
       let formData = JSON.stringify({
         email: this.state.email,
         description: this.state.pantryDesc,
-        pantryName: this.state.pantryName
+        pantryName: this.state.pantryName,
       });
 
-      fetch("http://localhost:8080/createPantry", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: formData
-      })
-        .then(response => response.json())
-        .then(data => {
-          fetch("http://localhost:8080/userPantries/" + this.state.email + "/")
-            .then(response => response.json())
-            .then(data => {
+      fetch(
+        "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/createPantry",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: formData,
+        }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          fetch(
+            "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/userPantries/" +
+              this.state.email +
+              "/"
+          )
+            .then((response) => response.json())
+            .then((data) => {
               this.props.setUserPantries(data);
               this.setState({ errorMessage: "Pantry has been created!" });
             });
@@ -58,7 +65,7 @@ class CreatePantry extends React.Component {
       <div
         id="createPantry"
         className="suggest"
-        onClick={event => {
+        onClick={(event) => {
           if (event.target.id === "createPantry") {
             document.getElementById("createPantry").style.display = "none";
             this.setState({ pantryDesc: "", pantryName: "", errorMessage: "" });
@@ -71,7 +78,7 @@ class CreatePantry extends React.Component {
               style={{
                 display: "inline-block",
                 lineHeight: "40px",
-                fontSize: "18px"
+                fontSize: "18px",
               }}
             >
               Create a Pantry
@@ -85,7 +92,7 @@ class CreatePantry extends React.Component {
                 this.setState({
                   pantryDesc: "",
                   pantryName: "",
-                  errorMessage: ""
+                  errorMessage: "",
                 });
               }}
             >
@@ -111,7 +118,7 @@ class CreatePantry extends React.Component {
                   borderStyle: "solid",
                   backgroundColor: "rgb(244,248,247)",
                   marginBottom: "20px",
-                  marginRight: "50px"
+                  marginRight: "50px",
                 }}
                 onChange={this.handleChange}
               />
@@ -134,7 +141,7 @@ class CreatePantry extends React.Component {
                 style={{
                   borderStyle: "solid",
                   backgroundColor: "rgb(244,248,247)",
-                  padding: "10px 10px 10px 10px"
+                  padding: "10px 10px 10px 10px",
                 }}
                 onChange={this.handleChange}
               />

@@ -18,16 +18,16 @@ class PantryInfo extends React.Component {
       email: sessionStorage.getItem("currentUser"),
       currentUserInfo: { isExist: true },
       pantryProducts: [],
-      pantryId: id
+      pantryId: id,
     };
     this.handleBackClick = this.handleBackClick.bind(this);
   }
 
-  handleDeleteFromPantry = product => {
+  handleDeleteFromPantry = (product) => {
     console.log(product);
 
     fetch(
-      "http://localhost:8080/deleteproduct/" +
+      "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/deleteproduct/" +
         this.state.pantryId +
         "/" +
         product.actualProduct +
@@ -37,12 +37,12 @@ class PantryInfo extends React.Component {
       {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       }
     )
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         console.log(data);
         this.fetchProductsInPantry();
       });
@@ -50,18 +50,18 @@ class PantryInfo extends React.Component {
 
   fetchProductsInPantry = () => {
     fetch(
-      "http://localhost:8080/productsInPantry/" +
+      "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/productsInPantry/" +
         this.state.email +
         "/" +
         this.state.pantryId,
       {
         headers: {
-          "Content-Type": "application/json"
-        }
+          "Content-Type": "application/json",
+        },
       }
     )
-      .then(response => response.json())
-      .then(pantryProducts => {
+      .then((response) => response.json())
+      .then((pantryProducts) => {
         this.props.setCurrentMarkers(pantryProducts);
       })
       .catch(() => {
@@ -73,29 +73,33 @@ class PantryInfo extends React.Component {
     this.fetchProductsInPantry();
 
     let endPoint = this.props.currentPage;
-    fetch("http://localhost:8080/" + endPoint)
-      .then(response => response.json())
-      .then(data => {
+    fetch(
+      "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/" + endPoint
+    )
+      .then((response) => response.json())
+      .then((data) => {
         this.setState({ name: data.pantryName, description: data.description });
       });
 
-    let url = "http://localhost:8080/members/" + this.state.email;
+    let url =
+      "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/members/" +
+      this.state.email;
 
     if (
       this.state.email === null ||
       this.state.email === "" ||
       this.state.email === "null"
     ) {
-      url = 'http://localhost:8080/members/""';
+      url = 'http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/""';
     }
 
     fetch(url, {
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
-      .then(response => response.json())
-      .then(profileInfo => {
+      .then((response) => response.json())
+      .then((profileInfo) => {
         this.setState({ currentUserInfo: profileInfo });
       })
       .catch(() => {
@@ -107,11 +111,11 @@ class PantryInfo extends React.Component {
     this.props.setCurrentPage("pantry/");
   }
 
-  handlePantryClick = value => {
+  handlePantryClick = (value) => {
     this.props.setproductToAddToPantry(value);
   };
 
-  handleButtonClick = event => {
+  handleButtonClick = (event) => {
     if (!isNaN(event.target.id) && event.target.id !== "") {
       this.props.setPrevPage(this.props.currentPage);
       this.props.setCurrentPage("products/" + event.target.id);
@@ -131,7 +135,7 @@ class PantryInfo extends React.Component {
           style={{
             marginLeft: "20px",
             marginTop: "2.5%",
-            fontWeight: "bold"
+            fontWeight: "bold",
           }}
         >
           This pantry is empty...For now
@@ -139,7 +143,7 @@ class PantryInfo extends React.Component {
         </div>
       );
     } else {
-      productItems = this.props.currentMarkers.map(product => {
+      productItems = this.props.currentMarkers.map((product) => {
         number = number + 1;
         return (
           <div
@@ -193,7 +197,7 @@ class PantryInfo extends React.Component {
                   style={{
                     height: "30px",
                     transform: "rotate(90deg)",
-                    marginTop: "10px"
+                    marginTop: "10px",
                   }}
                 />
               </div>
@@ -216,7 +220,7 @@ class PantryInfo extends React.Component {
               marginLeft: "15px",
               marginRight: "15px",
               height: "110px",
-              display: "flex"
+              display: "flex",
             }}
           >
             <div
@@ -227,7 +231,7 @@ class PantryInfo extends React.Component {
                 display: "inline-block",
                 backgroundColor: "#0CC8AC",
                 borderRadius: "5px",
-                marginRight: "10px"
+                marginRight: "10px",
               }}
             >
               &nbsp;
@@ -239,7 +243,7 @@ class PantryInfo extends React.Component {
                 width: "60%",
                 display: "inline-block",
                 padding: "0px 0px 0px 0px",
-                overflowX: "hidden"
+                overflowX: "hidden",
               }}
             >
               <div className="head2" style={{}}>
@@ -259,7 +263,7 @@ class PantryInfo extends React.Component {
               marginLeft: "20px",
               marginRight: "13px",
               fontSize: "14.5px",
-              overflowX: "hidden"
+              overflowX: "hidden",
             }}
           >
             {this.state.description}
