@@ -37,18 +37,14 @@ class SearchSidebar extends Component {
         productsSearched: [],
         seasonSearched: [],
         regionSearched: [],
-      },
-      // isSearchBox: false
-      // searchQuery: {
-      //   productsSearched: [1,2,3],
-      //   seasonSearched: ["spring","summer"],
-      //   regionSearched: [1,2]
-      // },
-      // productTypes: ["Seed","Grain","Plant","Herb","Fruit","Vegetable","Animal","By-product","Freshwater product","Saltwater product",
-      // "Farmed product","Green house product","Aquaponic product","Sustainable","Endangered","Artisanal product"]
+      }
     };
   }
 
+  /**
+   * runs when the component renders for the first time
+   * fetch products, regions for options to search
+   */
   componentDidMount() {
     //Fetch products
     fetch(
@@ -79,6 +75,7 @@ class SearchSidebar extends Component {
 
     /*********************************************************************************
      * Note: region most likely to fetched in main component and passed down in props
+     * so that GoogleMap can also use that fetched data
      *********************************************************************************/
     //fetch regions name
     fetch(
@@ -104,6 +101,12 @@ class SearchSidebar extends Component {
       }); //end of fetch
   }
 
+  /**
+   * gets called when a user checks a checkbox
+   * rerender to the truth of what has been checked
+   * and fetches
+   * @param {Object} event - event and element that called
+   */
   handleChange = (event) => {
     let { name, value, type, checked } = event.target;
     let updatedSearchQuery;
@@ -203,6 +206,9 @@ class SearchSidebar extends Component {
     }
   }; //end of HandleChange
 
+  /**
+   * fetches data in the backend of what has been checked or search by text
+   */
   fetchProducts = () => {
     // console.log("fetching: ");
     // console.log(this.state.searchQuery);
@@ -248,17 +254,24 @@ class SearchSidebar extends Component {
   };
 
   /*This is what changes the sidebar when a checkbox is clicked */
-
   handleCheckBoxClick = () => {
     this.props.setCurrentPage("");
   };
 
+  /**
+   * gets called when user types in the search box
+   * @param {Object} event - event and element that called
+   */
   handleSearchbox = (event) => {
     const { value } = event.target;
     // this.props.setCurrentPage("");
     this.setState({ search: value });
   };
 
+  /**
+   * gets called when user presses and key but looks for the "enter" key to fetch products
+   * @param {Object} event - event and element that called
+   */
   handleKeyPress = (event) => {
     const { value } = event.target;
     if (event.key === "Enter") {
@@ -308,6 +321,11 @@ class SearchSidebar extends Component {
     }
   };
 
+  /**
+   * checks or unchecks a category
+   * @param {Object[]} category - ie this.state.products, this.state.regions, this.state.seasons
+   * @param {boolean} checked - whether the category should be all checked or unchecked
+   */
   toggleCategory = (category, checked) => {
     return category.map((element) => {
       return {
@@ -317,6 +335,9 @@ class SearchSidebar extends Component {
     });
   };
 
+  /**
+   * unchecks all categories
+   */
   uncheckAllCategory = () => {
     const updatedProducts = this.toggleCategory(this.state.products, false);
     const updatedRegions = this.toggleCategory(this.state.regions, false);
@@ -328,6 +349,9 @@ class SearchSidebar extends Component {
     };
   };
 
+  /**
+   * what to render on screen
+   */
   render() {
     const searchProducts = this.state.productsError
       ? "Failed to load. Please try again later."

@@ -6,19 +6,19 @@ const mapStyles = {
   height: "100vh",
 };
 
-var regionsPolygons = [];
+var regionsPolygons = []; // holds polygons object and 
 var currentHighlightedRegions = []; //holds regionId
-var markers = [];
+var markers = []; // holds marker objects
 
 class GoogleMap extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      regionsPolygons: [],
-    };
     this.googleMapRef = createRef();
   }
 
+  /**
+   * runs when the component renders for the first time
+   */
   componentDidMount() {
     if (document.getElementById("map") !== null) {
       var element = document.getElementById("map");
@@ -36,11 +36,19 @@ class GoogleMap extends Component {
     });
   }
 
+  /**
+   * the component should only update when the currentMarkers changes
+   * @param {Object} nextProps - future props if component rerenders
+   * @param {Object} nextState - future state if component rerenders
+   */
   shouldComponentUpdate(nextProps, nextState) {
     return nextProps.currentMarkers !== this.props.currentMarkers;
     // return false;
   }
 
+  /**
+   * if the component does decide to rerender unhighlight all regions and re-highlight of the currentMarkers
+   */
   componentDidUpdate() {
     console.log("Google Map Component updated!");
     // console.log(regionsPolygons)
@@ -75,6 +83,9 @@ class GoogleMap extends Component {
     });
   } //end of componentDidMount
 
+  /**
+   * create a google map instance
+   */
   createGoogleMap = () => {
     // var CANADA_BOUNDS = {
     //   north: 85.06,
@@ -103,6 +114,9 @@ class GoogleMap extends Component {
     this.googleMap.setOptions({ minZoom: 3, maxZoom: 6 });
   };
 
+  /**
+   * fetches top 10 products as the default currentMarkers when map instance is created
+   */
   showTop10Products = () => {
     let url = this.appendEmail(
       "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/products/top"
@@ -121,6 +135,10 @@ class GoogleMap extends Component {
     // this.showMarkers(top10Products); //uncomment to enable top10products markers. Note must uncomment all showMarkers()
   };
 
+  /**
+   * create marker objects based on currentMarkers
+   * @param {Object[]} newMarkers - new markers to create on map
+   */
   showMarkers = (newMarkers) => {
     for (let index = 0; index < newMarkers.length; index++) {
       const { position } = newMarkers[index];
@@ -143,6 +161,9 @@ class GoogleMap extends Component {
     }
   };
 
+  /**
+   * remove all markers object currently on map
+   */
   clearCurrentMarkers = () => {
     // this.props.setCurrentMarkers([]);
     for (var i = 0; i < markers.length; i++) {
@@ -151,6 +172,10 @@ class GoogleMap extends Component {
     markers = [];
   };
 
+  /**
+   * create all Polygons object on map
+   * Todo: fetch region polygon in the backend
+   */
   createRegions = () => {
     var regions = Regions;
     for (let regionsIndex = 0; regionsIndex < regions.length; regionsIndex++) {
@@ -198,6 +223,10 @@ class GoogleMap extends Component {
     }
   };
 
+  /**
+   * convert string into a list of lat and lng
+   * @param {String} MultiGeometryCoordinates - the string to convert into an array of lat, lng aka coordinates
+   */
   convertStringToArrayCoords = (MultiGeometryCoordinates) => {
     let finalData = [];
     var grouped = MultiGeometryCoordinates.split("\n");
@@ -212,6 +241,10 @@ class GoogleMap extends Component {
     return finalData;
   };
 
+  /**
+   * convert string into a list of lat and lng, starting from the end of the string
+   * @param {String} MultiGeometryCoordinates - the string to convert into an array of lat, lng aka coordinates
+   */
   convertStringToArrayCoordsBackwards = (MultiGeometryCoordinates) => {
     let finalData = [];
     var grouped = MultiGeometryCoordinates.split("\n");
@@ -228,7 +261,8 @@ class GoogleMap extends Component {
   };
 
   /************************************************************
-   * Regions/Polygons
+   * creates a single polygon instance
+   * @param {Object} regionInfo - information about a region
    ************************************************************/
   createRegion = (regionInfo) => {
     // const { strokeColor, strokeWeight, fillColor } = regionInfo.polygonStyle;
@@ -367,15 +401,20 @@ class GoogleMap extends Component {
     });
   };
 
+  /**
+   * shows markers on map
+   * @param {Object[]} products - products to show on map
+   */
   showProductsInRegion = (products) => {
     this.clearCurrentMarkers();
     this.props.setCurrentMarkers(products);
     // this.showMarkers(products);
-    // this.highlightRegion(regionId);
   };
 
   /********************************
-   * Create Region Pushpins
+   * Create Region Pushpins of region name on map when hovered
+   * @param {String} pushpins - create label markers 
+   * @param {String} regionName - label name for markers
    ********************************/
   createPushpinsInRegion = (pushpins, regionName) => {
     return pushpins.map((element) => {
@@ -402,6 +441,10 @@ class GoogleMap extends Component {
     });
   };
 
+  /**
+   * returns a boolean if the region is currently highlighted
+   * @param {Integer} regionId - region id to check if it's currently highlighted
+   */
   isHighlighted = (regionId) => {
     let isHighlighted = false;
     currentHighlightedRegions.forEach((ID) => {
@@ -412,6 +455,10 @@ class GoogleMap extends Component {
     return isHighlighted;
   };
 
+  /**
+   * appends Email if user is current logged in or empty string if it's a Guest
+   * @param {String} url - url to fetch and append email to
+   */
   appendEmail(url) {
     const email = sessionStorage.getItem("currentUser");
     if (email !== null && email !== "") {
@@ -422,6 +469,9 @@ class GoogleMap extends Component {
     return url;
   }
 
+  /**
+   * what to render on screen
+   */
   render() {
     return (
       <div>

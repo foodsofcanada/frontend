@@ -13,18 +13,30 @@ class FavoritesBar extends Component {
     this.handleBackClick = this.handleBackClick.bind(this);
   }
 
+  /**
+   * runs when the component first mounts
+   */
   componentDidMount() {
     this.fetchFavourites();
   }
 
+  /**
+   * runs when the component rerenders
+   */
   componentDidUpdate() {
     console.log("FavouriteBar updated");
   }
 
+  /**
+   * gets called when the "back" button is pressed
+   */
   handleBackClick() {
     this.props.setCurrentPage("profile/");
   }
 
+  /**
+   * onClick to view product info
+   */
   handleButtonClick = event => {
     if (!isNaN(event.target.id) && event.target.id !== "") {
       this.props.setPrevPage(this.props.currentPage);
@@ -32,6 +44,10 @@ class FavoritesBar extends Component {
     }
   };
 
+  /**
+   * handles the event Onclick to add/delete product from favourites
+   * @param {Integer} targetIndex - the index of the selected product to add/delete product from favourites
+   */
   handleHeartClick = targetIndex => {
     console.log("heart clicked");
     const email = sessionStorage.getItem("currentUser");
@@ -59,6 +75,9 @@ class FavoritesBar extends Component {
     }
   };
 
+  /**
+   * fetches the user's favourites
+   */
   fetchFavourites = () => {
     fetch(
       "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/favourites/" +
@@ -71,10 +90,16 @@ class FavoritesBar extends Component {
       });
   };
 
+  /**
+   * 
+   */
   handlePantryClick = value => {
     this.props.setproductToAddToPantry(value);
   };
 
+  /**
+   * what to render on screen
+   */
   render() {
     let productItems = null;
     let number = 0;
