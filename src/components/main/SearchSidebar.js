@@ -335,9 +335,8 @@ class SearchSidebar extends Component {
       ? "loading..."
       : this.state.products.map((product) => {
           return (
-            <div onClick={this.handleCheckBoxClick}>
+            <div onClick={this.handleCheckBoxClick} key={product.name}>
               <SearchItem
-                key={product.name}
                 value={product.productId}
                 name={"products"}
                 labelName={product.name}
@@ -354,9 +353,8 @@ class SearchSidebar extends Component {
       ? "loading..."
       : this.state.regions.map((region) => {
           return (
-            <div onClick={this.handleCheckBoxClick}>
+            <div onClick={this.handleCheckBoxClick} key={region.name}>
               <SearchItem
-                key={region.name}
                 value={region.regionId}
                 name={"regions"}
                 labelName={region.name}
@@ -371,9 +369,8 @@ class SearchSidebar extends Component {
       ? "loading..."
       : this.state.seasons.map((season) => {
           return (
-            <div onClick={this.handleCheckBoxClick}>
+            <div onClick={this.handleCheckBoxClick} key={season.name}>
               <SearchItem
-                key={season.name}
                 value={season.name}
                 name={"seasons"}
                 labelName={season.name}
