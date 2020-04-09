@@ -35,7 +35,7 @@ class Main extends React.Component {
       searchBody: null,
     };
 
-    this.openCloseBar = this.openCloseBar.bind(this);
+    // this.openCloseBar = this.openCloseBar.bind(this);
     this.openCloseSearchBar = this.openCloseSearchBar.bind(this);
   }
 
@@ -104,11 +104,11 @@ class Main extends React.Component {
     console.log("selected Region: " + regionID);
   };
 
-  openCloseBar() {
+  openCloseBar = () => {
     this.setState((prevState) => ({
       tabOpen: !prevState.tabOpen,
     }));
-  }
+  };
 
   openCloseSearchBar() {
     this.setState((prevState) => ({
@@ -225,6 +225,8 @@ class Main extends React.Component {
             setSelectedRegion={this.setSelectedRegion}
             closeBar={this.openCloseSearchBar}
             closeBarState={this.state.tabOpenSearch}
+            infoBarState={this.state.tabOpen}
+            openInfoBar={this.openCloseBar}
             setUrl={this.setUrl}
           />
         </div>

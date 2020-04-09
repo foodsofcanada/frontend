@@ -254,6 +254,10 @@ class GoogleMap extends Component {
         this.props.closeBar();
       }
 
+      if (this.props.infoBarState === false) {
+        this.props.openInfoBar();
+      }
+
       let url = this.appendEmail(
         "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/productRegion/" +
           regionInfo.regionId
