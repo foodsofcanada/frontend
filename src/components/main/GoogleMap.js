@@ -250,8 +250,8 @@ class GoogleMap extends Component {
       this.googleMap.panTo(event.latLng);
       // this.googleMap.setZoom(6);
       this.props.setSelectedRegion(regionInfo.regionName, regionInfo.regionId);
-      if (this.props.closeBarState === true) {
-        this.props.closeBar();
+      if (this.props.searchBarState === true) {
+        this.props.closeSearchBar();
       }
 
       if (this.props.infoBarState === false) {

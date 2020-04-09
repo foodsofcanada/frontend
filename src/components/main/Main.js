@@ -223,8 +223,8 @@ class Main extends React.Component {
             setCurrentMarkers={this.setCurrentMarkers}
             setCurrentPage={this.setCurrentPage}
             setSelectedRegion={this.setSelectedRegion}
-            closeBar={this.openCloseSearchBar}
-            closeBarState={this.state.tabOpenSearch}
+            closeSearchBar={this.openCloseSearchBar}
+            searchBarState={this.state.tabOpenSearch}
             infoBarState={this.state.tabOpen}
             openInfoBar={this.openCloseBar}
             setUrl={this.setUrl}
