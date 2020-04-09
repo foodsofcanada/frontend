@@ -107,6 +107,33 @@ class PantryInfo extends React.Component {
       });
   }
 
+  handleHeartClick = (targetIndex) => {
+    console.log("heart clicked");
+    const email = sessionStorage.getItem("currentUser");
+    if (email !== null && email !== "") {
+      const { productId, regionId, coordinates } = this.props.currentMarkers[
+        targetIndex
+      ];
+      //add/delete product from favourite
+      fetch(
+        "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/fav/" +
+          email +
+          "/" +
+          productId +
+          "/" +
+          regionId +
+          "/" +
+          coordinates +
+          "",
+        { method: "POST" }
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          this.fetchProductsInPantry();
+        }); //end of fetch
+    }
+  };
+
   handleBackClick() {
     this.props.setCurrentPage("pantry/");
   }

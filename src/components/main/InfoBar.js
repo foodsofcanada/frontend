@@ -58,10 +58,13 @@ class InfoBar extends React.Component {
 
   handleHeartClick = (targetIndex) => {
     const email = sessionStorage.getItem("currentUser");
+
     if (email !== null && email !== "") {
       const { productId, regionId, coordinates } = this.props.currentMarkers[
         targetIndex
       ];
+
+      console.log(productId + " " + regionId + " " + coordinates);
       //add/delete product from favourite
       fetch(
         "http://FoodsOfCanada-env-2.ca-central-1.elasticbeanstalk.com/fav/" +

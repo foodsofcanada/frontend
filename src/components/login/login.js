@@ -60,7 +60,10 @@ class LoginPage extends React.Component {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-
+          if (data.email === null) {
+            this.setState({ errorMessage: "Incorrect email or password." });
+            return;
+          }
           this.setState({ errorMessage: "" });
           sessionStorage.setItem("currentUser", data.email);
           this.setState({
